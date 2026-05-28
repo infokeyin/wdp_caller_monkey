@@ -1,0 +1,432 @@
+/* ============================================================
+   Caller Monkey — Global styles + design tokens + custom-* classes
+   All design tokens live here. All repeating utility patterns
+   live here as `custom-*` classes. Components consume them via
+   Tailwind utilities OR by applying `custom-*` class names.
+   ============================================================ */
+
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  /* Brand greens */
+  --color-green-50:  #E8F7EC;
+  --color-green-100: #C7ECCF;
+  --color-green-200: #9BDDA8;
+  --color-green-400: #3FBC5A;
+  --color-green-500: #2DA744;
+  --color-green-600: #218A37;
+  --color-green-700: #1A6B2A;
+  --color-green-900: #0F3E18;
+
+  /* Greys */
+  --color-grey-50:  #FAFAFA;
+  --color-grey-100: #F3F3F3;
+  --color-grey-200: #E5E5E5;
+  --color-grey-300: #CFCFCF;
+  --color-grey-400: #9E9E9E;
+  --color-grey-500: #6E6E6E;
+  --color-grey-600: #4A4A4A;
+  --color-grey-700: #2F2F2F;
+  --color-grey-900: #171717;
+  --color-grey-950: #0B0B0B;
+
+  /* Semantic */
+  --color-success:  #2DA744;
+  --color-warning:  #F4A623;
+  --color-error:    #D9342B;
+  --color-info:     #2C7BE5;
+  --color-whatsapp: #25D366;
+
+  /* Surfaces */
+  --color-bg:           #FFFFFF;
+  --color-bg-alt:       #FAFAFA;
+  --color-bg-elevated:  #FFFFFF;
+  --color-bg-dark:      #0B0B0B;
+  --color-text:         #171717;
+  --color-text-muted:   #6E6E6E;
+  --color-text-on-dark: #FAFAFA;
+  --color-text-on-green:#FFFFFF;
+  --color-border:       #E5E5E5;
+
+  /* Typography */
+  --font-display: 'Cabinet Grotesk', system-ui, sans-serif;
+  --font-body:    'Inter Tight', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --text-display: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --text-h1:      clamp(2rem,   3.5vw + 1rem, 3.25rem);
+  --text-h2:      clamp(1.5rem, 2.5vw + 1rem, 2.25rem);
+  --text-h3:      clamp(1.25rem,1.5vw + 1rem, 1.625rem);
+  --text-h4:      1.25rem;
+  --text-lg:      1.125rem;
+  --text-base:    1rem;
+  --text-sm:      0.875rem;
+  --text-xs:      0.75rem;
+
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight:   -0.025em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.04em;
+  --tracking-widest:  0.12em;
+
+  /* Spacing & layout */
+  --space-section-y:    clamp(4rem, 7vw, 7rem);
+  --space-container-x:  clamp(1.25rem, 4vw, 2.5rem);
+  --container-max:      1200px;
+  --container-wide:     1400px;
+  --container-narrow:   760px;
+
+  /* Radius */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:    0 1px 2px rgba(11, 11, 11, 0.04);
+  --shadow-md:    0 4px 12px rgba(11, 11, 11, 0.06);
+  --shadow-lg:    0 12px 32px rgba(11, 11, 11, 0.10);
+  --shadow-green: 0 8px 24px rgba(45, 167, 68, 0.22);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  /* Motion */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast:  150ms;
+  --duration-base:  300ms;
+  --duration-slow:  600ms;
+
+  /* Industry accent colours (top-border per card) */
+  --ind-real-estate:   #E8943A;
+  --ind-finance:       #2C7BE5;
+  --ind-healthcare:    #D9342B;
+  --ind-education:     #7C3AED;
+  --ind-retail:        #F4A623;
+  --ind-manufacturing: #64748B;
+  --ind-insurance:     #0891B2;
+  --ind-jewellery:     #D97706;
+  --ind-logistics:     #059669;
+  --ind-restaurants:   #E11D48;
+  --ind-political:     #DC2626;
+  --ind-government:    #1D4ED8;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-grey-900);
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out-quart);
+}
+
+button { font: inherit; }
+
+/* Respect prefers-reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   CUSTOM CLASSES — Layout
+   ============================================================ */
+.custom-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-container-x);
+}
+.custom-container-wide   { max-width: var(--container-wide); }
+.custom-container-narrow { max-width: var(--container-narrow); }
+
+.custom-section      { padding-block: var(--space-section-y); }
+.custom-section-alt  { padding-block: var(--space-section-y); background: var(--color-bg-alt); }
+.custom-section-dark { padding-block: var(--space-section-y); background: var(--color-bg-dark); color: var(--color-text-on-dark); }
+.custom-section-dark h1, .custom-section-dark h2, .custom-section-dark h3, .custom-section-dark h4 { color: var(--color-text-on-dark); }
+
+/* ============================================================
+   CUSTOM CLASSES — Typography
+   ============================================================ */
+.custom-display { font-family: var(--font-display); font-size: var(--text-display); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); font-weight: 900; color: var(--color-grey-950); }
+.custom-h1      { font-family: var(--font-display); font-size: var(--text-h1);      line-height: var(--leading-snug);  letter-spacing: var(--tracking-tight); font-weight: 800; }
+.custom-h2      { font-family: var(--font-display); font-size: var(--text-h2);      line-height: var(--leading-snug);  font-weight: 700; }
+.custom-h3      { font-family: var(--font-display); font-size: var(--text-h3);      line-height: var(--leading-snug);  font-weight: 700; }
+
+.custom-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-green-600);
+}
+
+.custom-lead {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.custom-mono-stat {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* ============================================================
+   CUSTOM CLASSES — Buttons
+   ============================================================ */
+.custom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-base);
+  cursor: pointer;
+  border: none;
+  transition:
+    transform var(--duration-fast) var(--ease-out-quart),
+    box-shadow var(--duration-fast),
+    background var(--duration-fast),
+    color var(--duration-fast),
+    border-color var(--duration-fast);
+  will-change: transform;
+  text-decoration: none;
+}
+.custom-btn:hover { transform: translateY(-1px); }
+.custom-btn:active { transform: translateY(0); }
+.custom-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.custom-btn-primary { background: var(--color-green-500); color: var(--color-text-on-green); box-shadow: var(--shadow-green); }
+.custom-btn-primary:hover  { background: var(--color-green-400); }
+.custom-btn-primary:active { background: var(--color-green-600); }
+
+.custom-btn-secondary { background: transparent; color: var(--color-grey-900); border: 1.5px solid var(--color-grey-300); }
+.custom-btn-secondary:hover { border-color: var(--color-grey-900); background: var(--color-grey-50); }
+
+.custom-btn-ghost { background: transparent; color: var(--color-grey-700); padding: 0.5rem 1rem; }
+.custom-btn-ghost:hover { background: var(--color-grey-100); color: var(--color-grey-900); }
+
+.custom-btn-whatsapp { background: var(--color-whatsapp); color: #fff; box-shadow: 0 8px 24px rgba(37, 211, 102, 0.22); }
+.custom-btn-whatsapp:hover { background: #20BD5A; }
+
+.custom-btn-sm { padding: 0.5rem 1rem;    font-size: var(--text-sm); }
+.custom-btn-lg { padding: 1rem 2rem;       font-size: var(--text-lg); }
+
+/* ============================================================
+   CUSTOM CLASSES — Cards
+   ============================================================ */
+.custom-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  transition:
+    transform var(--duration-base) var(--ease-out-quart),
+    box-shadow var(--duration-base),
+    border-color var(--duration-base);
+}
+.custom-card-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: var(--color-green-200); }
+.custom-card-feature { border-color: var(--color-green-500); box-shadow: var(--shadow-green); }
+.custom-card-soft { background: var(--color-bg-alt); }
+
+/* ============================================================
+   CUSTOM CLASSES — Tags / Badges
+   ============================================================ */
+.custom-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  background: var(--color-green-50);
+  color: var(--color-green-700);
+}
+.custom-tag-dark    { background: var(--color-grey-900); color: var(--color-grey-50); }
+.custom-tag-warning { background: rgba(244, 166, 35, 0.12); color: #B47312; }
+
+/* ============================================================
+   CUSTOM CLASSES — Forms
+   ============================================================ */
+.custom-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  background: var(--color-bg-elevated);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+.custom-input:focus { outline: none; border-color: var(--color-green-500); box-shadow: 0 0 0 4px var(--color-green-50); }
+.custom-input-error { border-color: var(--color-error); }
+.custom-input-error:focus { box-shadow: 0 0 0 4px rgba(217, 52, 43, 0.12); }
+
+.custom-label      { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: var(--text-sm); color: var(--color-grey-700); }
+.custom-error-text { color: var(--color-error); font-size: var(--text-sm); margin-top: 0.375rem; }
+
+/* ============================================================
+   CUSTOM CLASSES — Tables (used for all comparison blocks)
+   ============================================================ */
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+  font-size: var(--text-base);
+}
+.custom-table th,
+.custom-table td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+.custom-table thead th {
+  background: var(--color-bg-alt);
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--color-grey-900);
+}
+.custom-table tbody tr:last-child td { border-bottom: none; }
+.custom-table tbody tr:hover { background: var(--color-bg-alt); }
+
+/* ============================================================
+   CUSTOM CLASSES — Decorative
+   ============================================================ */
+.custom-divider          { height: 1px; background: var(--color-border); border: none; }
+.custom-divider-gradient { height: 1px; border: none; background: linear-gradient(90deg, transparent, var(--color-green-500), transparent); }
+
+.custom-focus-ring:focus-visible {
+  outline: 3px solid var(--color-green-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Hide scrollbar (horizontal scrollers) */
+.custom-scroll-hide::-webkit-scrollbar { display: none; }
+.custom-scroll-hide { scrollbar-width: none; }
+
+/* ============================================================
+   KEYFRAMES & ANIMATIONS — kept minimal
+   ============================================================ */
+@keyframes pulseWa {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  50%      { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+.custom-anim-pulse-wa {
+  animation: pulseWa 2.6s ease-in-out;
+  animation-iteration-count: 6;
+}
+.custom-anim-fade-up    { animation: fadeUp 0.35s var(--ease-out-quart) both; }
+.custom-anim-float      { animation: floatGentle 6s ease-in-out infinite; }
+
+/* Stop animations entirely when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .custom-anim-pulse-wa,
+  .custom-anim-fade-up,
+  .custom-anim-float { animation: none !important; }
+}
+
+/* ============================================================
+   KEYFRAMES — Phase-2 additions
+   ============================================================ */
+
+/* Infinite horizontal ticker scroll */
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.custom-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 28s linear infinite;
+}
+.custom-ticker-track:hover { animation-play-state: paused; }
+
+/* Waveform bar pulse — each bar gets a delay via inline style */
+@keyframes waveBar {
+  0%, 100% { transform: scaleY(0.25); }
+  50%       { transform: scaleY(1); }
+}
+.custom-wave-bar {
+  transform-origin: center bottom;
+  animation: waveBar 1.4s ease-in-out infinite;
+}
+
+/* Pulse ring expand */
+@keyframes pulseRing {
+  0%   { transform: scale(0.7); opacity: 0.55; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.custom-pulse-ring {
+  animation: pulseRing 2.4s var(--ease-out-expo) infinite;
+}
+
+/* Card top accent — coloured 3px border-top */
+.custom-card-accent-top {
+  border-top-width: 3px;
+  border-top-style: solid;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-ticker-track,
+  .custom-wave-bar,
+  .custom-pulse-ring { animation: none !important; }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2DA744" />
+
+    <title>Caller Monkey | AI Voice & Communication Platform for Indian Businesses | callermonkey.in</title>
+    <meta name="description" content="Caller Monkey is India's AI-powered business communication platform. Automate calls, follow-ups, WhatsApp, CRM, attendance, email and more. Start at ₹15/min. Live in 15 days." />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://callermonkey.in" />
+    <meta property="og:title" content="Caller Monkey — AI That Runs Your Business Communication" />
+    <meta property="og:description" content="One platform for AI calls, WhatsApp, CRM, attendance, email and more. Built for Indian businesses. Live in 15 days." />
+    <meta property="og:image" content="/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Caller Monkey — AI That Runs Your Business Communication" />
+    <meta name="twitter:description" content="One platform for AI calls, WhatsApp, CRM, attendance, email and more." />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Fonts: preconnect for speed -->
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts: Cabinet Grotesk (display), Inter Tight (body), JetBrains Mono (numbers) -->
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+
+    <!-- Tailwind via Play CDN with brand theme -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          container: { center: true, padding: '1.25rem', screens: { '2xl': '1200px' } },
+          extend: {
+            colors: {
+              brand: {
+                green:         '#2DA744',
+                'green-dark':  '#1A6B2A',
+                'green-light': '#3FBC5A',
+                'green-50':    '#E8F7EC',
+                'green-100':   '#C7ECCF',
+              },
+              grey: {
+                50:  '#FAFAFA',
+                100: '#F3F3F3',
+                200: '#E5E5E5',
+                300: '#CFCFCF',
+                400: '#9E9E9E',
+                500: '#6E6E6E',
+                600: '#4A4A4A',
+                700: '#2F2F2F',
+                900: '#171717',
+                950: '#0B0B0B',
+              },
+              whatsapp: '#25D366',
+            },
+            fontFamily: {
+              display: ['"Cabinet Grotesk"', 'system-ui', 'sans-serif'],
+              body:    ['"Inter Tight"', 'system-ui', 'sans-serif'],
+              mono:    ['"JetBrains Mono"', 'monospace'],
+            },
+            borderRadius: { DEFAULT: '10px', lg: '16px', xl: '24px' },
+            boxShadow: {
+              card:  '0 4px 12px rgba(11, 11, 11, 0.06)',
+              float: '0 12px 32px rgba(11, 11, 11, 0.10)',
+              green: '0 8px 24px rgba(45, 167, 68, 0.22)',
+            },
+            maxWidth: { content: '1200px', wide: '1400px', narrow: '760px' },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-body text-grey-900 bg-white antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
