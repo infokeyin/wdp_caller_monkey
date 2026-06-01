@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Phone } from 'lucide-react';
 import FadeIn from '@components/motion/FadeIn';
 import Container from '@components/layout/Container';
 import appConfig from '@config/appConfig';
@@ -8,35 +8,41 @@ const WHATSAPP_URL = `https://wa.me/${appConfig.contactInfo.whatsapp}?text=${enc
 
 function GetStartedWhatsApp() {
   return (
-    <section
-      className="custom-section"
-      style={{ borderTop: '1px solid var(--color-border)' }}
-    >
+    <section style={{ borderTop: '1px solid var(--color-border)', paddingBlock: 'clamp(2rem, 4vw, 3rem)', background: 'var(--color-bg-alt)' }}>
       <Container variant="narrow">
         <FadeIn>
-          <div className="flex flex-col items-center text-center gap-5">
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center"
-              style={{ background: '#25D36615' }}
-            >
-              <MessageCircle size={28} strokeWidth={1.75} style={{ color: '#25D366' }} aria-hidden="true" />
-            </div>
-            <div>
-              <h2 className="custom-h3 mb-2">Prefer to just chat?</h2>
-              <p className="text-base" style={{ color: 'var(--color-text-muted)' }}>
-                Message us on WhatsApp. Someone from our team will respond within a few hours.
-              </p>
-            </div>
+          <div style={{
+            display: 'flex', flexWrap: 'wrap',
+            alignItems: 'center', justifyContent: 'center',
+            gap: '2rem',
+          }}>
+            {/* Label */}
+            <p style={{ fontWeight: 700, color: 'var(--color-grey-700)', fontSize: 'var(--text-base)', margin: 0 }}>
+              Prefer to talk first?
+            </p>
+
+            {/* WhatsApp */}
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="custom-btn custom-btn-whatsapp custom-btn-lg"
+              className="custom-btn custom-btn-whatsapp custom-btn-sm"
             >
-              Chat on WhatsApp →
+              <MessageCircle size={16} strokeWidth={2} aria-hidden="true" />
+              Chat on WhatsApp
             </a>
-            <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-              Available Monday to Saturday, 9am to 7pm IST.
+
+            {/* Phone */}
+            <a
+              href={`tel:${appConfig.contactInfo.phone}`}
+              className="custom-btn custom-btn-secondary custom-btn-sm"
+            >
+              <Phone size={16} strokeWidth={2} aria-hidden="true" />
+              {appConfig.contactInfo.phone}
+            </a>
+
+            <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', margin: 0 }}>
+              Mon – Sat · 9am – 7pm IST
             </p>
           </div>
         </FadeIn>

@@ -1,41 +1,18 @@
 import React from 'react';
-import { XCircle, CheckCircle2 } from 'lucide-react';
+import { X, Check } from 'lucide-react';
 import FadeIn from '@components/motion/FadeIn';
+import Stagger from '@components/motion/Stagger';
 import Container from '@components/layout/Container';
 
 const ROWS = [
-  [
-    'A calling bot that makes automated calls',
-    'A full AI communication system that connects your entire business',
-  ],
-  [
-    'English-only or limited language support',
-    '15+ Indian languages including Hinglish, built for real India',
-  ],
-  [
-    'Tools that work in isolation',
-    'A single system connecting calls, WhatsApp, CRM, email, attendance, and more',
-  ],
-  [
-    'Takes months to get started',
-    'Live in 15 days, guaranteed',
-  ],
-  [
-    'Charges high monthly retainers',
-    'Pay-per-minute from ₹15/min — use only what you need',
-  ],
-  [
-    'Treats businesses of all sizes the same',
-    'Designed for Indian businesses: field teams, multilingual customers, complex follow-up chains',
-  ],
-  [
-    'Gives you a dashboard but not decisions',
-    'Shows you what is working, what is not, and what to fix',
-  ],
-  [
-    'Requires technical setup by your IT team',
-    'We handle all setup, integration, and training — you just approve the scripts',
-  ],
+  { other: 'Basic calling bot',              cm: 'Full AI communication system'         },
+  { other: 'English-only',                   cm: '15+ Indian languages, Hinglish ready' },
+  { other: 'Tools that work in isolation',   cm: 'Calls, WhatsApp, CRM, email — one system' },
+  { other: 'Months to go live',              cm: 'Live in 15 days, guaranteed'          },
+  { other: 'High monthly retainers',         cm: '₹15/min — pay only what you use'      },
+  { other: 'One-size-fits-all',              cm: 'Built for Indian field teams & markets' },
+  { other: 'Dashboard but no decisions',     cm: 'Shows what to fix, not just numbers'  },
+  { other: 'Requires your IT team',          cm: 'We handle all setup and training'     },
 ];
 
 function FeaturesComparison() {
@@ -43,49 +20,54 @@ function FeaturesComparison() {
     <section className="custom-section-dark" id="comparison">
       <Container>
         <FadeIn>
-          <h2 className="custom-h2 text-center mb-4" style={{ color: '#fff' }}>
-            What Others Offer vs What Caller Monkey Delivers
+          <h2 className="custom-h2 text-center mb-2" style={{ color: '#fff' }}>
+            Others vs Caller Monkey
           </h2>
-          <p className="custom-lead text-center mb-12 max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.65)' }}>
-            Not all AI calling systems are built the same. Here is what sets Caller Monkey apart.
+          <p style={{
+            textAlign: 'center', marginBottom: '3rem',
+            color: 'rgba(255,255,255,0.55)',
+            fontSize: 'var(--text-base)',
+          }}>
+            Not all AI calling systems are built the same.
           </p>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <div className="overflow-x-auto rounded-xl">
-            <table className="custom-table" style={{ background: 'var(--color-grey-900)' }}>
-              <caption className="sr-only">Comparison: generic AI tools vs Caller Monkey</caption>
-              <thead>
-                <tr>
-                  <th scope="col" style={{ background: 'var(--color-grey-950)', color: 'var(--color-grey-400)' }}>
-                    <span className="flex items-center gap-2">
-                      <XCircle size={16} strokeWidth={2} style={{ color: 'var(--color-error)' }} aria-hidden="true" />
-                      What Others Offer
-                    </span>
-                  </th>
-                  <th scope="col" style={{ background: 'var(--color-grey-950)', color: 'var(--color-green-400)' }}>
-                    <span className="flex items-center gap-2">
-                      <CheckCircle2 size={16} strokeWidth={2} aria-hidden="true" />
-                      What Caller Monkey Delivers
-                    </span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {ROWS.map(([other, cm], i) => (
-                  <tr key={i} style={{ borderColor: 'var(--color-grey-700)' }}>
-                    <td style={{ color: 'var(--color-grey-400)', borderColor: 'var(--color-grey-700)' }}>
-                      {other}
-                    </td>
-                    <td style={{ color: 'var(--color-green-400)', fontWeight: 600, borderColor: 'var(--color-grey-700)' }}>
-                      {cm}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </FadeIn>
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {ROWS.map(({ other, cm }, i) => (
+            <Stagger.Child key={i}>
+              <div style={{
+                display: 'grid', gridTemplateColumns: '1fr 1fr',
+                borderRadius: 'var(--radius-lg)',
+                overflow: 'hidden',
+                border: '1px solid rgba(255,255,255,0.08)',
+              }}>
+                {/* Others — left */}
+                <div style={{
+                  display: 'flex', alignItems: 'flex-start', gap: '0.5rem',
+                  padding: '0.875rem 1rem',
+                  background: 'rgba(255,255,255,0.04)',
+                }}>
+                  <X size={14} strokeWidth={2.5} style={{ color: '#D9342B', flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+                  <span style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.45)', lineHeight: 1.4 }}>
+                    {other}
+                  </span>
+                </div>
+                {/* CM — right */}
+                <div style={{
+                  display: 'flex', alignItems: 'flex-start', gap: '0.5rem',
+                  padding: '0.875rem 1rem',
+                  background: 'rgba(45,167,68,0.10)',
+                  borderLeft: '1px solid rgba(45,167,68,0.2)',
+                }}>
+                  <Check size={14} strokeWidth={2.5} style={{ color: '#2DA744', flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+                  <span style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.88)', fontWeight: 600, lineHeight: 1.4 }}>
+                    {cm}
+                  </span>
+                </div>
+              </div>
+            </Stagger.Child>
+          ))}
+        </Stagger>
       </Container>
     </section>
   );

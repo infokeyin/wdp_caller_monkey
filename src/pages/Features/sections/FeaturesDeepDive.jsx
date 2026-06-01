@@ -1,124 +1,186 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import FadeIn from '@components/motion/FadeIn';
 import Icon from '@components/atoms/Icon';
 import Container from '@components/layout/Container';
 import { capabilities } from '@data/capabilities';
+import { useReducedMotion } from '@hooks/useReducedMotion';
 
-/**
- * Expanded detail for each capability.
- * whyMatters and usedFor are appended to the base description.
- */
+/* ── Compact detail per capability ── */
 const DETAILS = {
   'voice-calling': {
-    whyMatters: 'Most businesses lose 60–70% of their leads simply because no one calls back quickly enough. A lead that is not called within 5 minutes is 21× less likely to convert.',
-    usedFor: ['Lead qualification on inbound enquiries', 'Cold outreach to prospect lists', 'Re-engagement of dormant customers'],
+    accent: '#2DA744',
+    bg: '#E8F7EC',
+    oneliner: 'Calls every lead in under 2 minutes — qualifies, answers, follows up.',
+    stat: '21× more likely to convert when called within 5 min',
+    chips: ['Lead qualification', 'Cold outreach', 'Re-engagement'],
   },
   'whatsapp': {
-    whyMatters: 'WhatsApp has a 98% open rate in India. When a call goes unanswered, Caller Monkey automatically sends a WhatsApp message to keep the conversation alive.',
-    usedFor: ['Post-call follow-up with property brochures or loan details', 'Appointment confirmation and directions', 'Payment link sharing and receipt delivery'],
+    accent: '#25D366',
+    bg: '#E6FBF0',
+    oneliner: 'Follows up missed calls, shares docs, collects replies — on WhatsApp.',
+    stat: '98% open rate in India',
+    chips: ['Post-call follow-up', 'Appointment confirmation', 'Payment links'],
   },
   'crm': {
-    whyMatters: 'Manual CRM entry is never done completely. Caller Monkey logs every call, outcome, and next step automatically — giving you a full, accurate picture of your pipeline at any moment.',
-    usedFor: ['Auto-logging lead status after every AI call', 'Syncing with Salesforce, Zoho CRM, Freshsales, and more', 'Triggering CRM workflows based on call outcome'],
+    accent: '#2C7BE5',
+    bg: '#EBF3FF',
+    oneliner: 'Every call outcome auto-logged. Full pipeline visibility, zero manual entry.',
+    stat: 'Works with Salesforce, Zoho, Freshsales',
+    chips: ['Auto-logging', 'Workflow triggers', 'Pipeline sync'],
   },
   'lead-follow-up': {
-    whyMatters: 'Studies show 80% of sales require 5 or more follow-up touches. Almost no business can do this manually at scale. Caller Monkey does it automatically — without needing reminders.',
-    usedFor: ['Multi-step follow-up after first call, across 3–7 days', 'Escalation to senior sales rep after X failed attempts', 'Re-engagement of leads that went cold 30–90 days ago'],
+    accent: '#F4A623',
+    bg: '#FEF6E7',
+    oneliner: 'Calls every lead, follows up 5+ times — without anyone on your team tracking it.',
+    stat: '80% of sales need 5+ follow-ups',
+    chips: ['Multi-step sequences', 'Escalation logic', 'Re-engagement'],
   },
   'reminders': {
-    whyMatters: 'No-shows, missed payments, and lapsed renewals cost Indian businesses crores every year. Caller Monkey sends the right reminder at the right time, automatically.',
-    usedFor: ['Appointment reminders for clinics and service businesses', 'EMI and payment due date alerts', 'Policy renewal and subscription expiry calls'],
+    accent: '#E11D48',
+    bg: '#FEE2E2',
+    oneliner: 'Right reminder, right time — appointments, EMI, renewals, deliveries.',
+    stat: 'Reduces no-shows by up to 40%',
+    chips: ['Clinic reminders', 'EMI alerts', 'Policy renewals'],
   },
   'attendance': {
-    whyMatters: 'For businesses with field teams — DSAs, delivery staff, sales executives — manual attendance is unreliable and easy to fake. Voice-verified attendance with GPS gives you accurate, tamper-proof records.',
-    usedFor: ['Daily voice check-in for field sales teams', 'GPS location confirmation for on-site executives', 'Auto-generated attendance report sent to manager daily'],
+    accent: '#059669',
+    bg: '#ECFDF5',
+    oneliner: 'Field staff check in by voice. GPS confirmed. Manager gets daily report.',
+    stat: 'Tamper-proof, no app needed',
+    chips: ['Voice check-in', 'GPS location', 'Auto daily report'],
   },
   'employee-comm': {
-    whyMatters: 'For large or distributed teams, communicating policy changes, training schedules, or urgent updates via WhatsApp groups means critical information gets buried. AI voice broadcasts ensure everyone hears it.',
-    usedFor: ['Daily briefings for call centre or field teams', 'Training reminders and module completion nudges', 'Emergency communication to all staff in seconds'],
+    accent: '#7C3AED',
+    bg: '#F5EEF8',
+    oneliner: 'Broadcasts updates, training nudges, and urgent alerts to your whole team.',
+    stat: 'Reaches 1000 staff in seconds',
+    chips: ['Daily briefings', 'Training reminders', 'Emergency alerts'],
   },
   'email': {
-    whyMatters: 'The right email, sent at the right moment, dramatically increases conversion. Caller Monkey triggers emails based on call outcomes — not time delays.',
-    usedFor: ['Property brochure or loan offer after a qualified call', 'Thank-you email after a successful appointment booking', 'Escalation email to senior manager if lead is unresponsive'],
+    accent: '#0891B2',
+    bg: '#E0F7FA',
+    oneliner: 'Triggers the right email based on call outcome — proposals, follow-ups, thank-yous.',
+    stat: 'Triggered by call result, not a timer',
+    chips: ['Proposals', 'Thank-you notes', 'Escalation emails'],
   },
   'analytics': {
-    whyMatters: 'Most business owners run on gut feel. Caller Monkey shows you exactly where leads are being lost, which team members are converting, and where to focus next week\'s effort.',
-    usedFor: ['Daily call volume and outcome dashboard', 'Team performance comparison by region or executive', 'Campaign-level response rate tracking'],
+    accent: '#9B59B6',
+    bg: '#F5EEF8',
+    oneliner: 'Live dashboard: call volume, pick-up rate, team performance, conversion.',
+    stat: 'See exactly where leads are lost',
+    chips: ['Call dashboard', 'Team comparison', 'Campaign tracking'],
   },
   'multilanguage': {
-    whyMatters: 'India is not one market. A customer in Punjab speaks differently from one in Tamil Nadu. Caller Monkey matches the language to the customer — increasing pick-up rates and trust.',
-    usedFor: ['Hindi and Hinglish for North India outreach', 'Tamil, Telugu, Kannada for South India campaigns', 'Marathi, Gujarati, Bengali for regional business communication'],
+    accent: '#D97706',
+    bg: '#FEF3C7',
+    oneliner: 'Speaks the customer\'s language — Hindi, Tamil, Marathi, Bengali, and 11 more.',
+    stat: 'Higher pick-up rates in regional markets',
+    chips: ['North India', 'South India', 'Regional campaigns'],
   },
 };
 
 function DeepDiveCard({ cap, isEven }) {
-  const detail = DETAILS[cap.id];
+  const reduced = useReducedMotion();
+  const d = DETAILS[cap.id] ?? { accent: '#2DA744', bg: '#E8F7EC', oneliner: cap.description, stat: '', chips: [] };
 
   return (
     <div
       id={cap.id}
-      className="custom-section"
       style={{
         background: isEven ? 'var(--color-bg)' : 'var(--color-bg-alt)',
-        paddingBlock: 'clamp(3rem, 4vw, 4.5rem)',
+        paddingBlock: 'clamp(2.5rem, 4vw, 4rem)',
+        borderBottom: '1px solid var(--color-border)',
       }}
     >
       <Container>
         <FadeIn>
-          <div className={`flex flex-col lg:flex-row gap-10 lg:gap-16 items-start ${isEven ? '' : 'lg:flex-row-reverse'}`}>
+          <div style={{
+            display: 'flex',
+            flexDirection: isEven ? 'row' : 'row-reverse',
+            alignItems: 'center',
+            gap: 'clamp(2rem, 5vw, 5rem)',
+            flexWrap: 'wrap',
+          }}>
 
-            {/* Icon block */}
-            <div className="shrink-0 lg:w-52 flex flex-col items-center lg:items-start gap-4 lg:pt-2">
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                style={{ background: 'var(--color-green-50)' }}
+            {/* Icon side */}
+            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+              <motion.div
+                animate={reduced ? {} : { y: [0, -5, 0] }}
+                transition={reduced ? {} : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                style={{
+                  width: 80, height: 80,
+                  borderRadius: 'var(--radius-xl)',
+                  background: d.bg,
+                  border: `1.5px solid ${d.accent}33`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  boxShadow: `0 8px 24px ${d.accent}18`,
+                }}
                 aria-hidden="true"
               >
-                <Icon name={cap.icon} size={30} strokeWidth={1.75} style={{ color: 'var(--color-green-600)' }} />
+                <Icon name={cap.icon} size={34} strokeWidth={1.5} style={{ color: d.accent }} />
+              </motion.div>
+
+              {/* Stat badge */}
+              {d.stat && (
+                <div style={{
+                  padding: '0.35rem 0.75rem',
+                  borderRadius: 'var(--radius-full)',
+                  background: d.bg,
+                  fontSize: 'var(--text-xs)', fontWeight: 700,
+                  color: d.accent, textAlign: 'center',
+                  maxWidth: 160, lineHeight: 1.4,
+                  border: `1px solid ${d.accent}33`,
+                }}>
+                  {d.stat}
+                </div>
+              )}
+            </div>
+
+            {/* Content side */}
+            <div style={{ flex: '1 1 280px', minWidth: 0 }}>
+              {/* Title with coloured left accent */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                <div style={{ width: 4, height: 28, borderRadius: 2, background: d.accent, flexShrink: 0 }} />
+                <h2 style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'var(--text-h3)', fontWeight: 700,
+                  color: 'var(--color-grey-900)', margin: 0,
+                }}>
+                  {cap.title}
+                </h2>
               </div>
-              <div className="hidden lg:flex flex-col gap-1">
-                {detail?.usedFor?.map((use) => (
-                  <span key={use} className="flex items-start gap-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    <span className="text-green-500 mt-0.5 shrink-0" aria-hidden="true">→</span>
-                    {use}
+
+              {/* One-liner */}
+              <p style={{
+                fontSize: 'var(--text-lg)',
+                color: 'var(--color-text-muted)',
+                lineHeight: 'var(--leading-relaxed)',
+                marginBottom: '1.25rem',
+              }}>
+                {d.oneliner}
+              </p>
+
+              {/* Use-case chips */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {d.chips.map((chip) => (
+                  <span
+                    key={chip}
+                    style={{
+                      padding: '0.3rem 0.75rem',
+                      borderRadius: 'var(--radius-full)',
+                      background: d.bg,
+                      fontSize: 'var(--text-xs)', fontWeight: 600,
+                      color: d.accent,
+                      border: `1px solid ${d.accent}33`,
+                    }}
+                  >
+                    {chip}
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* Content */}
-            <div className="flex-1 min-w-0">
-              <h2 className="custom-h3 mb-4" style={{ color: 'var(--color-grey-900)' }}>
-                {cap.title}
-              </h2>
-              <p className="text-base mb-4" style={{ color: 'var(--color-text-muted)', lineHeight: 'var(--leading-relaxed)' }}>
-                {cap.description}
-              </p>
-              {detail?.whyMatters && (
-                <div
-                  className="p-4 rounded-xl mb-4"
-                  style={{ background: 'var(--color-green-50)', borderLeft: '3px solid var(--color-green-500)' }}
-                >
-                  <p className="text-sm font-semibold mb-1" style={{ color: 'var(--color-green-700)' }}>
-                    Why it matters
-                  </p>
-                  <p className="text-sm" style={{ color: 'var(--color-green-900)', lineHeight: 'var(--leading-relaxed)' }}>
-                    {detail.whyMatters}
-                  </p>
-                </div>
-              )}
-              {/* Mobile use-cases */}
-              {detail?.usedFor && (
-                <div className="flex flex-col gap-1.5 lg:hidden">
-                  {detail.usedFor.map((use) => (
-                    <span key={use} className="flex items-start gap-2 text-sm" style={{ color: 'var(--color-text-muted)' }}>
-                      <span style={{ color: 'var(--color-green-500)' }} aria-hidden="true">→</span>
-                      {use}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         </FadeIn>
       </Container>

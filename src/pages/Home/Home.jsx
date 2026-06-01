@@ -8,6 +8,7 @@ import HomeProblem         from './sections/HomeProblem';
 import HomeWhatItDoes      from './sections/HomeWhatItDoes';
 import HomeConnectsTeaser  from './sections/HomeConnectsTeaser';
 import HomeResults         from './sections/HomeResults';
+import HomeVelocity        from './sections/HomeVelocity';
 import HomeCTA             from './sections/HomeCTA';
 
 function Home() {
@@ -20,6 +21,7 @@ function Home() {
       <HomeWhatItDoes />
       <HomeConnectsTeaser />
       <HomeResults />
+      <HomeVelocity />
       <HomeCTA />
     </PageLayout>
   );

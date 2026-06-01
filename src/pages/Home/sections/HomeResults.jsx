@@ -42,12 +42,9 @@ function HomeResults() {
       <Container>
         <FadeIn>
           <p className="custom-eyebrow mb-3 text-center">Results</p>
-          <h2 className="custom-h2 mb-4 text-center">
+          <h2 className="custom-h2 mb-10 text-center">
             What Businesses Experience After Going Live.
           </h2>
-          <p className="custom-lead text-center mb-12 max-w-2xl mx-auto">
-            Outcomes reported by businesses using Caller Monkey across Real Estate, Finance, Healthcare, and Retail.
-          </p>
         </FadeIn>
 
         {/* 4 animated stat counters */}

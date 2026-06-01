@@ -1,64 +1,113 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import FadeIn from '@components/motion/FadeIn';
 import Stagger from '@components/motion/Stagger';
-import IndustryCard from '@components/molecules/IndustryCard';
+import Icon from '@components/atoms/Icon';
 import Container from '@components/layout/Container';
 import { industries } from '@data/industries';
 import { useCases } from '@data/useCases';
+import { useReducedMotion } from '@hooks/useReducedMotion';
 
 const USE_CASE_IDS = new Set(useCases.map((u) => u.industryId));
 
-// Accent colour per industry id — drives card top border + icon tint
-const ACCENT = {
-  'real-estate':   'var(--ind-real-estate)',
-  'finance':       'var(--ind-finance)',
-  'healthcare':    'var(--ind-healthcare)',
-  'education':     'var(--ind-education)',
-  'retail':        'var(--ind-retail)',
-  'manufacturing': 'var(--ind-manufacturing)',
-  'insurance':     'var(--ind-insurance)',
-  'jewellery':     'var(--ind-jewellery)',
-  'logistics':     'var(--ind-logistics)',
-  'restaurants':   'var(--ind-restaurants)',
-  'political':     'var(--ind-political)',
-  'government':    'var(--ind-government)',
+const ACCENT_HEX = {
+  'real-estate':   '#E07B39',
+  'finance':       '#2C7BE5',
+  'healthcare':    '#E91E63',
+  'education':     '#9B59B6',
+  'retail':        '#F4A623',
+  'manufacturing': '#0891B2',
+  'insurance':     '#2DA744',
+  'jewellery':     '#D4AF37',
+  'logistics':     '#5D4037',
+  'restaurants':   '#D32F2F',
+  'political':     '#1565C0',
+  'government':    '#4CAF50',
 };
 
 function IndustriesGrid() {
+  const reduced = useReducedMotion();
+
   return (
     <section id="industries-grid" className="custom-section-alt">
       <Container>
         <FadeIn>
           <p className="custom-eyebrow mb-3 text-center">12 Industries</p>
-          <h2 className="custom-h2 text-center mb-4">Who We Work With</h2>
-          <p className="custom-lead text-center mb-12 max-w-2xl mx-auto">
-            From high-volume lead management to field team tracking. Caller Monkey adapts to your industry's communication needs.
-          </p>
+          <h2 className="custom-h2 text-center mb-10">Who We Work With</h2>
         </FadeIn>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <Stagger className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {industries.map((ind) => {
+            const color = ACCENT_HEX[ind.id] ?? '#2DA744';
+            const bg = `${color}14`;
             const hasUseCase = USE_CASE_IDS.has(ind.id);
+
             return (
               <Stagger.Child key={ind.id}>
-                <IndustryCard
-                  icon={ind.icon}
-                  name={ind.name}
-                  description={ind.description}
-                  to={hasUseCase ? `#story-${ind.id}` : undefined}
-                  accentColor={ACCENT[ind.id]}
-                  className="h-full"
-                />
+                <motion.a
+                  href={hasUseCase ? `#story-${ind.id}` : '#industries-grid'}
+                  whileHover={reduced ? {} : { y: -4, boxShadow: `0 12px 28px ${color}22` }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    display: 'flex', flexDirection: 'column', gap: '0.75rem',
+                    padding: '1.25rem 1rem',
+                    background: 'var(--color-bg-elevated)',
+                    border: '1px solid var(--color-border)',
+                    borderTop: `3px solid ${color}`,
+                    borderRadius: 'var(--radius-lg)',
+                    textDecoration: 'none',
+                    height: '100%',
+                  }}
+                  aria-label={ind.name}
+                >
+                  {/* Icon */}
+                  <div style={{
+                    width: 42, height: 42,
+                    borderRadius: 'var(--radius-md)',
+                    background: bg,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0,
+                  }} aria-hidden="true">
+                    <Icon name={ind.icon} size={20} strokeWidth={1.75} style={{ color }} />
+                  </div>
+
+                  {/* Name */}
+                  <p style={{
+                    fontFamily: 'var(--font-display)', fontWeight: 700,
+                    fontSize: 'var(--text-sm)', color: 'var(--color-grey-900)',
+                    lineHeight: 1.3, margin: 0,
+                  }}>
+                    {ind.name}
+                  </p>
+
+                  {/* Has use case indicator */}
+                  {hasUseCase && (
+                    <span style={{
+                      alignSelf: 'flex-start',
+                      fontSize: 'var(--text-xs)', fontWeight: 700,
+                      color, background: bg,
+                      padding: '0.15rem 0.5rem',
+                      borderRadius: 'var(--radius-full)',
+                      border: `1px solid ${color}33`,
+                    }}>
+                      Case study ↓
+                    </span>
+                  )}
+                </motion.a>
               </Stagger.Child>
             );
           })}
         </Stagger>
 
+        {/* Footer note */}
         <FadeIn delay={0.2}>
-          <p className="text-center text-sm mt-10" style={{ color: 'var(--color-text-muted)' }}>
+          <p style={{
+            textAlign: 'center', marginTop: '2rem',
+            fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)',
+          }}>
             Don't see your industry?{' '}
             <a href="/get-started#demo-form" style={{ color: 'var(--color-green-600)', fontWeight: 600 }}>
-              Talk to us — if your business makes calls, we can help.
+              Talk to us — if you make calls, we can help.
             </a>
           </p>
         </FadeIn>

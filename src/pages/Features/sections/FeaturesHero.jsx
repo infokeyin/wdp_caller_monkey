@@ -1,75 +1,193 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FadeIn from '@components/motion/FadeIn';
 import Container from '@components/layout/Container';
-import { useReducedMotion } from '@hooks/useReducedMotion';
 import Icon from '@components/atoms/Icon';
+import { useReducedMotion } from '@hooks/useReducedMotion';
 
-const FEATURE_ICONS = [
-  { icon: 'PhoneCall',    label: 'AI Calls',   color: '#2DA744', delay: 0 },
-  { icon: 'MessageSquare',label: 'WhatsApp',   color: '#25D366', delay: 0.15 },
-  { icon: 'Calendar',     label: 'Calendar',   color: '#F4A623', delay: 0.3 },
-  { icon: 'Database',     label: 'CRM Sync',   color: '#2C7BE5', delay: 0.45 },
-  { icon: 'BarChart3',    label: 'Analytics',  color: '#9B59B6', delay: 0.6 },
+/* ── Feature chips shown in the hero ── */
+const FEATURES = [
+  { icon: 'PhoneCall',     label: 'AI Voice Calls',  color: '#2DA744', bg: '#E8F7EC' },
+  { icon: 'MessageSquare', label: 'WhatsApp Auto',    color: '#25D366', bg: '#E6FBF0' },
+  { icon: 'Database',      label: 'CRM Sync',         color: '#2C7BE5', bg: '#EBF3FF' },
+  { icon: 'Zap',           label: 'Lead Follow-Up',   color: '#F4A623', bg: '#FEF6E7' },
+  { icon: 'BarChart3',     label: 'Analytics',        color: '#9B59B6', bg: '#F5EEF8' },
+  { icon: 'Languages',     label: '15+ Languages',    color: '#D97706', bg: '#FEF3C7' },
+  { icon: 'MapPin',        label: 'Field Tracking',   color: '#E11D48', bg: '#FEE2E2' },
+  { icon: 'Mail',          label: 'Email Automation', color: '#0891B2', bg: '#E0F7FA' },
 ];
+
+/* ── Live activity feed SVG ── */
+const FEED_ITEMS = [
+  { color: '#2DA744', label: 'Lead called — qualified',    time: '0:02' },
+  { color: '#25D366', label: 'WhatsApp sent — brochure',   time: '0:03' },
+  { color: '#2C7BE5', label: 'CRM updated — Hot lead',     time: '0:03' },
+  { color: '#F4A623', label: 'Follow-up scheduled',        time: '0:05' },
+  { color: '#9B59B6', label: 'Report generated',           time: '1:00' },
+];
+
+function ActivityFeed({ reduced }) {
+  return (
+    <div style={{
+      background: '#FAFAFA',
+      border: '1px solid var(--color-border)',
+      borderRadius: 'var(--radius-xl)',
+      padding: '1.25rem',
+      width: '100%',
+      maxWidth: 340,
+    }}>
+      {/* Header bar */}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: '0.5rem',
+        marginBottom: '1rem', paddingBottom: '0.75rem',
+        borderBottom: '1px solid var(--color-border)',
+      }}>
+        <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#2DA744' }} />
+        <span style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--color-grey-600)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+          Live activity
+        </span>
+        <span style={{ marginLeft: 'auto', fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)' }}>today</span>
+      </div>
+
+      {/* Feed rows */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
+        {FEED_ITEMS.map((item, i) => (
+          <motion.div
+            key={item.label}
+            initial={reduced ? { opacity: 1 } : { opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={reduced ? {} : { delay: 0.3 + i * 0.18, duration: 0.35 }}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '0.625rem',
+              padding: '0.5rem 0.625rem',
+              background: 'white',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            <div style={{
+              width: 7, height: 7, borderRadius: '50%',
+              background: item.color, flexShrink: 0,
+            }} />
+            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--color-grey-700)', flex: 1 }}>
+              {item.label}
+            </span>
+            <span style={{
+              fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)',
+              color: 'var(--color-text-muted)',
+            }}>
+              {item.time}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Footer */}
+      <p style={{
+        marginTop: '0.875rem', fontSize: 'var(--text-xs)',
+        color: 'var(--color-text-muted)', textAlign: 'center',
+      }}>
+        All of this. Zero manual work.
+      </p>
+    </div>
+  );
+}
 
 function FeaturesHero() {
   const reduced = useReducedMotion();
 
   return (
     <section
-      className="custom-section"
       style={{
-        background: 'linear-gradient(160deg, var(--color-green-50) 0%, var(--color-bg) 60%)',
-        paddingTop: 'clamp(3rem, 5vw, 5rem)',
-        paddingBottom: 'clamp(2rem, 4vw, 4rem)',
+        background: 'var(--color-bg)',
+        paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+        paddingBottom: 'clamp(2.5rem, 5vw, 5rem)',
+        borderBottom: '1px solid var(--color-border)',
+        overflow: 'hidden',
       }}
     >
-      <Container variant="narrow">
-        <FadeIn>
-          <p className="custom-eyebrow mb-4 text-center">Features</p>
-          <h1 className="custom-display text-center mb-6">
-            10 Things Caller Monkey Does for You, Every Day, Automatically.
-          </h1>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <p className="custom-lead text-center mb-12">
-            These are not features on a list. These are jobs your business needs done — and Caller Monkey does all of them.
-          </p>
-        </FadeIn>
+      <Container>
+        <div style={{
+          display: 'flex', flexWrap: 'wrap',
+          alignItems: 'center', gap: 'clamp(2rem, 5vw, 5rem)',
+        }}>
 
-        {/* Animated icon strip */}
-        <div
-          style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}
-          aria-hidden="true"
-        >
-          {FEATURE_ICONS.map((f) => (
-            <motion.div
-              key={f.icon}
-              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={reduced ? {} : { duration: 0.45, delay: f.delay, ease: [0.25,1,0.5,1] }}
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem' }}
-            >
-              <motion.div
-                animate={reduced ? {} : { y: [0, -5, 0] }}
-                transition={reduced ? {} : { duration: 3.5 + f.delay, repeat: Infinity, ease: 'easeInOut' }}
+          {/* Left */}
+          <div style={{ flex: '1 1 320px', minWidth: 0 }}>
+            <FadeIn>
+              <p className="custom-eyebrow mb-3">Features</p>
+              <h1 className="custom-h1 mb-4" style={{ maxWidth: 480 }}>
+                10 Jobs Done for You. Every Day. Automatically.
+              </h1>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <p className="custom-lead mb-8" style={{ maxWidth: 420 }}>
+                Not a feature list — these are real business jobs Caller Monkey handles without manual input.
+              </p>
+            </FadeIn>
+
+            {/* Feature chips */}
+            <FadeIn delay={0.14}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '2rem' }}>
+                {FEATURES.map((f, i) => (
+                  <motion.a
+                    key={f.icon}
+                    href={`#features-grid`}
+                    initial={reduced ? { opacity: 1 } : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={reduced ? {} : { delay: 0.2 + i * 0.07, duration: 0.3 }}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '0.375rem',
+                      padding: '0.3rem 0.75rem',
+                      background: f.bg, color: f.color,
+                      borderRadius: 'var(--radius-full)',
+                      fontSize: 'var(--text-xs)', fontWeight: 700,
+                      textDecoration: 'none',
+                      border: `1px solid ${f.color}33`,
+                      transition: 'transform 0.15s',
+                    }}
+                    whileHover={reduced ? {} : { scale: 1.04 }}
+                  >
+                    <Icon name={f.icon} size={12} strokeWidth={2} aria-hidden="true" />
+                    {f.label}
+                  </motion.a>
+                ))}
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.22}>
+              <Link
+                to="/get-started#demo-form"
                 style={{
-                  width: 52, height: 52,
-                  borderRadius: 'var(--radius-xl)',
-                  background: 'white',
-                  border: `1.5px solid ${f.color}33`,
-                  boxShadow: 'var(--shadow-md)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                  padding: '0.875rem 1.75rem',
+                  background: 'var(--color-green-500)', color: '#fff',
+                  borderRadius: 'var(--radius-md)', fontWeight: 700,
+                  fontSize: 'var(--text-base)', textDecoration: 'none',
+                  boxShadow: 'var(--shadow-green)',
                 }}
               >
-                <Icon name={f.icon} size={24} strokeWidth={1.75} style={{ color: f.color }} />
+                See It Live
+              </Link>
+            </FadeIn>
+          </div>
+
+          {/* Right — activity feed */}
+          <div style={{
+            flex: '0 0 auto',
+            display: 'flex', justifyContent: 'center',
+          }}>
+            <FadeIn delay={0.1} y={16}>
+              <motion.div
+                animate={reduced ? {} : { y: [0, -5, 0] }}
+                transition={reduced ? {} : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <ActivityFeed reduced={reduced} />
               </motion.div>
-              <span style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--color-grey-500)' }}>
-                {f.label}
-              </span>
-            </motion.div>
-          ))}
+            </FadeIn>
+          </div>
+
         </div>
       </Container>
     </section>

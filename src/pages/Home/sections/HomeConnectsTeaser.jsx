@@ -100,7 +100,7 @@ function HomeConnectsTeaser() {
               <p className="custom-eyebrow mb-3">Integrations</p>
               <h2 className="custom-h2 mb-4">One Brain. Every Tool, Connected.</h2>
               <p className="custom-lead mb-8">
-                Caller Monkey connects to your CRM, WhatsApp Business, calendar, email, lead platforms, and payment gateway — all talking to each other through one system.
+                Your CRM, WhatsApp, calendar, email, and payment gateway — all talking to each other through one central system.
               </p>
             </FadeIn>
 

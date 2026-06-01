@@ -7,7 +7,7 @@ import Container from '@components/layout/Container';
 const PLANS = [
   {
     name: 'Starter — AI Voice Core',
-    audience: 'Businesses starting with AI communication for the first time, or moving from manual calling.',
+    audience: 'First-time AI adoption, moving from manual calling.',
     featured: false,
     features: [
       'AI calling in your business voice and language',
@@ -21,7 +21,7 @@ const PLANS = [
   },
   {
     name: 'Growth — + CRM & Lead Engine',
-    audience: 'Sales-heavy businesses wanting full pipeline automation and zero lead drop.',
+    audience: 'Sales-heavy teams — full pipeline automation, zero dropped leads.',
     featured: true,
     features: [
       'Everything in Starter',
@@ -34,7 +34,7 @@ const PLANS = [
   },
   {
     name: 'Operations — + Team & Business Tools',
-    audience: 'Businesses with field teams, multi-location operations, or large employee bases.',
+    audience: 'Field teams, multi-location ops, large employee bases.',
     featured: false,
     features: [
       'Everything in Growth',
@@ -54,10 +54,7 @@ function GetStartedPlans() {
       <Container>
         <FadeIn>
           <p className="custom-eyebrow mb-3 text-center">Starting Points</p>
-          <h2 className="custom-h2 text-center mb-4">Where Do You Want to Start?</h2>
-          <p className="custom-lead text-center mb-12 max-w-2xl mx-auto">
-            Three starting points. All include setup, training, and support. All scale as your business grows.
-          </p>
+          <h2 className="custom-h2 text-center mb-10">Where Do You Want to Start?</h2>
         </FadeIn>
 
         <Stagger className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
@@ -74,12 +71,12 @@ function GetStartedPlans() {
         </Stagger>
 
         <FadeIn delay={0.2}>
-          <p className="text-center text-sm mt-10" style={{ color: 'var(--color-text-muted)' }}>
-            Not sure which to pick?{' '}
+          <p className="text-center text-sm mt-8" style={{ color: 'var(--color-text-muted)' }}>
+            Not sure?{' '}
             <a href="#demo-form" style={{ color: 'var(--color-green-600)', fontWeight: 600 }}>
-              Book a free 30-minute walkthrough →
+              Book the free walkthrough →
             </a>
-            {' '}We will recommend the right starting point for your business.
+            {' '}We'll recommend the right fit.
           </p>
         </FadeIn>
       </Container>

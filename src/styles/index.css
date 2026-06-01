@@ -234,25 +234,37 @@ button { font: inherit; }
   will-change: transform;
   text-decoration: none;
 }
-.custom-btn:hover { transform: translateY(-1px); }
-.custom-btn:active { transform: translateY(0); }
+.custom-btn:hover  { transform: translateY(-2px); }
+.custom-btn:active { transform: translateY(0);    }
 .custom-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
+/* Primary — green fill */
 .custom-btn-primary { background: var(--color-green-500); color: var(--color-text-on-green); box-shadow: var(--shadow-green); }
-.custom-btn-primary:hover  { background: var(--color-green-400); }
+.custom-btn-primary:hover  { background: var(--color-green-400); box-shadow: 0 12px 28px rgba(45,167,68,0.32); }
 .custom-btn-primary:active { background: var(--color-green-600); }
 
+/* Secondary — outline on light bg */
 .custom-btn-secondary { background: transparent; color: var(--color-grey-900); border: 1.5px solid var(--color-grey-300); }
 .custom-btn-secondary:hover { border-color: var(--color-grey-900); background: var(--color-grey-50); }
 
+/* Ghost — text-only on light bg */
 .custom-btn-ghost { background: transparent; color: var(--color-grey-700); padding: 0.5rem 1rem; }
 .custom-btn-ghost:hover { background: var(--color-grey-100); color: var(--color-grey-900); }
 
-.custom-btn-whatsapp { background: var(--color-whatsapp); color: #fff; box-shadow: 0 8px 24px rgba(37, 211, 102, 0.22); }
+/* Outline — for use on dark / green section backgrounds */
+.custom-btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.35); }
+.custom-btn-outline:hover { border-color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.08); }
+
+/* Inverted — white fill, green text (for green section backgrounds) */
+.custom-btn-inverted { background: #fff; color: var(--color-green-600); box-shadow: 0 4px 16px rgba(0,0,0,0.14); }
+.custom-btn-inverted:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+/* WhatsApp */
+.custom-btn-whatsapp { background: var(--color-whatsapp); color: #fff; box-shadow: 0 8px 24px rgba(37,211,102,0.22); }
 .custom-btn-whatsapp:hover { background: #20BD5A; }
 
-.custom-btn-sm { padding: 0.5rem 1rem;    font-size: var(--text-sm); }
-.custom-btn-lg { padding: 1rem 2rem;       font-size: var(--text-lg); }
+.custom-btn-sm { padding: 0.5rem 1rem;  font-size: var(--text-sm); }
+.custom-btn-lg { padding: 1rem 2rem;    font-size: var(--text-lg); }
 
 /* ============================================================
    CUSTOM CLASSES — Cards

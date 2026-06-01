@@ -1,72 +1,161 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FadeIn from '@components/motion/FadeIn';
 import Container from '@components/layout/Container';
-import { useReducedMotion } from '@hooks/useReducedMotion';
 import Icon from '@components/atoms/Icon';
+import { industries } from '@data/industries';
+import { useReducedMotion } from '@hooks/useReducedMotion';
 
-const IND_ICONS = [
-  { icon: 'Building2',      color: 'var(--ind-real-estate)',   delay: 0 },
-  { icon: 'HeartPulse',     color: 'var(--ind-healthcare)',    delay: 0.1 },
-  { icon: 'GraduationCap',  color: 'var(--ind-education)',     delay: 0.2 },
-  { icon: 'ShoppingCart',   color: 'var(--ind-retail)',        delay: 0.3 },
-  { icon: 'Factory',        color: 'var(--ind-manufacturing)', delay: 0.4 },
-  { icon: 'Truck',          color: 'var(--ind-logistics)',     delay: 0.5 },
-];
+/* ── CSS variable → hex map for icons ── */
+const IND_HEX = {
+  'real-estate':   '#E07B39',
+  'finance':       '#2C7BE5',
+  'healthcare':    '#E91E63',
+  'education':     '#9B59B6',
+  'retail':        '#F4A623',
+  'manufacturing': '#0891B2',
+  'insurance':     '#2DA744',
+  'jewellery':     '#D4AF37',
+  'logistics':     '#5D4037',
+  'restaurants':   '#D32F2F',
+  'political':     '#1565C0',
+  'government':    '#4CAF50',
+};
+
+/* ── Radial orbit of 12 industry icons ── */
+function IndustryOrbit({ reduced }) {
+  const cx = 200, cy = 200;
+  const outerR = 148, innerR = 80;
+  const outer = industries.slice(0, 6);
+  const inner = industries.slice(6, 12);
+
+  return (
+    <svg
+      viewBox="0 0 400 400"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Industries served by Caller Monkey"
+      style={{ width: '100%', maxWidth: 380, height: 'auto' }}
+    >
+      {/* Orbit rings */}
+      <circle cx={cx} cy={cy} r={outerR} stroke="#E5E5E5" strokeWidth="1" strokeDasharray="4 5" />
+      <circle cx={cx} cy={cy} r={innerR} stroke="#E5E5E5" strokeWidth="1" strokeDasharray="3 4" />
+
+      {/* Outer ring — 6 nodes */}
+      {outer.map((ind, i) => {
+        const angle = (i / outer.length) * 2 * Math.PI - Math.PI / 2;
+        const nx = cx + outerR * Math.cos(angle);
+        const ny = cy + outerR * Math.sin(angle);
+        const hex = IND_HEX[ind.id] ?? '#2DA744';
+        return (
+          <g key={ind.id}>
+            <circle cx={nx} cy={ny} r="26" fill={`${hex}18`} stroke={hex} strokeWidth="1.5" />
+            <svg x={nx - 10} y={ny - 10} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={hex} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <Icon name={ind.icon} size={20} />
+            </svg>
+          </g>
+        );
+      })}
+
+      {/* Inner ring — 6 nodes */}
+      {inner.map((ind, i) => {
+        const angle = (i / inner.length) * 2 * Math.PI;
+        const nx = cx + innerR * Math.cos(angle);
+        const ny = cy + innerR * Math.sin(angle);
+        const hex = IND_HEX[ind.id] ?? '#2DA744';
+        return (
+          <g key={ind.id}>
+            <circle cx={nx} cy={ny} r="20" fill={`${hex}18`} stroke={hex} strokeWidth="1.25" />
+            <svg x={nx - 8} y={ny - 8} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={hex} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <Icon name={ind.icon} size={16} />
+            </svg>
+          </g>
+        );
+      })}
+
+      {/* Centre hub */}
+      <circle cx={cx} cy={cy} r="36" fill="#2DA744" />
+      <circle cx={cx} cy={cy} r="30" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" />
+      <text x={cx} y={cy - 5} textAnchor="middle" fontSize="12" fontWeight="900" fill="white" fontFamily="system-ui">CM</text>
+      <text x={cx} y={cy + 9} textAnchor="middle" fontSize="7" fontWeight="600" fill="rgba(255,255,255,0.75)" fontFamily="system-ui" letterSpacing="0.06em">12 INDUSTRIES</text>
+    </svg>
+  );
+}
 
 function IndustriesHero() {
   const reduced = useReducedMotion();
 
   return (
     <section
-      className="custom-section"
       style={{
-        background: 'linear-gradient(160deg, var(--color-green-50) 0%, var(--color-bg) 60%)',
-        paddingTop: 'clamp(3rem, 5vw, 5rem)',
-        paddingBottom: 'clamp(2rem, 4vw, 4rem)',
+        background: 'var(--color-bg)',
+        paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+        paddingBottom: 'clamp(2.5rem, 5vw, 5rem)',
+        borderBottom: '1px solid var(--color-border)',
+        overflow: 'hidden',
       }}
     >
-      <Container variant="narrow">
-        <FadeIn>
-          <p className="custom-eyebrow mb-4 text-center">Industries</p>
-          <h1 className="custom-display text-center mb-6">
-            Caller Monkey Works for Your Industry, Not Just Your Business.
-          </h1>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <p className="custom-lead text-center mb-12">
-            Every industry has its own follow-up rhythm and customer expectations. Caller Monkey is trained for each one — here is what that looks like across 12 industries.
-          </p>
-        </FadeIn>
+      <Container>
+        <div style={{
+          display: 'flex', flexWrap: 'wrap',
+          alignItems: 'center', gap: 'clamp(2rem, 5vw, 5rem)',
+        }}>
 
-        {/* Industry icon strip */}
-        <div
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', gap: '1.25rem', flexWrap: 'wrap' }}
-          aria-hidden="true"
-        >
-          {IND_ICONS.map((f, i) => (
-            <motion.div
-              key={f.icon}
-              initial={reduced ? { opacity: 1 } : { opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={reduced ? {} : { duration: 0.4, delay: f.delay, ease: [0.25,1,0.5,1] }}
-            >
+          {/* Left — text */}
+          <div style={{ flex: '1 1 320px', minWidth: 0 }}>
+            <FadeIn>
+              <p className="custom-eyebrow mb-3">Industries</p>
+              <h1 className="custom-h1 mb-5" style={{ maxWidth: 500 }}>
+                Built for Your Industry, Not Just Any Business.
+              </h1>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <p className="custom-lead mb-8" style={{ maxWidth: 440 }}>
+                Every industry has its own follow-up rhythm and customer expectations. Caller Monkey is trained for each one across 12 industries.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.14}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <Link to="#industries-grid" className="custom-btn custom-btn-primary">
+                  Find My Industry
+                </Link>
+                <Link to="/get-started#demo-form" className="custom-btn custom-btn-secondary">
+                  Book a Demo
+                </Link>
+              </div>
+            </FadeIn>
+
+            {/* Count badge */}
+            <FadeIn delay={0.22}>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                marginTop: '2rem',
+                padding: '0.5rem 1rem',
+                background: 'var(--color-green-50)',
+                borderRadius: 'var(--radius-full)',
+                fontSize: 'var(--text-xs)', fontWeight: 700,
+                color: 'var(--color-green-700)',
+              }}>
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-green-500)' }} />
+                12 industries · 500+ businesses · Live in 15 days
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Right — orbit diagram */}
+          <div style={{ flex: '0 0 auto', display: 'flex', justifyContent: 'center' }}>
+            <FadeIn delay={0.1} y={16}>
               <motion.div
-                animate={reduced ? {} : { y: [0, -4, 0] }}
-                transition={reduced ? {} : { duration: 4 + i * 0.5, repeat: Infinity, ease: 'easeInOut' }}
-                style={{
-                  width: 48, height: 48,
-                  borderRadius: 'var(--radius-lg)',
-                  background: 'white',
-                  border: `2px solid ${f.color}`,
-                  boxShadow: 'var(--shadow-md)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}
+                animate={reduced ? {} : { rotate: [0, 360] }}
+                transition={reduced ? {} : { duration: 60, repeat: Infinity, ease: 'linear' }}
+                style={{ transformOrigin: 'center center' }}
               >
-                <Icon name={f.icon} size={22} strokeWidth={1.75} style={{ color: f.color }} />
+                <IndustryOrbit reduced={reduced} />
               </motion.div>
-            </motion.div>
-          ))}
+            </FadeIn>
+          </div>
+
         </div>
       </Container>
     </section>
