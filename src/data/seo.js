@@ -6,7 +6,7 @@ export const seoData = {
     title:
       'Caller Monkey | AI Voice & Communication Platform for Indian Businesses | callermonkey.in',
     description:
-      "Caller Monkey is India's AI-powered business communication platform. Automate calls, follow-ups, WhatsApp, CRM, email and more. Start at ₹15/min. Live in 15 days.",
+      "Caller Monkey is India's AI-powered business communication platform. Automate calls, follow-ups, WhatsApp, CRM, email and more. Live in 15 days.",
   },
   features: {
     title: 'Features | Caller Monkey',
@@ -26,7 +26,7 @@ export const seoData = {
   getStarted: {
     title: 'Get Started & Free Demo | Caller Monkey',
     description:
-      'Pick where to begin. Add more as you grow. From ₹15/min. Book a 30-minute walkthrough customised to your business.',
+      'Pick where to begin. Add more as you grow. Book a 30-minute walkthrough customised to your business.',
   },
   notFound: {
     title: 'Page Not Found | Caller Monkey',

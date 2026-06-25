@@ -18,19 +18,19 @@ const INDUSTRY_OPTIONS = [
 ];
 
 const TEAM_SIZES = [
-  { value: '1-5',   label: '1 – 5 people' },
-  { value: '6-20',  label: '6 – 20 people' },
+  { value: '1-5', label: '1 – 5 people' },
+  { value: '6-20', label: '6 – 20 people' },
   { value: '21-100', label: '21 – 100 people' },
-  { value: '100+',  label: '100+ people' },
+  { value: '100+', label: '100+ people' },
 ];
 
 const PREFERRED_TIMES = [
-  { value: 'morning',   label: 'Morning (9am – 12pm)' },
+  { value: 'morning', label: 'Morning (9am – 12pm)' },
   { value: 'afternoon', label: 'Afternoon (12pm – 5pm)' },
-  { value: 'evening',   label: 'Evening (5pm – 8pm)' },
+  { value: 'evening', label: 'Evening (5pm – 8pm)' },
 ];
 
-const WHATSAPP_URL = `https://wa.me/${appConfig.contactInfo.whatsapp}?text=${encodeURIComponent("Hi! I just submitted the demo request form on callermonkey.in")}`;
+const WHATSAPP_URL = `https://wa.me/${appConfig.contactInfo.whatsapp}?text=${encodeURIComponent('Hi! I just submitted the demo request form on callermonkey.in')}`;
 
 /* ── Success state ── */
 function SuccessPanel() {
@@ -45,7 +45,8 @@ function SuccessPanel() {
       <div>
         <h3 className="custom-h3 mb-2">We have received your details.</h3>
         <p className="text-base" style={{ color: 'var(--color-text-muted)' }}>
-          Someone from our team will call you within one business day to schedule your 30-minute walkthrough. If you would prefer to connect sooner:
+          Someone from our team will call you within one business day to schedule your 30-minute
+          walkthrough. If you would prefer to connect sooner:
         </p>
       </div>
       <a
@@ -124,20 +125,20 @@ function GetStartedForm() {
   };
 
   return (
-    <section
-      id="demo-form"
-      className="custom-section-alt scroll-mt-24"
-    >
+    <section id="demo-form" className="custom-section-alt scroll-mt-24">
       <Container>
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-
           {/* Left — heading + trust points */}
           <div className="flex-1 min-w-0 lg:max-w-xs">
             <FadeIn>
               <p className="custom-eyebrow mb-3">Free Demo</p>
               <h2 className="custom-h2 mb-5">Book Your Free 30-Minute Walkthrough</h2>
-              <p className="text-base mb-8" style={{ color: 'var(--color-text-muted)', lineHeight: 'var(--leading-relaxed)' }}>
-                No generic demo. We customise the walkthrough to your industry, your team size, and the specific problems you want to solve.
+              <p
+                className="text-base mb-8"
+                style={{ color: 'var(--color-text-muted)', lineHeight: 'var(--leading-relaxed)' }}
+              >
+                No generic demo. We customise the walkthrough to your industry, your team size, and
+                the specific problems you want to solve.
               </p>
 
               {/* Trust list */}
@@ -149,8 +150,18 @@ function GetStartedForm() {
                   'Response within 1 business day',
                 ].map((trust) => (
                   <div key={trust} className="flex items-center gap-2.5">
-                    <CheckCircle2 size={16} strokeWidth={2} style={{ color: 'var(--color-green-500)' }} aria-hidden="true" />
-                    <span className="text-sm font-medium" style={{ color: 'var(--color-grey-700)' }}>{trust}</span>
+                    <CheckCircle2
+                      size={16}
+                      strokeWidth={2}
+                      style={{ color: 'var(--color-green-500)' }}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="text-sm font-medium"
+                      style={{ color: 'var(--color-grey-700)' }}
+                    >
+                      {trust}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -161,17 +172,11 @@ function GetStartedForm() {
           <div className="flex-1 min-w-0 w-full">
             <FadeIn delay={0.08}>
               <div className="custom-card p-6 md:p-8">
-
                 {isSubmitSuccessful ? (
                   <SuccessPanel />
                 ) : (
-                  <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    noValidate
-                    aria-label="Demo request form"
-                  >
+                  <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Demo request form">
                     <div className="flex flex-col gap-5">
-
                       {/* Name + Business (2 col on md+) */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Input
@@ -213,6 +218,7 @@ function GetStartedForm() {
                         <Input
                           label="Email Address"
                           type="email"
+                          required
                           placeholder="rajesh@kumarproperties.in"
                           autoComplete="email"
                           error={errors.email?.message}
@@ -245,7 +251,14 @@ function GetStartedForm() {
                       {/* Team Size */}
                       <div>
                         <p className="custom-label mb-2">
-                          Team Size <span className="ml-1" style={{ color: 'var(--color-error)' }} aria-hidden="true">*</span>
+                          Team Size{' '}
+                          <span
+                            className="ml-1"
+                            style={{ color: 'var(--color-error)' }}
+                            aria-hidden="true"
+                          >
+                            *
+                          </span>
                         </p>
                         <Controller
                           name="teamSize"
@@ -261,7 +274,9 @@ function GetStartedForm() {
                           )}
                         />
                         {errors.teamSize && (
-                          <p className="custom-error-text mt-1" role="alert">{errors.teamSize.message}</p>
+                          <p className="custom-error-text mt-1" role="alert">
+                            {errors.teamSize.message}
+                          </p>
                         )}
                       </div>
 
@@ -301,7 +316,12 @@ function GetStartedForm() {
                           style={{ background: '#FEF2F2', color: 'var(--color-error)' }}
                           role="alert"
                         >
-                          <AlertCircle size={16} strokeWidth={2} className="shrink-0 mt-0.5" aria-hidden="true" />
+                          <AlertCircle
+                            size={16}
+                            strokeWidth={2}
+                            className="shrink-0 mt-0.5"
+                            aria-hidden="true"
+                          />
                           {errors.root.message}
                         </div>
                       )}
@@ -317,8 +337,12 @@ function GetStartedForm() {
                         {isSubmitting ? 'Sending…' : 'Book My Free Walkthrough'}
                       </Button>
 
-                      <p className="text-xs text-center" style={{ color: 'var(--color-text-muted)' }}>
-                        By submitting, you agree to be contacted by our team. We do not share your data with third parties.
+                      <p
+                        className="text-xs text-center"
+                        style={{ color: 'var(--color-text-muted)' }}
+                      >
+                        By submitting, you agree to be contacted by our team. We do not share your
+                        data with third parties.
                       </p>
                     </div>
                   </form>

@@ -36,8 +36,8 @@ function PageLayout({ title, description, ogImage, canonical, children }) {
   const resolvedTitle = title
     ? `${title} | ${brand.name}`
     : `${brand.name} | AI Voice & Communication Platform for Indian Businesses`;
-  const resolvedOg    = ogImage ?? seoDefaults.ogImage;
-  const resolvedUrl   = canonical ?? `${brand.url}${location.pathname}`;
+  const resolvedOg = ogImage ?? seoDefaults.ogImage;
+  const resolvedUrl = canonical ?? `${brand.url}${location.pathname}`;
 
   return (
     <>
@@ -49,19 +49,19 @@ function PageLayout({ title, description, ogImage, canonical, children }) {
         <link rel="canonical" href={resolvedUrl} />
 
         {/* Open Graph */}
-        <meta property="og:type"        content="website" />
-        <meta property="og:url"         content={resolvedUrl} />
-        <meta property="og:title"       content={resolvedTitle} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={resolvedUrl} />
+        <meta property="og:title" content={resolvedTitle} />
         {description && <meta property="og:description" content={description} />}
-        <meta property="og:image"       content={resolvedOg} />
-        <meta property="og:site_name"   content={brand.name} />
-        <meta property="og:locale"      content={seoDefaults.locale} />
+        <meta property="og:image" content={resolvedOg} />
+        <meta property="og:site_name" content={brand.name} />
+        <meta property="og:locale" content={seoDefaults.locale} />
 
         {/* Twitter */}
-        <meta name="twitter:card"        content="summary_large_image" />
-        <meta name="twitter:title"       content={resolvedTitle} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={resolvedTitle} />
         {description && <meta name="twitter:description" content={description} />}
-        <meta name="twitter:image"       content={resolvedOg} />
+        <meta name="twitter:image" content={resolvedOg} />
         {seoDefaults.twitterHandle && (
           <meta name="twitter:site" content={`@${seoDefaults.twitterHandle}`} />
         )}
@@ -77,8 +77,8 @@ function PageLayout({ title, description, ogImage, canonical, children }) {
       <Footer />
 
       {/* Floating UI */}
-      {appConfig.flags.showWhatsAppBubble  && <WhatsAppBubble />}
-      {appConfig.flags.showScrollToTopFab  && <ScrollToTopFab />}
+      {appConfig.flags.showWhatsAppBubble && <WhatsAppBubble />}
+      {appConfig.flags.showScrollToTopFab && <ScrollToTopFab />}
     </>
   );
 }

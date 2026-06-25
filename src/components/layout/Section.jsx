@@ -1,4 +1,3 @@
-import React from 'react';
 import { cn } from '@utils/classNames';
 
 /**
@@ -18,9 +17,9 @@ function Section({ variant = 'default', id, as: Tag = 'section', className, chil
       id={id}
       className={cn(
         variant === 'default' && 'custom-section',
-        variant === 'alt'     && 'custom-section-alt',
-        variant === 'dark'    && 'custom-section-dark',
-        variant === 'narrow'  && 'custom-section',
+        variant === 'alt' && 'custom-section-alt',
+        variant === 'dark' && 'custom-section-dark',
+        variant === 'narrow' && 'custom-section',
         className
       )}
       {...props}

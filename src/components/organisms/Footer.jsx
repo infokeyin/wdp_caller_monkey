@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Mail,
-  Phone,
-  Linkedin,
-  Instagram,
-  Youtube,
-  MessageCircle,
-  ExternalLink,
-} from 'lucide-react';
+import { Mail, ExternalLink } from 'lucide-react';
 
 import appConfig from '@config/appConfig';
 import cmLogo from '../../props/logos/logo-240px.png';
@@ -22,14 +14,6 @@ const PRODUCT_LINKS = [
   { label: 'Analytics & Reports', path: '/features#analytics' },
 ];
 
-const SOLUTIONS_LINKS = [
-  { label: 'For Sales Teams', path: '/features' },
-  { label: 'For Operations Teams', path: '/features' },
-  { label: 'For Customer Success', path: '/features' },
-  { label: 'For Field Teams', path: '/features' },
-  { label: 'For Enterprise', path: '/get-started' },
-];
-
 const INDUSTRY_LINKS = [
   { label: 'Real Estate', path: '/industries' },
   { label: 'Finance & Loans', path: '/industries' },
@@ -39,11 +23,7 @@ const INDUSTRY_LINKS = [
   { label: 'Manufacturing', path: '/industries' },
 ];
 
-const COMPANY_LINKS = [
-  { label: 'Contact', path: '/get-started#demo-form' },
-  { label: 'Privacy Policy', path: '/privacy-policy' },
-  { label: 'Terms of Use', path: '/terms-of-use' },
-];
+const COMPANY_LINKS = [{ label: 'Contact', path: '/get-started#demo-form' }];
 
 function FooterCol({ title, children }) {
   return (
@@ -144,33 +124,38 @@ function NewsletterSignup() {
   );
 }
 
-function SocialIcon({ href, icon: Icon, label }) {
-  if (!href) return null;
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="p-2 rounded-md text-grey-500 hover:text-brand-green transition-colors custom-focus-ring"
-      aria-label={label}
-    >
-      <Icon size={18} strokeWidth={1.75} />
-    </a>
-  );
-}
+// function SocialIcon({ href, icon: Icon, label }) {
+//   if (!href) return null;
+//   return (
+//     <a
+//       href={href}
+//       target="_blank"
+//       rel="noopener noreferrer"
+//       className="p-2 rounded-md text-grey-500 hover:text-brand-green transition-colors custom-focus-ring"
+//       aria-label={label}
+//     >
+//       <Icon size={18} strokeWidth={1.75} />
+//     </a>
+//   );
+// }
 
 /**
  * Footer
- * Dark background (#0B0B0B). 5-column grid (Product / Solutions / Industries / Company / Contact+Social).
+ * Dark background (#0B0B0B). 5-column grid (Product / Industries / Company / Contact+Social).
  * Bottom row: copyright left, Infokey attribution right.
  */
 function Footer() {
-  const { contactInfo, social, brand, developer } = appConfig;
+  const {
+    contactInfo,
+    brand,
+    developer,
+    // social
+  } = appConfig;
 
   return (
     <footer
       className="custom-section-dark"
-      style={{ background: 'var(--color-bg-dark)' }}
+      style={{ background: 'var(--color-bg-dark)', paddingBottom: 32 }}
       aria-label="Site footer"
     >
       <div className="custom-container">
@@ -199,15 +184,6 @@ function Footer() {
                 >
                   <Mail size={14} strokeWidth={2} />
                   {contactInfo.email}
-                </a>
-              )}
-              {contactInfo.phone && (
-                <a
-                  href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
-                  className="flex items-center gap-2 text-sm text-grey-400 hover:text-brand-green transition-colors"
-                >
-                  <Phone size={14} strokeWidth={2} />
-                  {contactInfo.phone}
                 </a>
               )}
             </div>
@@ -241,10 +217,10 @@ function Footer() {
             </ul>
           </FooterCol>
 
-          {/* Solutions */}
-          <FooterCol title="Solutions">
+          {/* Industries */}
+          <FooterCol title="Industries">
             <ul className="space-y-1">
-              {SOLUTIONS_LINKS.map((l) => (
+              {INDUSTRY_LINKS.map((l) => (
                 <li key={l.label}>
                   <FooterLink to={l.path}>{l.label}</FooterLink>
                 </li>
@@ -252,28 +228,16 @@ function Footer() {
             </ul>
           </FooterCol>
 
-          {/* Industries + Company */}
-          <div className="flex flex-col gap-8">
-            <FooterCol title="Industries">
-              <ul className="space-y-1">
-                {INDUSTRY_LINKS.map((l) => (
-                  <li key={l.label}>
-                    <FooterLink to={l.path}>{l.label}</FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </FooterCol>
-
-            <FooterCol title="Company">
-              <ul className="space-y-1">
-                {COMPANY_LINKS.map((l) => (
-                  <li key={l.label}>
-                    <FooterLink to={l.path}>{l.label}</FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </FooterCol>
-          </div>
+          {/* Company */}
+          <FooterCol title="Company">
+            <ul className="space-y-1">
+              {COMPANY_LINKS.map((l) => (
+                <li key={l.label}>
+                  <FooterLink to={l.path}>{l.label}</FooterLink>
+                </li>
+              ))}
+            </ul>
+          </FooterCol>
         </div>
 
         {/* Bottom bar */}
@@ -281,9 +245,9 @@ function Footer() {
           {/* Left: copyright + social */}
           <div className="flex flex-col gap-2">
             <p className="text-xs" style={{ color: 'var(--color-grey-400)' }}>
-              © 2025 Caller Monkey. All rights reserved. | Made in India.
+              © 2026 Caller Monkey. All rights reserved. | Made in India.
             </p>
-            <div className="flex items-center gap-1 -ml-2">
+            {/* <div className="flex items-center gap-1 -ml-2">
               <SocialIcon href={social.linkedin} icon={Linkedin} label="LinkedIn" />
               <SocialIcon href={social.instagram} icon={Instagram} label="Instagram" />
               <SocialIcon href={social.youtube} icon={Youtube} label="YouTube" />
@@ -294,7 +258,7 @@ function Footer() {
                   label="WhatsApp"
                 />
               )}
-            </div>
+            </div> */}
           </div>
 
           {/* Right: Infokey attribution */}

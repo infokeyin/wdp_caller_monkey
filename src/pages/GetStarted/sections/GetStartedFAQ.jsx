@@ -1,4 +1,3 @@
-import React from 'react';
 import FAQSection from '@components/organisms/FAQSection';
 
 const FAQS = [
@@ -20,7 +19,7 @@ const FAQS = [
   {
     question: 'Is there a minimum commitment?',
     answer:
-      'No monthly contracts and no lock-in. AI calling is billed at ₹15 per minute — you pay only for what you use. The setup fee is a one-time cost. You can pause or stop at any time.',
+      'No monthly contracts and no lock-in. AI calling is very economical — you pay only for what you use. The setup fee is a one-time cost. You can pause or stop at any time.',
   },
   {
     question: 'Can I start with just one feature?',

@@ -73,7 +73,7 @@ export const appConfig = {
 
   // Feature flags — flip on/off without touching components.
   flags: {
-    showWhatsAppBubble: true,
+    showWhatsAppBubble: false,
     showScrollToTopFab: true,
     showFooterNewsletter: true,
     enableAnalytics: false, // flip to true once GA/Plausible is wired
