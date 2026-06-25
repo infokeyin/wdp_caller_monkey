@@ -27,24 +27,25 @@ const FLOW_CSS = `
 const GREEN = '#2DA744';
 const VOICE_BARS = [22, 22, 22, 22, 22, 22, 22, 22, 22];
 
-/* 6 output cards spaced evenly */
+/* 6 output cards spaced evenly — y values include TOP_PAD so pills never clip */
+const TOP_PAD = 36;
 const CARDS = [
-  { y: 30,  color: '#25D366', label: 'WhatsApp',  sub: 'follow-up sent',    check: 0,    pathId: 'ip1' },
-  { y: 115, color: '#2C7BE5', label: 'CRM',        sub: 'contact logged',    check: 1.1,  pathId: 'ip2' },
-  { y: 200, color: '#F4A623', label: 'Calendar',   sub: 'meeting scheduled', check: null, pathId: 'ip3' },
-  { y: 285, color: '#D9342B', label: 'Email',      sub: 'digest sent',       check: 2.2,  pathId: 'ip4' },
-  { y: 370, color: '#7C3AED', label: 'Payments',   sub: 'invoice raised',    check: null, pathId: 'ip5' },
-  { y: 455, color: '#0891B2', label: 'Analytics',  sub: 'report updated',    check: 3.0,  pathId: 'ip6' },
+  { y: 30  + TOP_PAD, color: '#25D366', label: 'WhatsApp',  sub: 'follow-up sent',    check: 0,    pathId: 'ip1' },
+  { y: 115 + TOP_PAD, color: '#2C7BE5', label: 'CRM',        sub: 'contact logged',    check: 1.1,  pathId: 'ip2' },
+  { y: 200 + TOP_PAD, color: '#F4A623', label: 'Calendar',   sub: 'meeting scheduled', check: null, pathId: 'ip3' },
+  { y: 285 + TOP_PAD, color: '#D9342B', label: 'Email',      sub: 'digest sent',       check: 2.2,  pathId: 'ip4' },
+  { y: 370 + TOP_PAD, color: '#7C3AED', label: 'Payments',   sub: 'invoice raised',    check: null, pathId: 'ip5' },
+  { y: 455 + TOP_PAD, color: '#0891B2', label: 'Analytics',  sub: 'report updated',    check: 3.0,  pathId: 'ip6' },
 ];
 
 /* SVG layout constants */
 const SVG_W   = 620;
-const SVG_H   = CARDS[CARDS.length - 1].y + 90;   // ≈ 545
-const AIX     = 290;                                // AI hub centre x
-const CY      = (CARDS[0].y + CARDS[CARDS.length - 1].y + 56) / 2; // ≈ 270
+const SVG_H   = CARDS[CARDS.length - 1].y + 90;
+const AIX     = 290;
+const CY      = (CARDS[0].y + CARDS[CARDS.length - 1].y + 56) / 2;
 const VOICE_X = 20;
 const CARD_X  = 430;
-const LOGO_R  = 52;   // radius of the hub circle
+const LOGO_R  = 52;
 
 function FlowDot({ pathId, fill, dur, begin }) {
   return (
@@ -191,7 +192,7 @@ function IntegrationFlowScene({ reduced }) {
         ))}
 
         {/* ── "24/7 always on" stat pill only ── */}
-        <g transform={`translate(${VOICE_X + 54} 18)`}>
+        <g transform={`translate(${VOICE_X + 54} ${CARDS[0].y - 36})`}>
           <g className="inth-pill" style={{ animationDelay: '0s' }} filter="url(#inthShadow)">
             <rect x={-46} y={-20} width={90} height={36} rx={12} fill="#FFFFFF" stroke="#EBEDEF" strokeWidth={1} />
             <text x={0} y={-3} textAnchor="middle" fontFamily="'Cabinet Grotesk', sans-serif" fontSize="15" fontWeight="800" fill={GREEN}>24/7</text>
@@ -213,7 +214,7 @@ function WorksWithHero() {
         position: 'relative',
         overflow: 'hidden',
         background: 'var(--color-bg)',
-        paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+        paddingTop: 'clamp(5rem, 8vw, 8rem)',
         paddingBottom: 'clamp(2.5rem, 5vw, 5rem)',
         borderBottom: '1px solid var(--color-border)',
       }}
@@ -221,7 +222,6 @@ function WorksWithHero() {
       <Container>
         <div
           style={{
-            display: 'flex',
             display: 'grid',
             gridTemplateColumns: '60fr 40fr',
             alignItems: 'center',

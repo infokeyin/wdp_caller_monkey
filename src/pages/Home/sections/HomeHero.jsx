@@ -1,7 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import FadeIn from '@components/motion/FadeIn';
 import { useReducedMotion } from '@hooks/useReducedMotion';
+import cmLogo from '../../../props/logos/logo-240px.png';
 
 /* ── Subtle waveform watermark ── */
 const BARS = [
@@ -41,278 +41,388 @@ function Waveform() {
   );
 }
 
-/* ── Animation styles (loops gated behind .aiq-anim + reduced-motion query) ── */
+/* ── Animation keyframes ── */
 const FLOW_CSS = `
-@keyframes aiqBar { 0%,100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
-@keyframes aiqRing { 0% { transform: scale(.55); opacity:.5; } 100% { transform: scale(1.9); opacity:0; } }
-@keyframes aiqCore { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-@keyframes aiqDot { 0%,100% { opacity:.25; } 50% { opacity:1; } }
-@keyframes aiqPop { 0%,18% { transform: scale(0); opacity:0; } 34% { transform: scale(1.18); opacity:1; } 50%,82% { transform: scale(1); opacity:1; } 100% { transform: scale(1); opacity:1; } }
-@keyframes aiqFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-@keyframes aiqStat { 0%,100% { transform: scaleY(.4); } 50% { transform: scaleY(1); } }
-.aiq-anim .aiq-bar { transform-box: fill-box; transform-origin: bottom; animation: aiqBar 1.1s ease-in-out infinite; }
-.aiq-anim .aiq-ring { transform-box: fill-box; transform-origin: center; animation: aiqRing 2.6s ease-out infinite; }
-.aiq-anim .aiq-core { transform-box: fill-box; transform-origin: center; animation: aiqCore 3s ease-in-out infinite; }
-.aiq-anim .aiq-tdot { transform-box: fill-box; transform-origin: center; animation: aiqDot 1.2s ease-in-out infinite; }
-.aiq-anim .aiq-check { transform-box: fill-box; transform-origin: center; animation: aiqPop 3.4s ease-in-out infinite; }
-.aiq-anim .aiq-pill { transform-box: fill-box; transform-origin: center; animation: aiqFloat 3.6s ease-in-out infinite; }
-.aiq-anim .aiq-statbar { transform-box: fill-box; transform-origin: bottom; animation: aiqStat 1.3s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) {
-  .aiq-anim .aiq-bar, .aiq-anim .aiq-ring, .aiq-anim .aiq-core, .aiq-anim .aiq-tdot,
-  .aiq-anim .aiq-check, .aiq-anim .aiq-pill, .aiq-anim .aiq-statbar { animation: none; }
+@keyframes hmBar   { 0%,100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+@keyframes hmRing  { 0% { transform: scale(.55); opacity:.5; } 100% { transform: scale(1.9); opacity:0; } }
+@keyframes hmCore  { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes hmDot   { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+@keyframes hmPop   { 0%,18% { transform:scale(0);opacity:0; } 34% { transform:scale(1.18);opacity:1; } 50%,100% { transform:scale(1);opacity:1; } }
+@keyframes hmFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-4px); } }
+.hm-anim .hm-bar  { transform-box:fill-box;transform-origin:bottom;animation:hmBar  1.1s ease-in-out infinite; }
+.hm-anim .hm-ring { transform-box:fill-box;transform-origin:center;animation:hmRing 2.6s ease-out  infinite; }
+.hm-anim .hm-core { transform-box:fill-box;transform-origin:center;animation:hmCore 3s   ease-in-out infinite; }
+.hm-anim .hm-tdot { transform-box:fill-box;transform-origin:center;animation:hmDot  1.2s ease-in-out infinite; }
+.hm-anim .hm-check{ transform-box:fill-box;transform-origin:center;animation:hmPop  3.4s ease-in-out infinite; }
+.hm-anim .hm-pill { transform-box:fill-box;transform-origin:center;animation:hmFloat 3.6s ease-in-out infinite; }
+@media(prefers-reduced-motion:reduce){
+  .hm-anim .hm-bar,.hm-anim .hm-ring,.hm-anim .hm-core,
+  .hm-anim .hm-tdot,.hm-anim .hm-check,.hm-anim .hm-pill { animation:none; }
 }
 `;
 
-const GREEN = 'var(--color-green-500)';
+const GREEN = '#2DA744';
 
-/* ── A single flowing data dot that rides a connector path ── */
-function FlowDot({ path, fill, dur, begin }) {
+/* ── Input sources (left side) ── */
+const INPUTS = [
+  {
+    id: 'fb',
+    label: 'Facebook',
+    sub: 'lead received',
+    color: '#1877F2',
+    pathId: 'hi1',
+    icon: (
+      <path
+        d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+        stroke="#1877F2"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    ),
+  },
+  {
+    id: 'insta',
+    label: 'Instagram',
+    sub: 'DM captured',
+    color: '#E1306C',
+    pathId: 'hi2',
+    icon: (
+      <>
+        <rect
+          x="2"
+          y="2"
+          width="20"
+          height="20"
+          rx="5"
+          stroke="#E1306C"
+          strokeWidth="1.8"
+          fill="none"
+        />
+        <circle cx="12" cy="12" r="4" stroke="#E1306C" strokeWidth="1.8" fill="none" />
+        <circle cx="17.5" cy="6.5" r="1.2" fill="#E1306C" />
+      </>
+    ),
+  },
+  {
+    id: 'call',
+    label: 'Phone Call',
+    sub: 'inbound call',
+    color: '#059669',
+    pathId: 'hi3',
+    icon: (
+      <path
+        d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+        stroke="#059669"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    ),
+  },
+];
+
+/* ── Output channels (right side) ── */
+const OUTPUTS = [
+  { id: 'crm', label: 'CRM', sub: 'contact logged', color: '#2C7BE5', check: 0, pathId: 'ho1' },
+  {
+    id: 'email',
+    label: 'Email',
+    sub: 'follow-up sent',
+    color: '#D9342B',
+    check: 1.1,
+    pathId: 'ho2',
+  },
+  {
+    id: 'followup',
+    label: 'Follow-up',
+    sub: 'call scheduled',
+    color: '#25D366',
+    check: null,
+    pathId: 'ho3',
+  },
+  {
+    id: 'calendar',
+    label: 'Calendar',
+    sub: 'meeting booked',
+    color: '#F4A623',
+    check: 2.2,
+    pathId: 'ho4',
+  },
+  {
+    id: 'analytics',
+    label: 'Analytics',
+    sub: 'report updated',
+    color: '#0891B2',
+    check: null,
+    pathId: 'ho5',
+  },
+];
+
+/* SVG layout */
+const SVG_W = 580;
+const IN_X = 20; // input cards left edge
+const IN_W = 110; // input card width
+const AIX = 280; // hub centre x
+const LOGO_R = 50; // hub radius
+const OUT_X = 390; // output cards left edge
+const OUT_W = 170; // output card width
+const CARD_H = 52;
+const IN_GAP = 90; // vertical spacing between input cards
+const OUT_GAP = 82;
+const TOP_PAD = 36; // extra top room so pills never clip
+const IN_START = 60 + TOP_PAD;
+const OUT_START = 20 + TOP_PAD;
+const CY = IN_START + (IN_GAP * (INPUTS.length - 1)) / 2 + CARD_H / 2;
+const SVG_H = Math.max(
+  IN_START + IN_GAP * (INPUTS.length - 1) + CARD_H + 50,
+  OUT_START + OUT_GAP * (OUTPUTS.length - 1) + CARD_H + 50
+);
+
+function FlowDot({ pathId, fill, dur, begin }) {
   return (
     <circle r={3} fill={fill}>
       <animateMotion dur={`${dur}s`} begin={`${begin}s`} repeatCount="indefinite">
-        <mpath href={`#${path}`} />
+        <mpath href={`#${pathId}`} />
       </animateMotion>
     </circle>
   );
 }
 
-const VOICE_BARS = [22, 22, 22, 22, 22, 22, 22, 22, 22];
-
-const CARDS = [
-  {
-    y: 78,
-    icon: '#25D366',
-    glyph: 'chat',
-    title: 'WhatsApp',
-    sub: 'follow-up sent',
-    checkDelay: 0,
-  },
-  { y: 158, icon: '#2C7BE5', glyph: 'user', title: 'CRM', sub: 'contact logged', checkDelay: 1.1 },
-  { y: 238, icon: '#1F8A48', glyph: 'bars', title: 'Team', sub: 'activity tracked' },
-];
-
-function CardGlyph({ type }) {
-  if (type === 'chat') {
-    return (
-      <>
-        <rect x={390} y={100} width={16} height={11} rx={4} fill="#FFFFFF" />
-        <path d="M393 111 L393 116 L398 111 Z" fill="#FFFFFF" />
-      </>
-    );
-  }
-  if (type === 'user') {
-    return (
-      <>
-        <circle cx={398} cy={182} r={4.2} fill="#FFFFFF" />
-        <path d="M391 195 Q398 188 405 195 Z" fill="#FFFFFF" />
-      </>
-    );
-  }
-  return [0, 1, 2].map((i) => (
-    <rect
-      key={i}
-      className="aiq-statbar"
-      x={390 + i * 6}
-      y={262}
-      width={3.5}
-      height={12}
-      rx={1.5}
-      fill="#FFFFFF"
-      style={{ animationDelay: `${i * 0.25}s` }}
-    />
-  ));
-}
-
-/* ── Full illustration: voice → AI core → channels ── */
 function AIFlowScene({ reduced }) {
   return (
     <svg
-      viewBox="0 0 500 360"
+      viewBox={`0 0 ${SVG_W} ${SVG_H}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       role="img"
-      aria-label="A live voice call flows into an AI engine that automatically sends a WhatsApp follow-up, logs the contact in the CRM, and tracks team activity"
+      aria-label="Facebook, Instagram and phone leads flow into Caller Monkey which automatically triggers CRM, email, follow-up, calendar and analytics"
       style={{ width: '100%', height: 'auto' }}
     >
       <defs>
-        <pattern id="aqd" width="22" height="22" patternUnits="userSpaceOnUse">
+        <pattern id="hmdots" width="22" height="22" patternUnits="userSpaceOnUse">
           <circle cx="1" cy="1" r="1" fill="#E7E9EC" />
         </pattern>
-        <filter id="aqShadow" x="-30%" y="-30%" width="160%" height="170%">
-          <feDropShadow dx="0" dy="3" stdDeviation="5" floodColor="#1F2937" floodOpacity="0.08" />
+        <filter id="hmShadow" x="-30%" y="-30%" width="160%" height="170%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" floodColor="#1F2937" floodOpacity="0.07" />
         </filter>
+        <clipPath id="hmLogoClip">
+          <circle cx={AIX} cy={CY} r={LOGO_R} />
+        </clipPath>
       </defs>
 
       <style>{FLOW_CSS}</style>
+      <rect width={SVG_W} height={SVG_H} fill="url(#hmdots)" />
 
-      <rect width="500" height="360" fill="url(#aqd)" />
+      <g className={reduced ? undefined : 'hm-anim'}>
+        {/* ── Input connectors: each source → hub ── */}
+        {INPUTS.map((inp, i) => {
+          const iy = IN_START + i * IN_GAP + CARD_H / 2;
+          return (
+            <path
+              key={inp.pathId}
+              id={inp.pathId}
+              d={`M${IN_X + IN_W} ${iy} C${AIX - 80} ${iy} ${AIX - 80} ${CY} ${AIX - LOGO_R - 2} ${CY}`}
+              stroke="#DDE1E5"
+              strokeWidth={1.5}
+            />
+          );
+        })}
 
-      <g className={reduced ? undefined : 'aiq-anim'}>
-        {/* connectors */}
-        <path id="ap0" d="M120 186 L210 186" stroke="#DDE1E5" strokeWidth={1.5} />
-        <path id="ap1" d="M290 186 C322 186 336 106 372 106" stroke="#DDE1E5" strokeWidth={1.5} />
-        <path id="ap2" d="M290 186 L372 186" stroke="#DDE1E5" strokeWidth={1.5} />
-        <path id="ap3" d="M290 186 C322 186 336 266 372 266" stroke="#DDE1E5" strokeWidth={1.5} />
+        {/* ── Output connectors: hub → each channel ── */}
+        {OUTPUTS.map((out, i) => {
+          const oy = OUT_START + i * OUT_GAP + CARD_H / 2;
+          return (
+            <path
+              key={out.pathId}
+              id={out.pathId}
+              d={`M${AIX + LOGO_R + 2} ${CY} C${AIX + 80} ${CY} ${AIX + 80} ${oy} ${OUT_X} ${oy}`}
+              stroke="#DDE1E5"
+              strokeWidth={1.5}
+            />
+          );
+        })}
 
-        {/* flowing data dots (skipped entirely when reduced) */}
+        {/* ── Flow dots ── */}
         {!reduced && (
           <>
-            <FlowDot path="ap0" fill={GREEN} dur={1.8} begin={0} />
-            <FlowDot path="ap0" fill={GREEN} dur={1.8} begin={0.9} />
-            <FlowDot path="ap1" fill="#25D366" dur={2.2} begin={0} />
-            <FlowDot path="ap1" fill="#25D366" dur={2.2} begin={1.1} />
-            <FlowDot path="ap2" fill="#2C7BE5" dur={2.2} begin={0.5} />
-            <FlowDot path="ap2" fill="#2C7BE5" dur={2.2} begin={1.6} />
-            <FlowDot path="ap3" fill="#1F8A48" dur={2.4} begin={0.8} />
+            {INPUTS.map((inp, i) => (
+              <FlowDot
+                key={inp.pathId}
+                pathId={inp.pathId}
+                fill={inp.color}
+                dur={2.0 + i * 0.2}
+                begin={i * 0.6}
+              />
+            ))}
+            {OUTPUTS.map((out, i) => (
+              <FlowDot
+                key={out.pathId}
+                pathId={out.pathId}
+                fill={out.color}
+                dur={2.2 + i * 0.15}
+                begin={i * 0.4}
+              />
+            ))}
           </>
         )}
 
-        {/* incoming voice card */}
-        <g filter="url(#aqShadow)">
-          <rect
-            x={24}
-            y={150}
-            width={94}
-            height={72}
-            rx={16}
-            fill="#FFFFFF"
-            stroke="#ECEEF0"
-            strokeWidth={1}
-          />
-        </g>
-        <circle className="aiq-tdot" cx={40} cy={167} r={3.5} fill={GREEN} />
-        <text
-          x={50}
-          y={170}
-          fontFamily="'Inter Tight', sans-serif"
-          fontSize="9"
-          fontWeight="500"
-          fill="#2B333C"
-        >
-          Voice AI
-        </text>
-        {VOICE_BARS.map((h, i) => (
-          <rect
-            key={i}
-            className="aiq-bar"
-            x={41 + i * 6.5}
-            y={205 - h}
-            width={3}
-            height={h}
-            rx={1.5}
-            fill={GREEN}
-            style={{ animationDelay: `${i * 0.09}s` }}
-          />
-        ))}
-        <text
-          x={71}
-          y={217}
-          textAnchor="middle"
-          fontFamily="'Inter Tight', sans-serif"
-          fontSize="7.5"
-          fill="#9AA0A6"
-        >
-          incoming call
-        </text>
+        {/* ── Input source cards (left) ── */}
+        {INPUTS.map((inp, i) => {
+          const iy = IN_START + i * IN_GAP;
+          return (
+            <g key={inp.id}>
+              <g filter="url(#hmShadow)">
+                <rect
+                  x={IN_X}
+                  y={iy}
+                  width={IN_W}
+                  height={CARD_H}
+                  rx={13}
+                  fill="#FFFFFF"
+                  stroke="#ECEEF0"
+                  strokeWidth={1}
+                />
+              </g>
+              {/* Icon bg */}
+              <circle cx={IN_X + 22} cy={iy + CARD_H / 2} r={13} fill={inp.color} opacity={0.12} />
+              <svg
+                x={IN_X + 11}
+                y={iy + CARD_H / 2 - 10}
+                width={22}
+                height={22}
+                viewBox="0 0 24 24"
+              >
+                {inp.icon}
+              </svg>
+              <text
+                x={IN_X + 40}
+                y={iy + 22}
+                fontFamily="'Inter Tight',sans-serif"
+                fontSize="9.5"
+                fontWeight="600"
+                fill="#2B333C"
+              >
+                {inp.label}
+              </text>
+              <text
+                x={IN_X + 40}
+                y={iy + 36}
+                fontFamily="'Inter Tight',sans-serif"
+                fontSize="7.5"
+                fill="#9AA0A6"
+              >
+                {inp.sub}
+              </text>
+              {/* Pulse dot */}
+              <circle
+                className="hm-tdot"
+                cx={IN_X + 96}
+                cy={iy + 12}
+                r={3.5}
+                fill={inp.color}
+                style={{ animationDelay: `${i * 0.4}s` }}
+              />
+            </g>
+          );
+        })}
 
-        {/* AI core */}
+        {/* ── CM Logo hub ── */}
         <circle
-          className="aiq-ring"
-          cx={250}
-          cy={186}
-          r={40}
+          className="hm-ring"
+          cx={AIX}
+          cy={CY}
+          r={LOGO_R}
           stroke={GREEN}
           strokeWidth={2}
           style={{ animationDelay: '0s' }}
         />
         <circle
-          className="aiq-ring"
-          cx={250}
-          cy={186}
-          r={40}
+          className="hm-ring"
+          cx={AIX}
+          cy={CY}
+          r={LOGO_R}
           stroke={GREEN}
           strokeWidth={2}
           style={{ animationDelay: '1.3s' }}
         />
-        <g className="aiq-core" filter="url(#aqShadow)">
-          <circle cx={250} cy={186} r={40} fill={GREEN} />
-          <circle cx={250} cy={176} r={18} fill="#FFFFFF" opacity={0.12} />
-          <path
-            d="M250 162 L257 179 L274 186 L257 193 L250 210 L243 193 L226 186 L243 179 Z"
-            fill="#FFFFFF"
+        <g className="hm-core" filter="url(#hmShadow)">
+          <circle cx={AIX} cy={CY} r={LOGO_R} fill="#FFFFFF" stroke="#E5E7EB" strokeWidth={1.5} />
+          <image
+            href={cmLogo}
+            x={AIX - LOGO_R}
+            y={CY - LOGO_R}
+            width={LOGO_R * 2}
+            height={LOGO_R * 2}
+            clipPath="url(#hmLogoClip)"
+            preserveAspectRatio="xMidYMid meet"
           />
         </g>
-        <text
-          x={250}
-          y={248}
-          textAnchor="middle"
-          fontFamily="'Inter Tight', sans-serif"
-          fontSize="10"
-          fontWeight="500"
-          fill="#2B333C"
-        >
-          AI engine
-        </text>
 
-        {/* output channel cards */}
-        {CARDS.map((c, i) => (
-          <g key={i}>
-            <g filter="url(#aqShadow)">
-              <rect
-                x={372}
-                y={c.y}
-                width={124}
-                height={56}
-                rx={14}
-                fill="#FFFFFF"
-                stroke="#ECEEF0"
-                strokeWidth={1}
-              />
-            </g>
-            <rect x={384} y={c.y + 14} width={28} height={28} rx={9} fill={c.icon} />
-            <CardGlyph type={c.glyph} />
-            <text
-              x={420}
-              y={c.y + 25}
-              fontFamily="'Inter Tight', sans-serif"
-              fontSize="10"
-              fontWeight="500"
-              fill="#2B333C"
-            >
-              {c.title}
-            </text>
-            <text
-              x={420}
-              y={c.y + 39}
-              fontFamily="'Inter Tight', sans-serif"
-              fontSize="8"
-              fill="#9AA0A6"
-            >
-              {c.sub}
-            </text>
-            {c.checkDelay !== undefined && (
-              <g className="aiq-check" style={{ animationDelay: `${c.checkDelay}s` }}>
-                <circle cx={476} cy={c.y + 22} r={8} fill={GREEN} />
-                <path
-                  d={`M472.5 ${c.y + 22} L475 ${c.y + 24.5} L479.5 ${c.y + 19.5}`}
-                  fill="none"
-                  stroke="#FFFFFF"
-                  strokeWidth={1.6}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+        {/* ── Output channel cards (right) ── */}
+        {OUTPUTS.map((out, i) => {
+          const oy = OUT_START + i * OUT_GAP;
+          return (
+            <g key={out.id}>
+              <g filter="url(#hmShadow)">
+                <rect
+                  x={OUT_X}
+                  y={oy}
+                  width={OUT_W}
+                  height={CARD_H}
+                  rx={13}
+                  fill="#FFFFFF"
+                  stroke="#ECEEF0"
+                  strokeWidth={1}
                 />
               </g>
-            )}
-          </g>
-        ))}
+              <circle cx={OUT_X + 20} cy={oy + CARD_H / 2} r={11} fill={out.color} opacity={0.15} />
+              <circle cx={OUT_X + 20} cy={oy + CARD_H / 2} r={6} fill={out.color} />
+              <text
+                x={OUT_X + 36}
+                y={oy + 22}
+                fontFamily="'Inter Tight',sans-serif"
+                fontSize="10"
+                fontWeight="600"
+                fill="#2B333C"
+              >
+                {out.label}
+              </text>
+              <text
+                x={OUT_X + 36}
+                y={oy + 36}
+                fontFamily="'Inter Tight',sans-serif"
+                fontSize="8"
+                fill="#9AA0A6"
+              >
+                {out.sub}
+              </text>
+              {out.check !== null && (
+                <g className="hm-check" style={{ animationDelay: `${out.check}s` }}>
+                  <circle cx={OUT_X + OUT_W - 14} cy={oy + 22} r={9} fill={GREEN} />
+                  <path
+                    d={`M${OUT_X + OUT_W - 18} ${oy + 22} L${OUT_X + OUT_W - 15} ${oy + 25} L${OUT_X + OUT_W - 10} ${oy + 19}`}
+                    stroke="#FFF"
+                    strokeWidth={1.8}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
+              )}
+            </g>
+          );
+        })}
 
-        {/* floating stat pills */}
-        <g transform="translate(96 34)">
-          <g className="aiq-pill" style={{ animationDelay: '0s' }} filter="url(#aqShadow)">
+        {/* ── Stat pills ── */}
+        <g transform={`translate(${IN_X + IN_W / 2} ${IN_START - 46})`}>
+          <g className="hm-pill" style={{ animationDelay: '0s' }} filter="url(#hmShadow)">
             <rect
-              x={-43}
+              x={-44}
               y={-18}
-              width={84}
+              width={86}
               height={34}
               rx={11}
               fill="#FFFFFF"
@@ -323,8 +433,8 @@ function AIFlowScene({ reduced }) {
               x={0}
               y={-2}
               textAnchor="middle"
-              fontFamily="'Cabinet Grotesk', sans-serif"
-              fontSize="14"
+              fontFamily="'Cabinet Grotesk',sans-serif"
+              fontSize="13"
               fontWeight="800"
               fill={GREEN}
             >
@@ -332,9 +442,9 @@ function AIFlowScene({ reduced }) {
             </text>
             <text
               x={0}
-              y={10}
+              y={11}
               textAnchor="middle"
-              fontFamily="'Inter Tight', sans-serif"
+              fontFamily="'Inter Tight',sans-serif"
               fontSize="8"
               fill="#9AA0A6"
             >
@@ -342,12 +452,12 @@ function AIFlowScene({ reduced }) {
             </text>
           </g>
         </g>
-        <g transform="translate(414 30)">
-          <g className="aiq-pill" style={{ animationDelay: '1.2s' }} filter="url(#aqShadow)">
+        <g transform={`translate(${OUT_X + OUT_W / 2} ${IN_START - 46})`}>
+          <g className="hm-pill" style={{ animationDelay: '1.4s' }} filter="url(#hmShadow)">
             <rect
-              x={-48}
+              x={-54}
               y={-18}
-              width={94}
+              width={106}
               height={34}
               rx={11}
               fill="#FFFFFF"
@@ -358,22 +468,22 @@ function AIFlowScene({ reduced }) {
               x={0}
               y={-2}
               textAnchor="middle"
-              fontFamily="'Cabinet Grotesk', sans-serif"
-              fontSize="14"
+              fontFamily="'Cabinet Grotesk',sans-serif"
+              fontSize="13"
               fontWeight="800"
               fill={GREEN}
             >
-              200 hrs
+              100%
             </text>
             <text
               x={0}
-              y={10}
+              y={11}
               textAnchor="middle"
-              fontFamily="'Inter Tight', sans-serif"
+              fontFamily="'Inter Tight',sans-serif"
               fontSize="8"
               fill="#9AA0A6"
             >
-              saved / month
+              follow-up coverage
             </text>
           </g>
         </g>
@@ -382,7 +492,6 @@ function AIFlowScene({ reduced }) {
   );
 }
 
-/* ── Page Section ── */
 function HomeHero() {
   const reduced = useReducedMotion();
   return (
@@ -391,15 +500,22 @@ function HomeHero() {
       style={{
         position: 'relative',
         overflow: 'hidden',
-        paddingTop: 'clamp(3rem,5vw,5rem)',
+        paddingTop: 'clamp(5rem, 8vw, 8rem)',
         paddingBottom: 'clamp(3rem,5vw,5rem)',
       }}
     >
       <Waveform />
       <div className="custom-container" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="mt-10 flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-16">
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '60fr 40fr',
+            alignItems: 'center',
+            gap: 'clamp(2rem,4vw,4rem)',
+          }}
+        >
           {/* Text — 55% */}
-          <div className="flex-1 min-w-0" style={{ flexBasis: '60%' }}>
+          <div style={{ minWidth: 0 }}>
             <FadeIn>
               <h1 className="custom-display mb-6 text-6xl">
                 <span style={{ color: 'var(--color-green-500)' }}>
@@ -430,8 +546,15 @@ function HomeHero() {
           </div>
 
           {/* Illustration — 45% */}
-          <div className="w-full md:w-auto" style={{ flexBasis: '40%', maxWidth: 540 }}>
-            <FadeIn delay={0.05} y={12}>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <FadeIn delay={0.05} y={12} style={{ width: '100%' }}>
               <AIFlowScene reduced={reduced} />
             </FadeIn>
           </div>

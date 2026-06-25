@@ -168,7 +168,7 @@ function IndustriesHero() {
   return (
     <section style={{
       background: 'var(--color-bg)',
-      paddingTop: 'clamp(3.5rem, 6vw, 6rem)',
+      paddingTop: 'clamp(5rem, 8vw, 8rem)',
       paddingBottom: 'clamp(2.5rem, 5vw, 5rem)',
       borderBottom: '1px solid var(--color-border)',
       overflow: 'hidden',

@@ -6,7 +6,7 @@ import HomeHero            from './sections/HomeHero';
 import HomeTrustBar        from './sections/HomeTrustBar';
 import HomeProblem         from './sections/HomeProblem';
 import HomeWhatItDoes      from './sections/HomeWhatItDoes';
-import HomeConnectsTeaser  from './sections/HomeConnectsTeaser';
+import HomeEnterpriseMeasures from './sections/HomeEnterpriseMeasures';
 import HomeResults         from './sections/HomeResults';
 import HomeVelocity        from './sections/HomeVelocity';
 import HomeCTA             from './sections/HomeCTA';
@@ -19,7 +19,7 @@ function Home() {
       <HomeTrustBar />
       <HomeProblem />
       <HomeWhatItDoes />
-      <HomeConnectsTeaser />
+      <HomeEnterpriseMeasures />
       <HomeResults />
       <HomeVelocity />
       <HomeCTA />
