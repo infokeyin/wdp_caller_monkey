@@ -4,6 +4,7 @@ import Stagger from '@components/motion/Stagger';
 import Container from '@components/layout/Container';
 import Icon from '@components/atoms/Icon';
 import { useReducedMotion } from '@hooks/useReducedMotion';
+import cmLogo from '../../../props/logos/logo-240px.png';
 
 /* ── Each capability with its own accent colour ── */
 const CAPABILITIES = [
@@ -105,9 +106,15 @@ function PipelineFlow() {
       viewBox="0 0 640 60"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       style={{ width: '100%', maxWidth: 640, height: 60, marginBottom: '2rem' }}
     >
+      <defs>
+        <clipPath id="wid-cm-clip">
+          <circle cx="320" cy="30" r="22" />
+        </clipPath>
+      </defs>
       {/* Central spine */}
       <line
         x1="320"
@@ -142,19 +149,17 @@ function PipelineFlow() {
         Lead
       </text>
 
-      {/* Centre node — CM */}
-      <circle cx="320" cy="30" r="22" fill="#2DA744" />
-      <text
-        x="320"
-        y="35"
-        textAnchor="middle"
-        fontSize="11"
-        fontWeight="900"
-        fill="white"
-        fontFamily="system-ui"
-      >
-        CM
-      </text>
+      {/* Centre node — Caller Monkey logo */}
+      <circle cx="320" cy="30" r="23" fill="white" stroke="#E5E7EB" strokeWidth="1.5" />
+      <image
+        href={cmLogo}
+        x={320 - 22}
+        y={30 - 22}
+        width={44}
+        height={44}
+        clipPath="url(#wid-cm-clip)"
+        preserveAspectRatio="xMidYMid meet"
+      />
 
       {/* Right node — Done */}
       <circle cx="610" cy="30" r="18" fill="#E8F7EC" />
