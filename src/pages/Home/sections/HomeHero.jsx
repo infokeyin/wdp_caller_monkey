@@ -79,7 +79,14 @@ function FlowDot({ path, fill, dur, begin }) {
 const VOICE_BARS = [22, 22, 22, 22, 22, 22, 22, 22, 22];
 
 const CARDS = [
-  { y: 78, icon: '#25D366', glyph: 'chat', title: 'WhatsApp', sub: 'follow-up sent', checkDelay: 0 },
+  {
+    y: 78,
+    icon: '#25D366',
+    glyph: 'chat',
+    title: 'WhatsApp',
+    sub: 'follow-up sent',
+    checkDelay: 0,
+  },
   { y: 158, icon: '#2C7BE5', glyph: 'user', title: 'CRM', sub: 'contact logged', checkDelay: 1.1 },
   { y: 238, icon: '#1F8A48', glyph: 'bars', title: 'Team', sub: 'activity tracked' },
 ];
@@ -162,10 +169,26 @@ function AIFlowScene({ reduced }) {
 
         {/* incoming voice card */}
         <g filter="url(#aqShadow)">
-          <rect x={24} y={150} width={94} height={72} rx={16} fill="#FFFFFF" stroke="#ECEEF0" strokeWidth={1} />
+          <rect
+            x={24}
+            y={150}
+            width={94}
+            height={72}
+            rx={16}
+            fill="#FFFFFF"
+            stroke="#ECEEF0"
+            strokeWidth={1}
+          />
         </g>
         <circle className="aiq-tdot" cx={40} cy={167} r={3.5} fill={GREEN} />
-        <text x={50} y={170} fontFamily="'Inter Tight', sans-serif" fontSize="9" fontWeight="500" fill="#2B333C">
+        <text
+          x={50}
+          y={170}
+          fontFamily="'Inter Tight', sans-serif"
+          fontSize="9"
+          fontWeight="500"
+          fill="#2B333C"
+        >
           Voice AI
         </text>
         {VOICE_BARS.map((h, i) => (
@@ -181,19 +204,53 @@ function AIFlowScene({ reduced }) {
             style={{ animationDelay: `${i * 0.09}s` }}
           />
         ))}
-        <text x={71} y={217} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="7.5" fill="#9AA0A6">
+        <text
+          x={71}
+          y={217}
+          textAnchor="middle"
+          fontFamily="'Inter Tight', sans-serif"
+          fontSize="7.5"
+          fill="#9AA0A6"
+        >
           incoming call
         </text>
 
         {/* AI core */}
-        <circle className="aiq-ring" cx={250} cy={186} r={40} stroke={GREEN} strokeWidth={2} style={{ animationDelay: '0s' }} />
-        <circle className="aiq-ring" cx={250} cy={186} r={40} stroke={GREEN} strokeWidth={2} style={{ animationDelay: '1.3s' }} />
+        <circle
+          className="aiq-ring"
+          cx={250}
+          cy={186}
+          r={40}
+          stroke={GREEN}
+          strokeWidth={2}
+          style={{ animationDelay: '0s' }}
+        />
+        <circle
+          className="aiq-ring"
+          cx={250}
+          cy={186}
+          r={40}
+          stroke={GREEN}
+          strokeWidth={2}
+          style={{ animationDelay: '1.3s' }}
+        />
         <g className="aiq-core" filter="url(#aqShadow)">
           <circle cx={250} cy={186} r={40} fill={GREEN} />
           <circle cx={250} cy={176} r={18} fill="#FFFFFF" opacity={0.12} />
-          <path d="M250 162 L257 179 L274 186 L257 193 L250 210 L243 193 L226 186 L243 179 Z" fill="#FFFFFF" />
+          <path
+            d="M250 162 L257 179 L274 186 L257 193 L250 210 L243 193 L226 186 L243 179 Z"
+            fill="#FFFFFF"
+          />
         </g>
-        <text x={250} y={248} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="10" fontWeight="500" fill="#2B333C">
+        <text
+          x={250}
+          y={248}
+          textAnchor="middle"
+          fontFamily="'Inter Tight', sans-serif"
+          fontSize="10"
+          fontWeight="500"
+          fill="#2B333C"
+        >
           AI engine
         </text>
 
@@ -201,14 +258,36 @@ function AIFlowScene({ reduced }) {
         {CARDS.map((c, i) => (
           <g key={i}>
             <g filter="url(#aqShadow)">
-              <rect x={372} y={c.y} width={124} height={56} rx={14} fill="#FFFFFF" stroke="#ECEEF0" strokeWidth={1} />
+              <rect
+                x={372}
+                y={c.y}
+                width={124}
+                height={56}
+                rx={14}
+                fill="#FFFFFF"
+                stroke="#ECEEF0"
+                strokeWidth={1}
+              />
             </g>
             <rect x={384} y={c.y + 14} width={28} height={28} rx={9} fill={c.icon} />
             <CardGlyph type={c.glyph} />
-            <text x={420} y={c.y + 25} fontFamily="'Inter Tight', sans-serif" fontSize="10" fontWeight="500" fill="#2B333C">
+            <text
+              x={420}
+              y={c.y + 25}
+              fontFamily="'Inter Tight', sans-serif"
+              fontSize="10"
+              fontWeight="500"
+              fill="#2B333C"
+            >
               {c.title}
             </text>
-            <text x={420} y={c.y + 39} fontFamily="'Inter Tight', sans-serif" fontSize="8" fill="#9AA0A6">
+            <text
+              x={420}
+              y={c.y + 39}
+              fontFamily="'Inter Tight', sans-serif"
+              fontSize="8"
+              fill="#9AA0A6"
+            >
               {c.sub}
             </text>
             {c.checkDelay !== undefined && (
@@ -230,22 +309,70 @@ function AIFlowScene({ reduced }) {
         {/* floating stat pills */}
         <g transform="translate(96 34)">
           <g className="aiq-pill" style={{ animationDelay: '0s' }} filter="url(#aqShadow)">
-            <rect x={-43} y={-18} width={84} height={34} rx={11} fill="#FFFFFF" stroke="#EBEDEF" strokeWidth={1} />
-            <text x={0} y={-2} textAnchor="middle" fontFamily="'Cabinet Grotesk', sans-serif" fontSize="14" fontWeight="800" fill={GREEN}>
+            <rect
+              x={-43}
+              y={-18}
+              width={84}
+              height={34}
+              rx={11}
+              fill="#FFFFFF"
+              stroke="#EBEDEF"
+              strokeWidth={1}
+            />
+            <text
+              x={0}
+              y={-2}
+              textAnchor="middle"
+              fontFamily="'Cabinet Grotesk', sans-serif"
+              fontSize="14"
+              fontWeight="800"
+              fill={GREEN}
+            >
               24/7
             </text>
-            <text x={0} y={10} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="8" fill="#9AA0A6">
+            <text
+              x={0}
+              y={10}
+              textAnchor="middle"
+              fontFamily="'Inter Tight', sans-serif"
+              fontSize="8"
+              fill="#9AA0A6"
+            >
               always on
             </text>
           </g>
         </g>
         <g transform="translate(414 30)">
           <g className="aiq-pill" style={{ animationDelay: '1.2s' }} filter="url(#aqShadow)">
-            <rect x={-48} y={-18} width={94} height={34} rx={11} fill="#FFFFFF" stroke="#EBEDEF" strokeWidth={1} />
-            <text x={0} y={-2} textAnchor="middle" fontFamily="'Cabinet Grotesk', sans-serif" fontSize="14" fontWeight="800" fill={GREEN}>
+            <rect
+              x={-48}
+              y={-18}
+              width={94}
+              height={34}
+              rx={11}
+              fill="#FFFFFF"
+              stroke="#EBEDEF"
+              strokeWidth={1}
+            />
+            <text
+              x={0}
+              y={-2}
+              textAnchor="middle"
+              fontFamily="'Cabinet Grotesk', sans-serif"
+              fontSize="14"
+              fontWeight="800"
+              fill={GREEN}
+            >
               200 hrs
             </text>
-            <text x={0} y={10} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="8" fill="#9AA0A6">
+            <text
+              x={0}
+              y={10}
+              textAnchor="middle"
+              fontFamily="'Inter Tight', sans-serif"
+              fontSize="8"
+              fill="#9AA0A6"
+            >
               saved / month
             </text>
           </g>
@@ -270,13 +397,15 @@ function HomeHero() {
     >
       <Waveform />
       <div className="custom-container" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-16">
+        <div className="mt-10 flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-16">
           {/* Text — 55% */}
-          <div className="flex-1 min-w-0" style={{ flexBasis: '55%' }}>
+          <div className="flex-1 min-w-0" style={{ flexBasis: '60%' }}>
             <FadeIn>
-              <h1 className="custom-display mb-6">
-                AI That Runs Your Business Communication,{' '}
-                <span style={{ color: 'var(--color-green-500)' }}>End to End.</span>
+              <h1 className="custom-display mb-6 text-6xl">
+                <span style={{ color: 'var(--color-green-500)' }}>
+                  Autonomous Lead Conversion System
+                </span>{' '}
+                that runs your business communication End to End
               </h1>
             </FadeIn>
             <FadeIn delay={0.1}>
@@ -301,7 +430,7 @@ function HomeHero() {
           </div>
 
           {/* Illustration — 45% */}
-          <div className="w-full md:w-auto" style={{ flexBasis: '45%', maxWidth: 540 }}>
+          <div className="w-full md:w-auto" style={{ flexBasis: '40%', maxWidth: 540 }}>
             <FadeIn delay={0.05} y={12}>
               <AIFlowScene reduced={reduced} />
             </FadeIn>

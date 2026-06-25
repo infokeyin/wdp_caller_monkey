@@ -67,7 +67,7 @@ function Header() {
             <img
               src={cmLogo}
               alt="Caller Monkey"
-              className="h-20 flex items-center gap-2 shrink-0"
+              className="h-28 flex items-center gap-2 shrink-0"
             />
           </Link>
 

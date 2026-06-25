@@ -15,14 +15,14 @@ const DETAILS = {
     stat: '21× more likely to convert when called within 5 min',
     chips: ['Lead qualification', 'Cold outreach', 'Re-engagement'],
   },
-  'whatsapp': {
+  whatsapp: {
     accent: '#25D366',
     bg: '#E6FBF0',
     oneliner: 'Follows up missed calls, shares docs, collects replies — on WhatsApp.',
     stat: '98% open rate in India',
     chips: ['Post-call follow-up', 'Appointment confirmation', 'Payment links'],
   },
-  'crm': {
+  crm: {
     accent: '#2C7BE5',
     bg: '#EBF3FF',
     oneliner: 'Every call outcome auto-logged. Full pipeline visibility, zero manual entry.',
@@ -36,19 +36,12 @@ const DETAILS = {
     stat: '80% of sales need 5+ follow-ups',
     chips: ['Multi-step sequences', 'Escalation logic', 'Re-engagement'],
   },
-  'reminders': {
+  reminders: {
     accent: '#E11D48',
     bg: '#FEE2E2',
     oneliner: 'Right reminder, right time — appointments, EMI, renewals, deliveries.',
     stat: 'Reduces no-shows by up to 40%',
     chips: ['Clinic reminders', 'EMI alerts', 'Policy renewals'],
-  },
-  'attendance': {
-    accent: '#059669',
-    bg: '#ECFDF5',
-    oneliner: 'Field staff check in by voice. GPS confirmed. Manager gets daily report.',
-    stat: 'Tamper-proof, no app needed',
-    chips: ['Voice check-in', 'GPS location', 'Auto daily report'],
   },
   'employee-comm': {
     accent: '#7C3AED',
@@ -57,24 +50,24 @@ const DETAILS = {
     stat: 'Reaches 1000 staff in seconds',
     chips: ['Daily briefings', 'Training reminders', 'Emergency alerts'],
   },
-  'email': {
+  email: {
     accent: '#0891B2',
     bg: '#E0F7FA',
     oneliner: 'Triggers the right email based on call outcome — proposals, follow-ups, thank-yous.',
     stat: 'Triggered by call result, not a timer',
     chips: ['Proposals', 'Thank-you notes', 'Escalation emails'],
   },
-  'analytics': {
+  analytics: {
     accent: '#9B59B6',
     bg: '#F5EEF8',
     oneliner: 'Live dashboard: call volume, pick-up rate, team performance, conversion.',
     stat: 'See exactly where leads are lost',
     chips: ['Call dashboard', 'Team comparison', 'Campaign tracking'],
   },
-  'multilanguage': {
+  multilanguage: {
     accent: '#D97706',
     bg: '#FEF3C7',
-    oneliner: 'Speaks the customer\'s language — Hindi, Tamil, Marathi, Bengali, and 11 more.',
+    oneliner: "Speaks the customer's language — Hindi, Tamil, Marathi, Bengali, and 11 more.",
     stat: 'Higher pick-up rates in regional markets',
     chips: ['North India', 'South India', 'Regional campaigns'],
   },
@@ -82,7 +75,13 @@ const DETAILS = {
 
 function DeepDiveCard({ cap, isEven }) {
   const reduced = useReducedMotion();
-  const d = DETAILS[cap.id] ?? { accent: '#2DA744', bg: '#E8F7EC', oneliner: cap.description, stat: '', chips: [] };
+  const d = DETAILS[cap.id] ?? {
+    accent: '#2DA744',
+    bg: '#E8F7EC',
+    oneliner: cap.description,
+    stat: '',
+    chips: [],
+  };
 
   return (
     <div
@@ -95,25 +94,37 @@ function DeepDiveCard({ cap, isEven }) {
     >
       <Container>
         <FadeIn>
-          <div style={{
-            display: 'flex',
-            flexDirection: isEven ? 'row' : 'row-reverse',
-            alignItems: 'center',
-            gap: 'clamp(2rem, 5vw, 5rem)',
-            flexWrap: 'wrap',
-          }}>
-
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: isEven ? 'row' : 'row-reverse',
+              alignItems: 'center',
+              gap: 'clamp(2rem, 5vw, 5rem)',
+              flexWrap: 'wrap',
+            }}
+          >
             {/* Icon side */}
-            <div style={{ flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            <div
+              style={{
+                flex: '0 0 auto',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '1rem',
+              }}
+            >
               <motion.div
                 animate={reduced ? {} : { y: [0, -5, 0] }}
                 transition={reduced ? {} : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                 style={{
-                  width: 80, height: 80,
+                  width: 80,
+                  height: 80,
                   borderRadius: 'var(--radius-xl)',
                   background: d.bg,
                   border: `1.5px solid ${d.accent}33`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   boxShadow: `0 8px 24px ${d.accent}18`,
                 }}
                 aria-hidden="true"
@@ -123,15 +134,20 @@ function DeepDiveCard({ cap, isEven }) {
 
               {/* Stat badge */}
               {d.stat && (
-                <div style={{
-                  padding: '0.35rem 0.75rem',
-                  borderRadius: 'var(--radius-full)',
-                  background: d.bg,
-                  fontSize: 'var(--text-xs)', fontWeight: 700,
-                  color: d.accent, textAlign: 'center',
-                  maxWidth: 160, lineHeight: 1.4,
-                  border: `1px solid ${d.accent}33`,
-                }}>
+                <div
+                  style={{
+                    padding: '0.35rem 0.75rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: d.bg,
+                    fontSize: 'var(--text-xs)',
+                    fontWeight: 700,
+                    color: d.accent,
+                    textAlign: 'center',
+                    maxWidth: 160,
+                    lineHeight: 1.4,
+                    border: `1px solid ${d.accent}33`,
+                  }}
+                >
                   {d.stat}
                 </div>
               )}
@@ -140,24 +156,45 @@ function DeepDiveCard({ cap, isEven }) {
             {/* Content side */}
             <div style={{ flex: '1 1 280px', minWidth: 0 }}>
               {/* Title with coloured left accent */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                <div style={{ width: 4, height: 28, borderRadius: 2, background: d.accent, flexShrink: 0 }} />
-                <h2 style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'var(--text-h3)', fontWeight: 700,
-                  color: 'var(--color-grey-900)', margin: 0,
-                }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.75rem',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                <div
+                  style={{
+                    width: 4,
+                    height: 28,
+                    borderRadius: 2,
+                    background: d.accent,
+                    flexShrink: 0,
+                  }}
+                />
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'var(--text-h3)',
+                    fontWeight: 700,
+                    color: 'var(--color-grey-900)',
+                    margin: 0,
+                  }}
+                >
                   {cap.title}
                 </h2>
               </div>
 
               {/* One-liner */}
-              <p style={{
-                fontSize: 'var(--text-lg)',
-                color: 'var(--color-text-muted)',
-                lineHeight: 'var(--leading-relaxed)',
-                marginBottom: '1.25rem',
-              }}>
+              <p
+                style={{
+                  fontSize: 'var(--text-lg)',
+                  color: 'var(--color-text-muted)',
+                  lineHeight: 'var(--leading-relaxed)',
+                  marginBottom: '1.25rem',
+                }}
+              >
                 {d.oneliner}
               </p>
 
@@ -170,7 +207,8 @@ function DeepDiveCard({ cap, isEven }) {
                       padding: '0.3rem 0.75rem',
                       borderRadius: 'var(--radius-full)',
                       background: d.bg,
-                      fontSize: 'var(--text-xs)', fontWeight: 600,
+                      fontSize: 'var(--text-xs)',
+                      fontWeight: 600,
                       color: d.accent,
                       border: `1px solid ${d.accent}33`,
                     }}
@@ -180,7 +218,6 @@ function DeepDiveCard({ cap, isEven }) {
                 ))}
               </div>
             </div>
-
           </div>
         </FadeIn>
       </Container>

@@ -1,4 +1,3 @@
-import React from 'react';
 import FadeIn from '@components/motion/FadeIn';
 import Stagger from '@components/motion/Stagger';
 import PlanCard from '@components/molecules/PlanCard';
@@ -39,7 +38,6 @@ const PLANS = [
     features: [
       'Everything in Growth',
       'Employee communication broadcasts (voice and WhatsApp)',
-      'Field team attendance via AI voice call',
       'GPS-verified field reporting and manager dashboard',
       'Email automation based on call outcomes',
       'WhatsApp Business API full integration',
@@ -75,8 +73,8 @@ function GetStartedPlans() {
             Not sure?{' '}
             <a href="#demo-form" style={{ color: 'var(--color-green-600)', fontWeight: 600 }}>
               Book the free walkthrough →
-            </a>
-            {' '}We'll recommend the right fit.
+            </a>{' '}
+            We'll recommend the right fit.
           </p>
         </FadeIn>
       </Container>

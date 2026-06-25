@@ -184,7 +184,7 @@ button { font: inherit; }
 /* ============================================================
    CUSTOM CLASSES — Typography
    ============================================================ */
-.custom-display { font-family: var(--font-display); font-size: var(--text-display); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); font-weight: 900; color: var(--color-grey-950); }
+.custom-display { font-family: var(--font-display); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight); font-weight: 900; color: var(--color-grey-950); }
 .custom-h1      { font-family: var(--font-display); font-size: var(--text-h1);      line-height: var(--leading-snug);  letter-spacing: var(--tracking-tight); font-weight: 800; }
 .custom-h2      { font-family: var(--font-display); font-size: var(--text-h2);      line-height: var(--leading-snug);  font-weight: 700; }
 .custom-h3      { font-family: var(--font-display); font-size: var(--text-h3);      line-height: var(--leading-snug);  font-weight: 700; }
