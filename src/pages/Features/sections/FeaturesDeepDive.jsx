@@ -67,7 +67,7 @@ const DETAILS = {
   multilanguage: {
     accent: '#D97706',
     bg: '#FEF3C7',
-    oneliner: "Speaks the customer's language — Hindi, Tamil, Marathi, Bengali, and 11 more.",
+    oneliner: "Speaks the customer's language — Hindi, Tamil, Marathi, Bengali, and more.",
     stat: 'Higher pick-up rates in regional markets',
     chips: ['North India', 'South India', 'Regional campaigns'],
   },

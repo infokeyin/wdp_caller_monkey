@@ -5,7 +5,7 @@ import Container from '@components/layout/Container';
 
 const ROWS = [
   { other: 'Basic calling bot', cm: 'Full AI communication system' },
-  { other: 'English-only', cm: '15+ Indian languages, Hinglish ready' },
+  { other: 'English-only', cm: '70+ languages, Hinglish ready' },
   { other: 'Tools that work in isolation', cm: 'Calls, WhatsApp, CRM, email — one system' },
   { other: 'Months to go live', cm: 'Live in 15 days, guaranteed' },
   { other: 'High monthly retainers', cm: 'Pay only what you use' },

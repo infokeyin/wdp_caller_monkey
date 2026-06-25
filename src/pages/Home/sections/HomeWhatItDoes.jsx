@@ -51,7 +51,7 @@ const CAPABILITIES = [
   },
   {
     icon: 'Languages',
-    label: '15+ Languages',
+    label: '70+ Languages',
     color: '#D97706',
     bg: '#FEF3C7',
     desc: 'Hindi, Tamil, Marathi & more',

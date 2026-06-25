@@ -9,7 +9,7 @@ const FAQS = [
   {
     question: 'Which languages does it support?',
     answer:
-      'Caller Monkey communicates in 15+ Indian languages including Hindi, Hinglish, Punjabi, Marathi, Tamil, Telugu, Kannada, Bengali, Gujarati, Malayalam, Odia, and more. Language can be selected per customer or per campaign.',
+      'Caller Monkey communicates in 70+ languages including Hindi, Hinglish, Punjabi, Marathi, Tamil, Telugu, Kannada, Bengali, Gujarati, Malayalam, Odia, and many more. Language can be selected per customer or per campaign.',
   },
   {
     question: 'How does it integrate with my CRM?',

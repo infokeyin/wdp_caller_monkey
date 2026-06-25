@@ -10,7 +10,7 @@ const PLANS = [
     featured: false,
     features: [
       'AI calling in your business voice and language',
-      '15+ Indian languages supported',
+      '70+ languages supported',
       'Lead follow-up engine (multiple automated call attempts)',
       'Customer reminder system (appointment, payment, renewal)',
       'Basic CRM logging via webhook or API',

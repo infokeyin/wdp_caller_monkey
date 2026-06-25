@@ -13,8 +13,7 @@ const FEATURES = [
   { icon: 'Database',      label: 'CRM Sync',         color: '#2C7BE5', bg: '#EBF3FF' },
   { icon: 'Zap',           label: 'Lead Follow-Up',   color: '#F4A623', bg: '#FEF6E7' },
   { icon: 'BarChart3',     label: 'Analytics',        color: '#9B59B6', bg: '#F5EEF8' },
-  { icon: 'Languages',     label: '15+ Languages',    color: '#D97706', bg: '#FEF3C7' },
-  { icon: 'MapPin',        label: 'Field Tracking',   color: '#E11D48', bg: '#FEE2E2' },
+  { icon: 'Languages',     label: '70+ Languages',    color: '#D97706', bg: '#FEF3C7' },
   { icon: 'Mail',          label: 'Email Automation', color: '#0891B2', bg: '#E0F7FA' },
 ];
 
@@ -118,7 +117,7 @@ function FeaturesHero() {
             <FadeIn>
               <p className="custom-eyebrow mb-3">Features</p>
               <h1 className="custom-h1 mb-4" style={{ maxWidth: 480 }}>
-                10 Jobs Done for You. Every Day. Automatically.
+                9 Jobs Done for You. Every Day. Automatically.
               </h1>
             </FadeIn>
             <FadeIn delay={0.08}>

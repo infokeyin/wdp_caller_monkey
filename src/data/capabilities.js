@@ -8,9 +8,8 @@ export const capabilities = [
   { id: 'crm',              icon: 'Database',      title: 'CRM Integration',          description: 'Every call, conversation and outcome is automatically logged in your CRM. No manual entry. Full pipeline visibility.' },
   { id: 'lead-follow-up',   icon: 'Zap',           title: 'Lead Follow-Up Engine',    description: 'Every new lead is called within minutes. Follows up multiple times until a response is received. Never drops a lead.' },
   { id: 'reminders',        icon: 'BellRing',      title: 'Customer Reminder System', description: 'Sends appointment, payment, renewal, delivery and service reminders automatically, via call or WhatsApp.' },
-  { id: 'attendance',       icon: 'MapPin',        title: 'Attendance & Field Tracking', description: 'Field staff mark attendance and send location via voice call. Manager gets daily report automatically.' },
   { id: 'employee-comm',    icon: 'Users',         title: 'Employee Communication Hub', description: 'Broadcasts updates, training reminders, policy changes and schedules to your entire team via AI voice or message.' },
   { id: 'email',            icon: 'Mail',          title: 'Email Automation',         description: 'Triggers emails based on call outcomes: follow-up emails, proposals, thank-you notes, sent automatically.' },
   { id: 'analytics',        icon: 'BarChart3',     title: 'Analytics & Reports',      description: 'Live dashboard showing call volumes, follow-up rates, response rates, team performance and customer sentiment.' },
-  { id: 'multilanguage',    icon: 'Languages',     title: 'Multi-Language Support',   description: 'Communicates in 15+ Indian languages: Hindi, Punjabi, Marathi, Tamil, Telugu, Bengali, Gujarati, and more.' },
+  { id: 'multilanguage',    icon: 'Languages',     title: 'Multi-Language Support',   description: 'Communicates in 70+ languages: Hindi, Punjabi, Marathi, Tamil, Telugu, Bengali, Gujarati, and many more.' },
 ];

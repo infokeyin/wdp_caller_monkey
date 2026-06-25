@@ -1,4 +1,3 @@
-import React from 'react';
 import { TrendingUp, Target, DollarSign } from 'lucide-react';
 import FadeIn from '@components/motion/FadeIn';
 import Stagger from '@components/motion/Stagger';
@@ -6,10 +5,10 @@ import StatCounter from '@components/molecules/StatCounter';
 import Container from '@components/layout/Container';
 
 const STATS = [
-  { value: 2,   prefix: '<', suffix: ' mins',  label: 'Lead response time'         },
-  { value: 100, suffix: '%',                    label: 'Follow-up coverage'         },
-  { value: 15,  suffix: ' days',                label: 'Go-live guarantee'          },
-  { value: 15,  suffix: '+',                    label: 'Indian languages supported' },
+  { value: 2, prefix: '<', suffix: ' mins', label: 'Lead response time' },
+  { value: 100, suffix: '%', label: 'Follow-up coverage' },
+  { value: 15, suffix: ' days', label: 'Go-live guarantee' },
+  { value: 70, suffix: '+', label: 'Indian languages supported' },
 ];
 
 const OUTCOMES = [
@@ -67,9 +66,13 @@ function HomeResults() {
               >
                 <div
                   style={{
-                    width: 48, height: 48, borderRadius: 'var(--radius-xl)',
+                    width: 48,
+                    height: 48,
+                    borderRadius: 'var(--radius-xl)',
                     background: `${color}14`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     margin: '0 auto 1rem',
                   }}
                   aria-hidden="true"
@@ -78,11 +81,23 @@ function HomeResults() {
                 </div>
                 <p
                   className="custom-mono-stat"
-                  style={{ fontSize: 'clamp(1.75rem, 3vw, 2.25rem)', color, lineHeight: 1, marginBottom: '0.5rem' }}
+                  style={{
+                    fontSize: 'clamp(1.75rem, 3vw, 2.25rem)',
+                    color,
+                    lineHeight: 1,
+                    marginBottom: '0.5rem',
+                  }}
                 >
                   {stat}
                 </p>
-                <p style={{ fontWeight: 700, color: 'var(--color-grey-800)', marginBottom: '0.35rem', fontSize: 'var(--text-sm)' }}>
+                <p
+                  style={{
+                    fontWeight: 700,
+                    color: 'var(--color-grey-800)',
+                    marginBottom: '0.35rem',
+                    fontSize: 'var(--text-sm)',
+                  }}
+                >
                   {label}
                 </p>
                 <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)' }}>

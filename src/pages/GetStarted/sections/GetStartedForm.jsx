@@ -30,7 +30,7 @@ const PREFERRED_TIMES = [
   { value: 'evening', label: 'Evening (5pm – 8pm)' },
 ];
 
-const WHATSAPP_URL = `https://wa.me/${appConfig.contactInfo.whatsapp}?text=${encodeURIComponent('Hi! I just submitted the demo request form on callermonkey.in')}`;
+
 
 /* ── Success state ── */
 function SuccessPanel() {
@@ -49,14 +49,7 @@ function SuccessPanel() {
           walkthrough. If you would prefer to connect sooner:
         </p>
       </div>
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="custom-btn custom-btn-whatsapp custom-btn-lg"
-      >
-        Chat on WhatsApp →
-      </a>
+
     </div>
   );
 }
@@ -119,7 +112,7 @@ function GetStartedForm() {
       track('demo_form_submit', { industry: data.industry, team_size: data.teamSize });
     } catch (err) {
       setError('root', {
-        message: 'Something went wrong. Please try again or chat with us on WhatsApp.',
+        message: 'Something went wrong. Please try again or email us at ' + appConfig.contactInfo.email,
       });
     }
   };
