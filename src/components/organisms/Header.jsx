@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { navigation } from '@data/navigation';
 import { useScrollDirection } from '@hooks/useScrollDirection';
 import { useLockBodyScroll } from '@hooks/useLockBodyScroll';
@@ -12,12 +12,149 @@ import cmLogo from '../../props/logos/logo-240px.png';
 /**
  * Header
  * Sticky top header with:
- * - Logo (text fallback until logo image is dropped in)
- * - Desktop nav (centered)
+ * - Logo (links to home)
+ * - Desktop nav (centered) — supports items with `children` (dropdown on hover)
  * - "Get a Free Demo" CTA (right)
- * - Compresses on scroll past 80px (CSS transition, no Framer)
- * - Mobile hamburger → full-screen slide-in panel (Framer AnimatePresence)
+ * - Compresses on scroll past 80px
+ * - Mobile hamburger → full-screen slide-in panel (sub-items expand inline)
  */
+
+/* ── Desktop dropdown for nav items that have children ── */
+function DesktopDropdown({ item }) {
+  const [open, setOpen] = useState(false);
+  const timerRef = useRef(null);
+  const location = useLocation();
+
+  // Is any child active?
+  const isChildActive = item.children?.some((c) => location.pathname === c.path);
+
+  const show = () => {
+    clearTimeout(timerRef.current);
+    setOpen(true);
+  };
+  const hide = () => {
+    timerRef.current = setTimeout(() => setOpen(false), 120);
+  };
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  return (
+    <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
+      <button
+        className={cn(
+          'flex items-center gap-1 px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-150 select-none',
+          isChildActive
+            ? 'text-brand-green bg-brand-green-50'
+            : 'text-grey-600 hover:text-grey-900 hover:bg-grey-100'
+        )}
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        {item.label}
+        <ChevronDown
+          size={14}
+          strokeWidth={2.5}
+          className={cn('transition-transform duration-200', open ? 'rotate-180' : '')}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="dropdown"
+            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.97 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            className="absolute top-full left-0 mt-1 w-44 bg-white rounded-lg border border-grey-200 shadow-lg overflow-hidden z-50"
+            onMouseEnter={show}
+            onMouseLeave={hide}
+          >
+            {item.children.map((child) => (
+              <NavLink
+                key={child.path}
+                to={child.path}
+                className={({ isActive }) =>
+                  cn(
+                    'block px-4 py-2.5 text-sm font-semibold transition-colors duration-150',
+                    isActive
+                      ? 'text-brand-green bg-brand-green-50'
+                      : 'text-grey-700 hover:text-grey-900 hover:bg-grey-50'
+                  )
+                }
+                onClick={() => setOpen(false)}
+              >
+                {child.label}
+              </NavLink>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ── Mobile expandable item for nav items that have children ── */
+function MobileExpandable({ item, onNavigate }) {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const isChildActive = item.children?.some((c) => location.pathname === c.path);
+
+  return (
+    <div>
+      <button
+        className={cn(
+          'w-full flex items-center justify-between px-4 py-3 rounded-lg text-base font-semibold transition-colors duration-150',
+          isChildActive
+            ? 'text-brand-green bg-brand-green-50'
+            : 'text-grey-700 hover:text-grey-900 hover:bg-grey-100'
+        )}
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+      >
+        {item.label}
+        <ChevronDown
+          size={16}
+          strokeWidth={2.5}
+          className={cn('transition-transform duration-200', open ? 'rotate-180' : '')}
+        />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-sub"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden pl-4"
+          >
+            {item.children.map((child) => (
+              <NavLink
+                key={child.path}
+                to={child.path}
+                className={({ isActive }) =>
+                  cn(
+                    'block px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors duration-150',
+                    isActive
+                      ? 'text-brand-green bg-brand-green-50'
+                      : 'text-grey-600 hover:text-grey-900 hover:bg-grey-100'
+                  )
+                }
+                onClick={onNavigate}
+              >
+                {child.label}
+              </NavLink>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { scrollY } = useScrollDirection();
@@ -73,22 +210,26 @@ function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
-            {navigation.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  cn(
-                    'px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-150',
-                    isActive
-                      ? 'text-brand-green bg-brand-green-50'
-                      : 'text-grey-600 hover:text-grey-900 hover:bg-grey-100'
-                  )
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {navigation.map((item) =>
+              item.children ? (
+                <DesktopDropdown key={item.label} item={item} />
+              ) : (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    cn(
+                      'px-4 py-2 rounded-md text-sm font-semibold transition-colors duration-150',
+                      isActive
+                        ? 'text-brand-green bg-brand-green-50'
+                        : 'text-grey-600 hover:text-grey-900 hover:bg-grey-100'
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              )
+            )}
           </nav>
 
           {/* Desktop CTA */}
@@ -170,23 +311,31 @@ function Header() {
 
               {/* Nav items */}
               <nav className="flex flex-col gap-1 px-4 py-6 flex-1" aria-label="Mobile navigation">
-                {navigation.map((item) => (
-                  <NavLink
-                    key={item.path}
-                    to={item.path}
-                    className={({ isActive }) =>
-                      cn(
-                        'px-4 py-3 rounded-lg text-base font-semibold transition-colors duration-150',
-                        isActive
-                          ? 'text-brand-green bg-brand-green-50'
-                          : 'text-grey-700 hover:text-grey-900 hover:bg-grey-100'
-                      )
-                    }
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </NavLink>
-                ))}
+                {navigation.map((item) =>
+                  item.children ? (
+                    <MobileExpandable
+                      key={item.label}
+                      item={item}
+                      onNavigate={() => setMobileOpen(false)}
+                    />
+                  ) : (
+                    <NavLink
+                      key={item.path}
+                      to={item.path}
+                      className={({ isActive }) =>
+                        cn(
+                          'px-4 py-3 rounded-lg text-base font-semibold transition-colors duration-150',
+                          isActive
+                            ? 'text-brand-green bg-brand-green-50'
+                            : 'text-grey-700 hover:text-grey-900 hover:bg-grey-100'
+                        )
+                      }
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.label}
+                    </NavLink>
+                  )
+                )}
               </nav>
 
               {/* Bottom CTA */}

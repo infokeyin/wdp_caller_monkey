@@ -47,7 +47,7 @@ function GlowBlob({ style }) {
 /* ── Trust stats — the 4 removed from HomeCTA ── */
 const TRUST_ITEMS = [
   { Icon: Clock, stat: '< 2 min', label: 'Lead response time' },
-  { Icon: PhoneCall, stat: '68–72%', label: 'Call pick-up rate' },
+  { Icon: PhoneCall, stat: '92%', label: 'Response rate' },
   { Icon: Users, stat: '500+', label: 'Businesses served' },
   { Icon: TrendingUp, stat: '15 days', label: 'Go-live guarantee' },
 ];

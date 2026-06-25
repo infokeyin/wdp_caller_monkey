@@ -23,7 +23,11 @@ const INDUSTRY_LINKS = [
   { label: 'Manufacturing', path: '/industries' },
 ];
 
-const COMPANY_LINKS = [{ label: 'Contact', path: '/get-started#demo-form' }];
+const COMPANY_LINKS = [
+  { label: 'Why Us',     path: '/why-us' },
+  { label: 'Get Started', path: '/get-started' },
+  { label: 'Contact',    path: '/get-started#demo-form' },
+];
 
 function FooterCol({ title, children }) {
   return (

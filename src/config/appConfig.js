@@ -58,6 +58,7 @@ export const appConfig = {
     features: '/features',
     integrations: '/integrations',
     industries: '/industries',
+    whyUs: '/why-us',
     getStarted: '/get-started',
     // Demo form anchor lives on the Get Started page.
     demoForm: '/get-started#demo-form',

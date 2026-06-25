@@ -14,8 +14,8 @@ const STATS = [
 const OUTCOMES = [
   {
     Icon: TrendingUp,
-    stat: '68–72%',
-    label: 'Call pick-up rate',
+    stat: '92%',
+    label: 'Response rate',
     note: 'vs 35–45% with in-house teams',
     color: '#2DA744',
   },

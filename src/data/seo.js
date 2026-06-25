@@ -21,7 +21,7 @@ export const seoData = {
   industries: {
     title: 'Industries We Serve | Caller Monkey',
     description:
-      'AI communication for Real Estate, Healthcare, Finance, Retail, Education, Manufacturing and more. See real customer stories across 12 industries.',
+      'AI communication for Real Estate, Healthcare, Finance, Retail, Education, Manufacturing and more. See real customer stories across all industries we serve.',
   },
   getStarted: {
     title: 'Get Started & Free Demo | Caller Monkey',

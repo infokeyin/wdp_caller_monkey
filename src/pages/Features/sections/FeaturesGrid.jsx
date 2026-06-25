@@ -7,17 +7,23 @@ import Icon from '@components/atoms/Icon';
 import { capabilities } from '@data/capabilities';
 import { useReducedMotion } from '@hooks/useReducedMotion';
 
-/* ── Unique accent per capability (same order as capabilities.js — 9 things Caller Monkey does) ── */
+/* ── Unique accent per capability (same order as capabilities.js — 15 features) ── */
 const ACCENTS = [
-  { color: '#2DA744', bg: '#E8F7EC' }, // AI Voice Calling
-  { color: '#25D366', bg: '#E6FBF0' }, // WhatsApp
-  { color: '#2C7BE5', bg: '#EBF3FF' }, // CRM
-  { color: '#F4A623', bg: '#FEF6E7' }, // Lead Follow-Up
-  { color: '#E11D48', bg: '#FEE2E2' }, // Reminders
-  { color: '#7C3AED', bg: '#F5EEF8' }, // Employee Comm
-  { color: '#0891B2', bg: '#E0F7FA' }, // Email
+  { color: '#2DA744', bg: '#E8F7EC' }, // Voice Agent
+  { color: '#25D366', bg: '#E6FBF0' }, // WhatsApp Automation
+  { color: '#2CA5E0', bg: '#E8F5FF' }, // Team Comm on Telegram
+  { color: '#1877F2', bg: '#EBF3FF' }, // Meta Leads Tracking
+  { color: '#EA4335', bg: '#FEE8E6' }, // Google Leads Tracking
+  { color: '#7C3AED', bg: '#F5EEF8' }, // Website Leads Tracking
+  { color: '#2C7BE5', bg: '#EBF3FF' }, // CRM Integration
+  { color: '#0891B2', bg: '#E0F7FA' }, // Calendar Schedule
+  { color: '#E11D48', bg: '#FEE2E2' }, // Email Integration
+  { color: '#059669', bg: '#ECFDF5' }, // Quotation & Payment Gateway
+  { color: '#D97706', bg: '#FEF3C7' }, // 70+ Languages
+  { color: '#F59E0B', bg: '#FFF7ED' }, // Autocall Function
+  { color: '#F4A623', bg: '#FEF6E7' }, // Lead Follow-up
   { color: '#9B59B6', bg: '#F5EEF8' }, // Analytics
-  { color: '#D97706', bg: '#FEF3C7' }, // Multi-Language
+  { color: '#10B981', bg: '#ECFDF5' }, // Pay as you Go
 ];
 
 function FeaturesGrid() {
@@ -28,7 +34,7 @@ function FeaturesGrid() {
       <Container>
         <FadeIn>
           <p className="custom-eyebrow mb-3 text-center">What It Does</p>
-          <h2 className="custom-h2 text-center mb-10">Nine everyday jobs. One connected system.</h2>
+          <h2 className="custom-h2 text-center mb-10">15 powerful features. One connected system.</h2>
         </FadeIn>
 
         <Stagger className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">

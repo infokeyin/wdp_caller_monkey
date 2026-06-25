@@ -10,6 +10,7 @@ const WorksWith = lazy(() => import('@pages/WorksWith/WorksWith'));
 const Industries = lazy(() => import('@pages/Industries/Industries'));
 const GetStarted = lazy(() => import('@pages/GetStarted/GetStarted'));
 const NotFound = lazy(() => import('@pages/NotFound/NotFound'));
+const WhyUs    = lazy(() => import('@pages/WhyUs/WhyUs'));
 
 /**
  * AppRoutes
@@ -32,7 +33,8 @@ function AppRoutes() {
           <Route path="/integrations" element={<WorksWith />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/get-started" element={<GetStarted />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/why-us"      element={<WhyUs />} />
+          <Route path="*"            element={<NotFound />} />
         </Routes>
       </Suspense>
     </PageTransition>

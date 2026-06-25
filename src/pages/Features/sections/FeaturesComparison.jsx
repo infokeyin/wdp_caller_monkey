@@ -4,14 +4,21 @@ import Stagger from '@components/motion/Stagger';
 import Container from '@components/layout/Container';
 
 const ROWS = [
-  { other: 'Basic calling bot', cm: 'Full AI communication system' },
-  { other: 'English-only', cm: '70+ languages, Hinglish ready' },
-  { other: 'Tools that work in isolation', cm: 'Calls, WhatsApp, CRM, email — one system' },
-  { other: 'Months to go live', cm: 'Live in 15 days, guaranteed' },
-  { other: 'High monthly retainers', cm: 'Pay only what you use' },
-  { other: 'One-size-fits-all', cm: 'Built for Indian field teams & markets' },
-  { other: 'Dashboard but no decisions', cm: 'Shows what to fix, not just numbers' },
-  { other: 'Requires your IT team', cm: 'We handle all setup and training' },
+  { other: 'Basic calling bot only',              cm: 'Full Voice Agent — qualifies, follows up, books' },
+  { other: 'WhatsApp not integrated',             cm: 'WhatsApp Automation built in' },
+  { other: 'Telegram not supported',              cm: 'Team broadcasts on Telegram, instantly' },
+  { other: 'Meta leads go to a spreadsheet',      cm: 'Meta leads → instant AI call in < 2 min' },
+  { other: 'Google leads handled manually',       cm: 'Google leads captured and called automatically' },
+  { other: 'Website form leads sit for hours',    cm: 'Website leads trigger an AI call immediately' },
+  { other: 'Manual CRM data entry',               cm: 'CRM auto-updated after every interaction' },
+  { other: 'Scheduling done by your team',        cm: 'AI books appointments during the call' },
+  { other: 'Email sent manually or not at all',   cm: 'Email triggered automatically by call outcome' },
+  { other: 'Quotation sent days later',           cm: 'Quotation + payment link sent right after the call' },
+  { other: 'English-only',                        cm: '70+ languages, Hinglish ready' },
+  { other: 'Leads wait hours for a call',         cm: "Autocall dials every lead the moment it arrives" },
+  { other: 'Follow-up relies on your team',       cm: '5+ follow-up attempts, fully automated' },
+  { other: 'Dashboard with no decisions',         cm: 'Analytics that show exactly where revenue is lost' },
+  { other: 'High monthly retainers',              cm: 'Pay as you Go — no contract, no lock-in' },
 ];
 
 function FeaturesComparison() {

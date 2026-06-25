@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import FadeIn from '@components/motion/FadeIn';
 import Icon from '@components/atoms/Icon';
@@ -8,68 +7,113 @@ import { useReducedMotion } from '@hooks/useReducedMotion';
 
 /* ── Compact detail per capability ── */
 const DETAILS = {
-  'voice-calling': {
+  'voice-agent': {
     accent: '#2DA744',
     bg: '#E8F7EC',
-    oneliner: 'Calls every lead in under 2 minutes — qualifies, answers, follows up.',
+    oneliner:
+      'AI voice agent calls every lead in under 2 minutes — qualifies, answers, follows up.',
     stat: '21× more likely to convert when called within 5 min',
-    chips: ['Lead qualification', 'Cold outreach', 'Re-engagement'],
+    chips: ['Lead qualification', 'Inbound answering', 'Re-engagement'],
   },
   whatsapp: {
     accent: '#25D366',
     bg: '#E6FBF0',
-    oneliner: 'Follows up missed calls, shares docs, collects replies — on WhatsApp.',
-    stat: '98% open rate in India',
+    oneliner: 'Follows up missed calls, shares docs, collects replies — on WhatsApp automatically.',
+    stat: '98% open rate vs 20% for email',
     chips: ['Post-call follow-up', 'Appointment confirmation', 'Payment links'],
+  },
+  telegram: {
+    accent: '#2CA5E0',
+    bg: '#E8F5FF',
+    oneliner: 'Broadcasts briefings, alerts and updates to your entire team on Telegram instantly.',
+    stat: 'Reaches 1000+ staff in seconds',
+    chips: ['Daily briefings', 'Field team alerts', 'Training reminders'],
+  },
+  'meta-leads': {
+    accent: '#1877F2',
+    bg: '#EBF3FF',
+    oneliner:
+      'Captures every Facebook and Instagram lead instantly — and calls them within 2 minutes.',
+    stat: 'Zero leads lost from Meta ad spend',
+    chips: ['Facebook Lead Ads', 'Instagram Leads', 'Instant AI call'],
+  },
+  'google-leads': {
+    accent: '#EA4335',
+    bg: '#FEE8E6',
+    oneliner: 'Pulls Google Ads and GMB leads automatically and follows up before competitors do.',
+    stat: 'First to call wins 78% of the time',
+    chips: ['Google Ads leads', 'Google My Business', 'CRM sync'],
+  },
+  'website-leads': {
+    accent: '#7C3AED',
+    bg: '#F5EEF8',
+    oneliner: 'Detects website form submissions and triggers an instant AI call — 24/7.',
+    stat: 'Lead response in under 2 minutes, round the clock',
+    chips: ['Form submissions', 'Chat enquiries', 'Landing page leads'],
   },
   crm: {
     accent: '#2C7BE5',
     bg: '#EBF3FF',
     oneliner: 'Every call outcome auto-logged. Full pipeline visibility, zero manual entry.',
-    stat: 'Works with Salesforce, Zoho, Freshsales',
+    stat: 'Works with Salesforce, Zoho, Freshsales, HubSpot',
     chips: ['Auto-logging', 'Workflow triggers', 'Pipeline sync'],
   },
-  'lead-follow-up': {
-    accent: '#F4A623',
-    bg: '#FEF6E7',
-    oneliner: 'Calls every lead, follows up 5+ times — without anyone on your team tracking it.',
-    stat: '80% of sales need 5+ follow-ups',
-    chips: ['Multi-step sequences', 'Escalation logic', 'Re-engagement'],
-  },
-  reminders: {
-    accent: '#E11D48',
-    bg: '#FEE2E2',
-    oneliner: 'Right reminder, right time — appointments, EMI, renewals, deliveries.',
-    stat: 'Reduces no-shows by up to 40%',
-    chips: ['Clinic reminders', 'EMI alerts', 'Policy renewals'],
-  },
-  'employee-comm': {
-    accent: '#7C3AED',
-    bg: '#F5EEF8',
-    oneliner: 'Broadcasts updates, training nudges, and urgent alerts to your whole team.',
-    stat: 'Reaches 1000 staff in seconds',
-    chips: ['Daily briefings', 'Training reminders', 'Emergency alerts'],
-  },
-  email: {
+  calendar: {
     accent: '#0891B2',
     bg: '#E0F7FA',
+    oneliner:
+      'AI books appointments into your calendar during the call — no back-and-forth needed.',
+    stat: 'Instant booking confirmation sent to the customer',
+    chips: ['Appointment booking', 'Reschedule handling', 'Confirmation alerts'],
+  },
+  email: {
+    accent: '#E11D48',
+    bg: '#FEE2E2',
     oneliner: 'Triggers the right email based on call outcome — proposals, follow-ups, thank-yous.',
     stat: 'Triggered by call result, not a timer',
     chips: ['Proposals', 'Thank-you notes', 'Escalation emails'],
   },
-  analytics: {
-    accent: '#9B59B6',
-    bg: '#F5EEF8',
-    oneliner: 'Live dashboard: call volume, pick-up rate, team performance, conversion.',
-    stat: 'See exactly where leads are lost',
-    chips: ['Call dashboard', 'Team comparison', 'Campaign tracking'],
+  payments: {
+    accent: '#059669',
+    bg: '#ECFDF5',
+    oneliner: 'Sends quotations after a call and a payment link so customers can pay immediately.',
+    stat: 'Closes deals faster — payment in the same session',
+    chips: ['Quotation generation', 'Payment link', 'Invoice tracking'],
   },
   multilanguage: {
     accent: '#D97706',
     bg: '#FEF3C7',
-    oneliner: "Speaks the customer's language — Hindi, Tamil, Marathi, Bengali, and more.",
+    oneliner: "Speaks the customer's language — Hindi, Tamil, Marathi, Bengali, and 65+ more.",
     stat: 'Higher pick-up rates in regional markets',
     chips: ['North India', 'South India', 'Regional campaigns'],
+  },
+  autocall: {
+    accent: '#F59E0B',
+    bg: '#FFF7ED',
+    oneliner: 'Dials every new lead the moment it arrives — day or night, no manual trigger.',
+    stat: '< 2 minute response time, 24/7',
+    chips: ['Instant lead dial', 'Off-hours coverage', 'Weekend calling'],
+  },
+  'lead-follow-up': {
+    accent: '#F4A623',
+    bg: '#FEF6E7',
+    oneliner: 'Follows up every lead 5+ times — without anyone on your team tracking it.',
+    stat: '80% of sales need 5+ follow-ups',
+    chips: ['Multi-step sequences', 'Escalation logic', 'Re-engagement'],
+  },
+  analytics: {
+    accent: '#9B59B6',
+    bg: '#F5EEF8',
+    oneliner: 'Live dashboard: call volume, response rate, team performance, conversion.',
+    stat: 'See exactly where leads are lost',
+    chips: ['Call dashboard', 'Team comparison', 'Campaign tracking'],
+  },
+  'pay-as-you-go': {
+    accent: '#10B981',
+    bg: '#ECFDF5',
+    oneliner: 'No retainers, no lock-in. Pay only for what you use — scale up or down any time.',
+    stat: 'Up to 60% lower cost vs in-house calling teams',
+    chips: ['Usage-based billing', 'No long-term contract', 'Flexible scale'],
   },
 };
 
@@ -90,6 +134,7 @@ function DeepDiveCard({ cap, isEven }) {
         background: isEven ? 'var(--color-bg)' : 'var(--color-bg-alt)',
         paddingBlock: 'clamp(2.5rem, 4vw, 4rem)',
         borderBottom: '1px solid var(--color-border)',
+        scrollMarginTop: '80px',
       }}
     >
       <Container>

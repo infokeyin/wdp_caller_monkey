@@ -2,44 +2,44 @@ import FAQSection from '@components/organisms/FAQSection';
 
 const FAQS = [
   {
-    question: 'Does AI calling sound robotic?',
+    question: 'Does the Voice Agent sound robotic?',
     answer:
-      'No. Caller Monkey uses advanced voice AI trained on natural conversation patterns. Callers consistently describe it as clear, professional, and easy to understand — not robotic. We can also customise the voice style, pace, and tone to match your brand.',
+      'No. Caller Monkey uses advanced voice AI trained on natural conversation patterns. Callers consistently describe it as clear, professional and easy to understand. We customise the voice style, pace and tone to match your brand.',
+  },
+  {
+    question: 'How does Meta and Google leads tracking work?',
+    answer:
+      'When a lead submits a Facebook, Instagram or Google Ads form, Caller Monkey captures it in real time and triggers an AI call within 2 minutes — before your competitors even see the notification. All outcomes sync to your CRM automatically.',
   },
   {
     question: 'Which languages does it support?',
     answer:
-      'Caller Monkey communicates in 70+ languages including Hindi, Hinglish, Punjabi, Marathi, Tamil, Telugu, Kannada, Bengali, Gujarati, Malayalam, Odia, and many more. Language can be selected per customer or per campaign.',
+      'Caller Monkey communicates in 70+ languages including Hindi, Hinglish, Punjabi, Marathi, Tamil, Telugu, Kannada, Bengali, Gujarati, Malayalam, Odia, and many more. Language is selected per customer or per campaign.',
   },
   {
-    question: 'How does it integrate with my CRM?',
+    question: 'How does CRM integration work?',
     answer:
-      'We handle all CRM integration as part of your setup. Caller Monkey connects with Salesforce, Zoho CRM, Freshsales, HubSpot, Leadsquared, and custom CRMs via API. Every call, outcome, and follow-up is logged automatically without any manual entry.',
+      'We handle all CRM integration as part of setup. Caller Monkey connects with Salesforce, Zoho CRM, Freshsales, HubSpot, Leadsquared and custom CRMs via API. Every call, outcome and follow-up is logged automatically.',
   },
   {
-    question: 'Can it handle inbound calls as well as outbound?',
+    question: 'How does the Calendar Schedule feature work?',
     answer:
-      'Yes. Caller Monkey handles both inbound and outbound calls. For inbound, it can answer, qualify, route, take messages, or book appointments — automatically. Your existing business phone number continues to work.',
+      'During a call the AI offers available slots and books an appointment directly into your connected calendar — Google Calendar, Calendly or your CRM calendar. A confirmation is sent to the customer instantly.',
   },
   {
-    question: 'What happens when a customer wants to speak to a human?',
+    question: 'What is the Autocall function?',
     answer:
-      "Caller Monkey detects intent and transfers to a human agent instantly. The agent receives a live summary of the conversation so they don't need to ask the customer to repeat anything.",
+      "Autocall means the moment a new lead arrives — from any source — the system automatically dials them without any manual trigger. This ensures every lead is contacted in under 2 minutes, 24 hours a day, 7 days a week.",
   },
   {
-    question: 'How does pricing work?',
+    question: 'How does the Quotation and Payment Gateway work?',
     answer:
-      'AI voice calling is very economical — no monthly retainers, no lock-in contracts. You pay for what you use. Setup is a one-time fee. WhatsApp, email automation, and CRM integration are bundled based on your selected plan.',
+      'After a qualifying call, Caller Monkey auto-generates a quotation and sends it with a payment link via WhatsApp or email. The customer can pay immediately — no back-and-forth, no waiting for your team to follow up.',
   },
   {
-    question: 'Do I need a technical team to set this up?',
+    question: 'How does Pay as you Go pricing work?',
     answer:
-      'No. We handle everything: number porting or new number provisioning, CRM integration, WhatsApp Business API setup, script writing, and training. You approve the scripts and we go live. Most businesses are live within 15 working days.',
-  },
-  {
-    question: 'Can I customise what the AI says?',
-    answer:
-      'Yes. You supply your scripts, FAQs, objection responses, and communication style. Our team trains the AI to sound like your best salesperson. Scripts can be updated any time.',
+      'There are no monthly retainers and no lock-in contracts. You pay based on actual usage — calls made, messages sent, leads processed. Scale up during peak seasons and scale down any time. Setup is a one-time fee.',
   },
 ];
 

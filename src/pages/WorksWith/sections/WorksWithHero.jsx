@@ -1,215 +1,209 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import FadeIn from '@components/motion/FadeIn';
 import Container from '@components/layout/Container';
 import { useReducedMotion } from '@hooks/useReducedMotion';
+import cmLogo from '../../../props/logos/logo-240px.png';
 
-/* ── Integration nodes that orbit the CM hub ── */
-const NODES = [
-  {
-    id: 'whatsapp',
-    label: 'WhatsApp',
-    color: '#25D366',
-    bg: '#E6FBF0',
-    angle: 0,
-    icon: (
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-        fill={`#25D366`}
-      />
-    ),
-  },
-  {
-    id: 'crm',
-    label: 'CRM',
-    color: '#2C7BE5',
-    bg: '#EBF3FF',
-    angle: 51,
-    icon: (
-      <path
-        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"
-        fill="#2C7BE5"
-      />
-    ),
-  },
-  {
-    id: 'calendar',
-    label: 'Calendar',
-    color: '#F4A623',
-    bg: '#FEF6E7',
-    angle: 102,
-    icon: (
-      <path
-        d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
-        fill="#F4A623"
-      />
-    ),
-  },
-  {
-    id: 'email',
-    label: 'Email',
-    color: '#D9342B',
-    bg: '#FEE2E2',
-    angle: 153,
-    icon: (
-      <path
-        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-        fill="#D9342B"
-      />
-    ),
-  },
-  {
-    id: 'payments',
-    label: 'Payments',
-    color: '#7C3AED',
-    bg: '#F5EEF8',
-    angle: 204,
-    icon: (
-      <path
-        d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"
-        fill="#7C3AED"
-      />
-    ),
-  },
-  {
-    id: 'analytics',
-    label: 'Analytics',
-    color: '#0891B2',
-    bg: '#E0F7FA',
-    angle: 255,
-    icon: (
-      <path
-        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-        fill="#0891B2"
-      />
-    ),
-  },
-  {
-    id: 'leads',
-    label: 'Leads',
-    color: '#059669',
-    bg: '#ECFDF5',
-    angle: 306,
-    icon: (
-      <path
-        d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
-        fill="#059669"
-      />
-    ),
-  },
+/* ── Animation CSS ── */
+const FLOW_CSS = `
+@keyframes inthBar  { 0%,100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+@keyframes inthRing { 0% { transform: scale(.55); opacity:.5; } 100% { transform: scale(1.9); opacity:0; } }
+@keyframes inthCore { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes inthDot  { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+@keyframes inthPop  { 0%,18% { transform: scale(0); opacity:0; } 34% { transform: scale(1.18); opacity:1; } 50%,100% { transform: scale(1); opacity:1; } }
+@keyframes inthFloat{ 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+.inth-anim .inth-bar  { transform-box:fill-box; transform-origin:bottom; animation: inthBar  1.1s ease-in-out infinite; }
+.inth-anim .inth-ring { transform-box:fill-box; transform-origin:center; animation: inthRing 2.6s ease-out  infinite; }
+.inth-anim .inth-core { transform-box:fill-box; transform-origin:center; animation: inthCore 3s   ease-in-out infinite; }
+.inth-anim .inth-tdot { transform-box:fill-box; transform-origin:center; animation: inthDot  1.2s ease-in-out infinite; }
+.inth-anim .inth-check{ transform-box:fill-box; transform-origin:center; animation: inthPop  3.4s ease-in-out infinite; }
+.inth-anim .inth-pill { transform-box:fill-box; transform-origin:center; animation: inthFloat 3.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .inth-anim .inth-bar,.inth-anim .inth-ring,.inth-anim .inth-core,
+  .inth-anim .inth-tdot,.inth-anim .inth-check,.inth-anim .inth-pill { animation: none; }
+}
+`;
+
+const GREEN = '#2DA744';
+const VOICE_BARS = [22, 22, 22, 22, 22, 22, 22, 22, 22];
+
+/* 6 output cards spaced evenly */
+const CARDS = [
+  { y: 30,  color: '#25D366', label: 'WhatsApp',  sub: 'follow-up sent',    check: 0,    pathId: 'ip1' },
+  { y: 115, color: '#2C7BE5', label: 'CRM',        sub: 'contact logged',    check: 1.1,  pathId: 'ip2' },
+  { y: 200, color: '#F4A623', label: 'Calendar',   sub: 'meeting scheduled', check: null, pathId: 'ip3' },
+  { y: 285, color: '#D9342B', label: 'Email',      sub: 'digest sent',       check: 2.2,  pathId: 'ip4' },
+  { y: 370, color: '#7C3AED', label: 'Payments',   sub: 'invoice raised',    check: null, pathId: 'ip5' },
+  { y: 455, color: '#0891B2', label: 'Analytics',  sub: 'report updated',    check: 3.0,  pathId: 'ip6' },
 ];
 
-/* ── Hub diagram SVG ── */
-function HubDiagram({ reduced }) {
-  const cx = 200; // SVG centre x
-  const cy = 200; // SVG centre y
-  const r = 140; // orbit radius
+/* SVG layout constants */
+const SVG_W   = 620;
+const SVG_H   = CARDS[CARDS.length - 1].y + 90;   // ≈ 545
+const AIX     = 290;                                // AI hub centre x
+const CY      = (CARDS[0].y + CARDS[CARDS.length - 1].y + 56) / 2; // ≈ 270
+const VOICE_X = 20;
+const CARD_X  = 430;
+const LOGO_R  = 52;   // radius of the hub circle
 
+function FlowDot({ pathId, fill, dur, begin }) {
+  return (
+    <circle r={3.5} fill={fill}>
+      <animateMotion dur={`${dur}s`} begin={`${begin}s`} repeatCount="indefinite">
+        <mpath href={`#${pathId}`} />
+      </animateMotion>
+    </circle>
+  );
+}
+
+function IntegrationFlowScene({ reduced }) {
   return (
     <svg
-      viewBox="0 0 400 400"
+      viewBox={`0 0 ${SVG_W} ${SVG_H}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="Caller Monkey integration hub diagram"
-      style={{ width: '100%', maxWidth: 420, height: 'auto' }}
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      role="img"
+      aria-label="Incoming leads flow through Caller Monkey into WhatsApp, CRM, Calendar, Email, Payments and Analytics"
+      style={{ width: '100%', height: 'auto' }}
     >
-      {/* Subtle orbit ring */}
-      <circle cx={cx} cy={cy} r={r} stroke="#E5E5E5" strokeWidth="1" strokeDasharray="4 5" />
+      <defs>
+        <pattern id="inthDots" width="22" height="22" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" fill="#E7E9EC" />
+        </pattern>
+        <filter id="inthShadow" x="-30%" y="-30%" width="160%" height="170%">
+          <feDropShadow dx="0" dy="3" stdDeviation="6" floodColor="#1F2937" floodOpacity="0.08" />
+        </filter>
+        <clipPath id="logoClip">
+          <circle cx={AIX} cy={CY} r={LOGO_R} />
+        </clipPath>
+      </defs>
 
-      {/* Spoke lines + animated traveling dots */}
-      {NODES.map((node) => {
-        const rad = (node.angle * Math.PI) / 180;
-        const nx = cx + r * Math.cos(rad);
-        const ny = cy + r * Math.sin(rad);
-        const dotId = `dot-${node.id}`;
+      <style>{FLOW_CSS}</style>
+      <rect width={SVG_W} height={SVG_H} fill="url(#inthDots)" />
 
-        return (
-          <g key={node.id}>
-            {/* Spoke */}
-            <line
-              x1={cx}
-              y1={cy}
-              x2={nx}
-              y2={ny}
-              stroke={node.color}
-              strokeWidth="1"
-              opacity="0.3"
-              strokeDasharray="3 4"
+      <g className={reduced ? undefined : 'inth-anim'}>
+
+        {/* ── Connector: Lead card → hub ── */}
+        <path
+          id="ip0"
+          d={`M${VOICE_X + 108} ${CY} L${AIX - LOGO_R - 2} ${CY}`}
+          stroke="#DDE1E5"
+          strokeWidth={1.5}
+        />
+        {!reduced && (
+          <>
+            <FlowDot pathId="ip0" fill={GREEN} dur={1.8} begin={0} />
+            <FlowDot pathId="ip0" fill={GREEN} dur={1.8} begin={0.9} />
+          </>
+        )}
+
+        {/* ── Connectors: hub → each card ── */}
+        {CARDS.map((c) => {
+          const cardMidY = c.y + 28;
+          return (
+            <path
+              key={c.pathId}
+              id={c.pathId}
+              d={`M${AIX + LOGO_R + 2} ${CY} C${AIX + 120} ${CY} ${CARD_X - 50} ${cardMidY} ${CARD_X} ${cardMidY}`}
+              stroke="#DDE1E5"
+              strokeWidth={1.5}
             />
+          );
+        })}
 
-            {/* Traveling dot along spoke */}
-            {!reduced && (
-              <circle r="3.5" fill={node.color} opacity="0.9">
-                <animateMotion
-                  dur={`${2.2 + (node.angle % 7) * 0.18}s`}
-                  repeatCount="indefinite"
-                  begin={`${(node.angle / 360) * 2.5}s`}
-                >
-                  <mpath>
-                    <path d={`M${cx},${cy} L${nx},${ny}`} />
-                  </mpath>
-                </animateMotion>
-              </circle>
-            )}
+        {/* ── Animated flow dots ── */}
+        {!reduced && CARDS.map((c, i) => (
+          <FlowDot key={c.pathId} pathId={c.pathId} fill={c.color} dur={2.2 + i * 0.15} begin={i * 0.4} />
+        ))}
 
-            {/* Node circle */}
-            <circle cx={nx} cy={ny} r="28" fill={node.bg} stroke={node.color} strokeWidth="1.5" />
+        {/* ── Incoming Lead card ── */}
+        <g filter="url(#inthShadow)">
+          <rect x={VOICE_X} y={CY - 42} width={108} height={84} rx={18} fill="#FFFFFF" stroke="#ECEEF0" strokeWidth={1} />
+        </g>
+        <circle className="inth-tdot" cx={VOICE_X + 18} cy={CY - 24} r={4} fill={GREEN} />
+        <text x={VOICE_X + 30} y={CY - 20} fontFamily="'Inter Tight', sans-serif" fontSize="10" fontWeight="600" fill="#2B333C">
+          Incoming Lead
+        </text>
+        {VOICE_BARS.map((h, i) => (
+          <rect
+            key={i}
+            className="inth-bar"
+            x={VOICE_X + 20 + i * 7.5}
+            y={CY + 20 - h}
+            width={3.5}
+            height={h}
+            rx={1.5}
+            fill={GREEN}
+            style={{ animationDelay: `${i * 0.09}s` }}
+          />
+        ))}
+        <text x={VOICE_X + 54} y={CY + 34} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="8" fill="#9AA0A6">
+          calling now
+        </text>
 
-            {/* Node icon — 16×16 centred */}
-            <svg x={nx - 10} y={ny - 10} width="20" height="20" viewBox="0 0 24 24">
-              {node.icon}
-            </svg>
+        {/* ── CM logo hub ── */}
+        {/* Pulsing rings */}
+        <circle className="inth-ring" cx={AIX} cy={CY} r={LOGO_R} stroke={GREEN} strokeWidth={2} style={{ animationDelay: '0s' }} />
+        <circle className="inth-ring" cx={AIX} cy={CY} r={LOGO_R} stroke={GREEN} strokeWidth={2} style={{ animationDelay: '1.3s' }} />
+        {/* White backing circle */}
+        <g className="inth-core" filter="url(#inthShadow)">
+          <circle cx={AIX} cy={CY} r={LOGO_R} fill="#FFFFFF" stroke="#E5E7EB" strokeWidth={1.5} />
+          {/* Logo image clipped to circle */}
+          <image
+            href={cmLogo}
+            x={AIX - LOGO_R}
+            y={CY - LOGO_R}
+            width={LOGO_R * 2}
+            height={LOGO_R * 2}
+            clipPath="url(#logoClip)"
+            preserveAspectRatio="xMidYMid meet"
+          />
+        </g>
 
-            {/* Node label */}
-            <text
-              x={nx}
-              y={ny + 40}
-              textAnchor="middle"
-              fontSize="9"
-              fontWeight="700"
-              fill="#4A4A4A"
-              fontFamily="system-ui, sans-serif"
-              letterSpacing="0.03em"
-            >
-              {node.label.toUpperCase()}
+        {/* ── Output integration cards ── */}
+        {CARDS.map((c) => (
+          <g key={c.label}>
+            <g filter="url(#inthShadow)">
+              <rect x={CARD_X} y={c.y} width={172} height={56} rx={14} fill="#FFFFFF" stroke="#ECEEF0" strokeWidth={1} />
+            </g>
+            <circle cx={CARD_X + 20} cy={c.y + 28} r={12} fill={c.color} opacity={0.15} />
+            <circle cx={CARD_X + 20} cy={c.y + 28} r={7} fill={c.color} />
+            <text x={CARD_X + 38} y={c.y + 24} fontFamily="'Inter Tight', sans-serif" fontSize="11" fontWeight="600" fill="#2B333C">
+              {c.label}
             </text>
+            <text x={CARD_X + 38} y={c.y + 40} fontFamily="'Inter Tight', sans-serif" fontSize="8.5" fill="#9AA0A6">
+              {c.sub}
+            </text>
+            {c.check !== null && (
+              <g className="inth-check" style={{ animationDelay: `${c.check}s` }}>
+                <circle cx={CARD_X + 156} cy={c.y + 24} r={9} fill={GREEN} />
+                <path
+                  d={`M${CARD_X + 152} ${c.y + 24} L${CARD_X + 155} ${c.y + 27} L${CARD_X + 160} ${c.y + 21}`}
+                  stroke="#FFFFFF"
+                  strokeWidth={1.8}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            )}
           </g>
-        );
-      })}
+        ))}
 
-      {/* Central CM hub */}
-      <circle cx={cx} cy={cy} r="40" fill="#2DA744" />
-      {/* Subtle inner ring */}
-      <circle cx={cx} cy={cy} r="34" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" />
-      <text
-        x={cx}
-        y={cy - 6}
-        textAnchor="middle"
-        fontSize="14"
-        fontWeight="900"
-        fill="white"
-        fontFamily="system-ui, sans-serif"
-      >
-        CM
-      </text>
-      <text
-        x={cx}
-        y={cy + 10}
-        textAnchor="middle"
-        fontSize="7.5"
-        fontWeight="600"
-        fill="rgba(255,255,255,0.75)"
-        fontFamily="system-ui, sans-serif"
-        letterSpacing="0.06em"
-      >
-        HUB
-      </text>
+        {/* ── "24/7 always on" stat pill only ── */}
+        <g transform={`translate(${VOICE_X + 54} 18)`}>
+          <g className="inth-pill" style={{ animationDelay: '0s' }} filter="url(#inthShadow)">
+            <rect x={-46} y={-20} width={90} height={36} rx={12} fill="#FFFFFF" stroke="#EBEDEF" strokeWidth={1} />
+            <text x={0} y={-3} textAnchor="middle" fontFamily="'Cabinet Grotesk', sans-serif" fontSize="15" fontWeight="800" fill={GREEN}>24/7</text>
+            <text x={0} y={11} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="8.5" fill="#9AA0A6">always on</text>
+          </g>
+        </g>
+
+      </g>
     </svg>
   );
 }
 
-/* ── Main section ── */
 function WorksWithHero() {
   const reduced = useReducedMotion();
 
@@ -228,14 +222,14 @@ function WorksWithHero() {
         <div
           style={{
             display: 'flex',
-            flexDirection: 'row',
+            display: 'grid',
+            gridTemplateColumns: '60fr 40fr',
             alignItems: 'center',
-            gap: 'clamp(2rem, 5vw, 5rem)',
-            flexWrap: 'wrap',
+            gap: 'clamp(2rem, 4vw, 4rem)',
           }}
         >
           {/* ── Left — text ── */}
-          <div style={{ flex: '1 1 340px', minWidth: 0 }}>
+          <div style={{ minWidth: 0 }}>
             <FadeIn>
               <p className="custom-eyebrow mb-3">Integrations</p>
               <h1 className="custom-h1 mb-5" style={{ maxWidth: 500 }}>
@@ -258,8 +252,6 @@ function WorksWithHero() {
                 </Link>
               </div>
             </FadeIn>
-
-            {/* Integration count badge */}
             <FadeIn delay={0.25}>
               <div
                 style={{
@@ -276,36 +268,23 @@ function WorksWithHero() {
                   letterSpacing: 'var(--tracking-wide)',
                 }}
               >
-                <span
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: '50%',
-                    background: 'var(--color-green-500)',
-                    flexShrink: 0,
-                  }}
-                />
-                7+ platforms connected · Setup in 15 days
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-green-500)', flexShrink: 0 }} />
+                6+ platforms connected · Setup in 15 days
               </div>
             </FadeIn>
           </div>
 
-          {/* ── Right — hub diagram ── */}
+          {/* ── Right — larger flow diagram ── */}
           <div
             style={{
-              flex: '0 0 auto',
-              width: 'clamp(280px, 40vw, 420px)',
+              width: '100%',
               display: 'flex',
               justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            <FadeIn delay={0.08} y={16}>
-              <motion.div
-                animate={reduced ? {} : { y: [0, -6, 0] }}
-                transition={reduced ? {} : { duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <HubDiagram reduced={reduced} />
-              </motion.div>
+            <FadeIn delay={0.08} y={16} style={{ width: '100%' }}>
+              <IntegrationFlowScene reduced={reduced} />
             </FadeIn>
           </div>
         </div>
