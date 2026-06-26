@@ -289,16 +289,7 @@ function StoryCard({ story, index }) {
             }}
           >
             {/* Stat column */}
-            <div
-              style={{
-                flex: '0 0 auto',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '0.75rem',
-                minWidth: 150,
-              }}
-            >
+            <div className="flex-none flex flex-col items-center  gap-3 min-w-[150px] mx-auto md:mx-0">
               <motion.div
                 animate={reduced ? {} : { y: [0, -5, 0] }}
                 transition={reduced ? {} : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}

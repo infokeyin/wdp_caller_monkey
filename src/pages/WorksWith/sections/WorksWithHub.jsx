@@ -5,12 +5,14 @@ import Icon from '@components/atoms/Icon';
 import Container from '@components/layout/Container';
 import { integrationCategories } from '@data/integrations';
 import { useReducedMotion } from '@hooks/useReducedMotion';
+import cmLogo from '../../../props/logos/logo-240px.png';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 
 // ViewBox: 0 0 560 520, center: (280, 260), radius: 190
 const CENTER = { x: 280, y: 260 };
-const RADIUS  = 185;
-const VB_W    = 560;
-const VB_H    = 520;
+const RADIUS = 185;
+const VB_W = 560;
+const VB_H = 520;
 
 // 8 nodes evenly at 45° CW from top
 function nodePos(index, total = 8, r = RADIUS) {
@@ -28,6 +30,9 @@ const SPOKE_CATEGORIES = integrationCategories.slice(0, 8);
 function WorksWithHub() {
   const reduced = useReducedMotion();
 
+  const { width: screenWidth } = useWindowSize();
+  const isMobile = screenWidth < 768;
+
   return (
     <section className="custom-section-alt">
       <Container>
@@ -35,14 +40,17 @@ function WorksWithHub() {
           <p className="custom-eyebrow mb-3 text-center">Integration Map</p>
           <h2 className="custom-h2 text-center mb-4">Every Integration, One View</h2>
           <p className="custom-lead text-center mb-12 max-w-xl mx-auto">
-            Caller Monkey sits at the centre. Every platform you use connects to it, and through it, to each other.
+            Caller Monkey sits at the centre. Every platform you use connects to it, and through it,
+            to each other.
           </p>
         </FadeIn>
 
         {/* Hub visual */}
         <FadeIn delay={0.1}>
-          <div className="relative w-full max-w-2xl mx-auto" style={{ aspectRatio: `${VB_W}/${VB_H}` }}>
-
+          <div
+            className="relative w-full max-w-2xl mx-auto"
+            style={{ aspectRatio: `${VB_W}/${VB_H}` }}
+          >
             {/* SVG — lines only */}
             <svg
               viewBox={`0 0 ${VB_W} ${VB_H}`}
@@ -52,7 +60,9 @@ function WorksWithHub() {
             >
               {/* Faint outer ring */}
               <circle
-                cx={CENTER.x} cy={CENTER.y} r={RADIUS}
+                cx={CENTER.x}
+                cy={CENTER.y}
+                r={RADIUS}
                 stroke="var(--color-grey-200)"
                 strokeWidth={1}
                 strokeDasharray="4 6"
@@ -64,8 +74,10 @@ function WorksWithHub() {
                 return (
                   <motion.line
                     key={cat.id}
-                    x1={CENTER.x} y1={CENTER.y}
-                    x2={pos.x}    y2={pos.y}
+                    x1={CENTER.x}
+                    y1={CENTER.y}
+                    x2={pos.x}
+                    y2={pos.y}
                     stroke={cat.color}
                     strokeWidth={1.5}
                     strokeLinecap="round"
@@ -73,16 +85,27 @@ function WorksWithHub() {
                     initial={reduced ? { opacity: 0.45 } : { pathLength: 0, opacity: 0 }}
                     whileInView={{ pathLength: 1, opacity: 0.45 }}
                     viewport={{ once: true, amount: 0.3 }}
-                    transition={reduced ? {} : { duration: 0.55, delay: 0.3 + i * 0.1, ease: [0.25, 1, 0.5, 1] }}
+                    transition={
+                      reduced
+                        ? {}
+                        : { duration: 0.55, delay: 0.3 + i * 0.1, ease: [0.25, 1, 0.5, 1] }
+                    }
                   />
                 );
               })}
 
               {/* Center node */}
               <circle cx={CENTER.x} cy={CENTER.y} r={46} fill="var(--color-green-500)" />
-              <circle cx={CENTER.x} cy={CENTER.y} r={52} fill="none"
-                stroke="var(--color-green-400)" strokeWidth={1} opacity={0.5} />
-              <text
+              <circle
+                cx={CENTER.x}
+                cy={CENTER.y}
+                r={52}
+                fill="none"
+                stroke="var(--color-green-400)"
+                strokeWidth={1}
+                opacity={0.5}
+              />
+              {/* <text
                 x={CENTER.x} y={CENTER.y - 7}
                 textAnchor="middle" dominantBaseline="middle"
                 fill="white" fontFamily="'Cabinet Grotesk', sans-serif"
@@ -97,14 +120,24 @@ function WorksWithHub() {
                 fontWeight="900" fontSize="13"
               >
                 Monkey
-              </text>
+              </text> */}
+              <image
+                href={cmLogo}
+                x={CENTER.x - 40} // 280 - 35 = 245
+                y={CENTER.y - 40} // 260 - 35 = 225
+                width={80}
+                height={75}
+              />
             </svg>
 
             {/* Spoke icon nodes — absolutely positioned */}
             {SPOKE_CATEGORIES.map((cat, i) => {
               const pos = nodePos(i);
-              const leftPct = (pos.x / VB_W) * 100;
-              const topPct  = (pos.y / VB_H) * 100;
+              const leftPct = (pos.x / VB_W) * (isMobile ? 90 : 93);
+              const topPct = (pos.y / VB_H) * (isMobile ? 89 : 91.5);
+
+              const iconSize = isMobile ? 36 : 48;
+              const fontSize = isMobile ? '0.6rem' : '0.7rem';
 
               const labelStyle = {
                 position: 'absolute',
@@ -113,7 +146,7 @@ function WorksWithHub() {
                 transform: 'translateX(-50%)',
                 marginTop: '4px',
                 color: 'var(--color-grey-600)',
-                fontSize: '0.7rem',
+                fontSize,
                 fontWeight: 600,
                 whiteSpace: 'nowrap',
                 pointerEvents: 'none',
@@ -122,29 +155,43 @@ function WorksWithHub() {
               return (
                 <motion.div
                   key={cat.id}
-                  // Fixed 48×48 box — translate(-50%,-50%) centres the ICON on the SVG point
                   style={{
                     position: 'absolute',
                     left: `${leftPct}%`,
                     top: `${topPct}%`,
-                    width: 48,
-                    height: 48,
+                    width: iconSize,
+                    height: iconSize,
                     transform: 'translate(-50%, -50%)',
                   }}
                   animate={reduced ? {} : { y: [0, -5, 0] }}
-                  transition={reduced ? {} : { duration: 5.5 + i * 0.6, repeat: Infinity, delay: i * 1.0, ease: 'easeInOut' }}
+                  transition={
+                    reduced
+                      ? {}
+                      : {
+                          duration: 5.5 + i * 0.6,
+                          repeat: Infinity,
+                          delay: i * 1.0,
+                          ease: 'easeInOut',
+                        }
+                  }
                 >
                   <div
-                    className="w-12 h-12 rounded-xl bg-white shadow-md border flex items-center justify-center"
+                    className="rounded-xl bg-white shadow-md border flex items-center justify-center"
                     style={{
+                      width: iconSize,
+                      height: iconSize,
                       borderColor: `${cat.color}40`,
                       boxShadow: `0 4px 12px ${cat.color}18`,
                     }}
                     aria-label={cat.category}
                   >
-                    <Icon name={cat.icon} size={22} strokeWidth={1.75} style={{ color: cat.color }} />
+                    <Icon
+                      name={cat.icon}
+                      size={isMobile ? 16 : 22}
+                      strokeWidth={1.75}
+                      style={{ color: cat.color }}
+                    />
                   </div>
-                  {/* Label — absolutely positioned below icon, never shifts parent width */}
                   <span style={labelStyle}>{cat.category.split(' ')[0]}</span>
                 </motion.div>
               );

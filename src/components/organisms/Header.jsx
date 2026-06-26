@@ -157,6 +157,7 @@ function MobileExpandable({ item, onNavigate }) {
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScrollDirection();
   const location = useLocation();
   const prevPath = useRef(location.pathname);
@@ -182,6 +183,16 @@ function Header() {
 
   const compressed = scrollY > 80;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       <header
@@ -204,7 +215,7 @@ function Header() {
             <img
               src={cmLogo}
               alt="Caller Monkey"
-              className="h-28 flex items-center gap-2 shrink-0"
+              className={` ${isScrolled ? 'h-20' : 'h-28'} flex items-center gap-2 shrink-0`}
             />
           </Link>
 

@@ -146,14 +146,7 @@ function GetStartedHero() {
       }}
     >
       <Container>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            gap: 'clamp(2rem, 5vw, 5rem)',
-          }}
-        >
+        <div className="flex flex-wrap items-center justify-center lg:justify-between gap-[clamp(2rem,5vw,5rem)]">
           {/* Left */}
           <div style={{ flex: '1 1 320px', minWidth: 0 }}>
             <FadeIn>

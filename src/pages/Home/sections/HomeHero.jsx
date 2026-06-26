@@ -506,18 +506,11 @@ function HomeHero() {
     >
       <Waveform />
       <div className="custom-container" style={{ position: 'relative', zIndex: 1 }}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '60fr 40fr',
-            alignItems: 'center',
-            gap: 'clamp(2rem,4vw,4rem)',
-          }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[60fr_40fr] items-center gap-4 md:gap-8 lg:gap-12">
           {/* Text — 55% */}
-          <div style={{ minWidth: 0 }}>
+          <div style={{ minWidth: 0 }} className="order-2 lg:order-1">
             <FadeIn>
-              <h1 className="custom-display mb-6 text-6xl">
+              <h1 className="custom-display mb-6 text-4xl md:text-5xl lg:text-6xl">
                 <span style={{ color: 'var(--color-green-500)' }}>
                   Autonomous Lead Conversion System
                 </span>{' '}
@@ -534,11 +527,13 @@ function HomeHero() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/get-started#demo-form"
-                  className="custom-btn custom-btn-primary custom-btn-lg"
+                  className="custom-btn custom-btn-primary custom-btn-sm md:custom-btn-lg"
                 >
                   Get a Free Demo
                 </Link>
-                <Link to="/features" className="custom-btn custom-btn-secondary custom-btn-lg">
+                <Link to="/features" 
+                className="custom-btn custom-btn-secondary custom-btn-sm md:custom-btn-lg"
+                >
                   See How It Works
                 </Link>
               </div>
@@ -553,6 +548,7 @@ function HomeHero() {
               justifyContent: 'center',
               alignItems: 'center',
             }}
+            className="order-1 lg:order-2"
           >
             <FadeIn delay={0.05} y={12} style={{ width: '100%' }}>
               <AIFlowScene reduced={reduced} />

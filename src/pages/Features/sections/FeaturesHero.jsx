@@ -7,21 +7,21 @@ import { useReducedMotion } from '@hooks/useReducedMotion';
 
 /* ── Feature chips shown in the hero ── */
 const FEATURES = [
-  { icon: 'PhoneCall',      label: 'Voice Agent',                    color: '#2DA744', bg: '#E8F7EC' },
-  { icon: 'MessageSquare',  label: 'WhatsApp Automation',            color: '#25D366', bg: '#E6FBF0' },
-  { icon: 'Send',           label: 'Team Comm on Telegram',          color: '#2CA5E0', bg: '#E8F5FF' },
-  { icon: 'Facebook',       label: 'Meta Leads Tracking',            color: '#1877F2', bg: '#EBF3FF' },
-  { icon: 'Search',         label: 'Google Leads Tracking',          color: '#EA4335', bg: '#FEE8E6' },
-  { icon: 'Globe',          label: 'Website Leads Tracking',         color: '#7C3AED', bg: '#F5EEF8' },
-  { icon: 'Database',       label: 'CRM Integration',                color: '#2C7BE5', bg: '#EBF3FF' },
-  { icon: 'CalendarCheck',  label: 'Calendar Schedule',              color: '#0891B2', bg: '#E0F7FA' },
-  { icon: 'Mail',           label: 'Email Integration',              color: '#E11D48', bg: '#FEE2E2' },
-  { icon: 'CreditCard',     label: 'Quotation & Payment Gateway',    color: '#059669', bg: '#ECFDF5' },
-  { icon: 'Languages',      label: '70+ Languages',                  color: '#D97706', bg: '#FEF3C7' },
-  { icon: 'PhoneForwarded', label: "'Autocall' Function",            color: '#F59E0B', bg: '#FFF7ED' },
-  { icon: 'Zap',            label: 'Lead Follow-up',                 color: '#F4A623', bg: '#FEF6E7' },
-  { icon: 'BarChart3',      label: 'Analytics',                      color: '#9B59B6', bg: '#F5EEF8' },
-  { icon: 'Coins',          label: 'Pay as you Go',                  color: '#10B981', bg: '#ECFDF5' },
+  { icon: 'PhoneCall', label: 'Voice Agent', color: '#2DA744', bg: '#E8F7EC' },
+  { icon: 'MessageSquare', label: 'WhatsApp Automation', color: '#25D366', bg: '#E6FBF0' },
+  { icon: 'Send', label: 'Team Comm on Telegram', color: '#2CA5E0', bg: '#E8F5FF' },
+  { icon: 'Facebook', label: 'Meta Leads Tracking', color: '#1877F2', bg: '#EBF3FF' },
+  { icon: 'Search', label: 'Google Leads Tracking', color: '#EA4335', bg: '#FEE8E6' },
+  { icon: 'Globe', label: 'Website Leads Tracking', color: '#7C3AED', bg: '#F5EEF8' },
+  { icon: 'Database', label: 'CRM Integration', color: '#2C7BE5', bg: '#EBF3FF' },
+  { icon: 'CalendarCheck', label: 'Calendar Schedule', color: '#0891B2', bg: '#E0F7FA' },
+  { icon: 'Mail', label: 'Email Integration', color: '#E11D48', bg: '#FEE2E2' },
+  { icon: 'CreditCard', label: 'Quotation & Payment Gateway', color: '#059669', bg: '#ECFDF5' },
+  { icon: 'Languages', label: '70+ Languages', color: '#D97706', bg: '#FEF3C7' },
+  { icon: 'PhoneForwarded', label: "'Autocall' Function", color: '#F59E0B', bg: '#FFF7ED' },
+  { icon: 'Zap', label: 'Lead Follow-up', color: '#F4A623', bg: '#FEF6E7' },
+  { icon: 'BarChart3', label: 'Analytics', color: '#9B59B6', bg: '#F5EEF8' },
+  { icon: 'Coins', label: 'Pay as you Go', color: '#10B981', bg: '#ECFDF5' },
 ];
 
 /* ── Live activity feed SVG ── */
@@ -151,14 +151,7 @@ function FeaturesHero() {
       }}
     >
       <Container>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            gap: 'clamp(2rem, 5vw, 5rem)',
-          }}
-        >
+        <div className="flex flex-wrap items-center justify-center lg:justify-between gap-[clamp(2rem,5vw,5rem)]">
           {/* Left */}
           <div style={{ flex: '1 1 320px', minWidth: 0 }}>
             <FadeIn>

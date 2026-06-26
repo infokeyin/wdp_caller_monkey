@@ -149,15 +149,7 @@ function DeepDiveCard({ cap, isEven }) {
             }}
           >
             {/* Icon side */}
-            <div
-              style={{
-                flex: '0 0 auto',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '1rem',
-              }}
-            >
+          <div className="flex flex-col items-center gap-4 w-full sm:w-fit flex-none">
               <motion.div
                 animate={reduced ? {} : { y: [0, -5, 0] }}
                 transition={reduced ? {} : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}

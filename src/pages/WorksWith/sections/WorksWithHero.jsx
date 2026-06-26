@@ -30,22 +30,64 @@ const VOICE_BARS = [22, 22, 22, 22, 22, 22, 22, 22, 22];
 /* 6 output cards spaced evenly — y values include TOP_PAD so pills never clip */
 const TOP_PAD = 36;
 const CARDS = [
-  { y: 30  + TOP_PAD, color: '#25D366', label: 'WhatsApp',  sub: 'follow-up sent',    check: 0,    pathId: 'ip1' },
-  { y: 115 + TOP_PAD, color: '#2C7BE5', label: 'CRM',        sub: 'contact logged',    check: 1.1,  pathId: 'ip2' },
-  { y: 200 + TOP_PAD, color: '#F4A623', label: 'Calendar',   sub: 'meeting scheduled', check: null, pathId: 'ip3' },
-  { y: 285 + TOP_PAD, color: '#D9342B', label: 'Email',      sub: 'digest sent',       check: 2.2,  pathId: 'ip4' },
-  { y: 370 + TOP_PAD, color: '#7C3AED', label: 'Payments',   sub: 'invoice raised',    check: null, pathId: 'ip5' },
-  { y: 455 + TOP_PAD, color: '#0891B2', label: 'Analytics',  sub: 'report updated',    check: 3.0,  pathId: 'ip6' },
+  {
+    y: 30 + TOP_PAD,
+    color: '#25D366',
+    label: 'WhatsApp',
+    sub: 'follow-up sent',
+    check: 0,
+    pathId: 'ip1',
+  },
+  {
+    y: 115 + TOP_PAD,
+    color: '#2C7BE5',
+    label: 'CRM',
+    sub: 'contact logged',
+    check: 1.1,
+    pathId: 'ip2',
+  },
+  {
+    y: 200 + TOP_PAD,
+    color: '#F4A623',
+    label: 'Calendar',
+    sub: 'meeting scheduled',
+    check: null,
+    pathId: 'ip3',
+  },
+  {
+    y: 285 + TOP_PAD,
+    color: '#D9342B',
+    label: 'Email',
+    sub: 'digest sent',
+    check: 2.2,
+    pathId: 'ip4',
+  },
+  {
+    y: 370 + TOP_PAD,
+    color: '#7C3AED',
+    label: 'Payments',
+    sub: 'invoice raised',
+    check: null,
+    pathId: 'ip5',
+  },
+  {
+    y: 455 + TOP_PAD,
+    color: '#0891B2',
+    label: 'Analytics',
+    sub: 'report updated',
+    check: 3.0,
+    pathId: 'ip6',
+  },
 ];
 
 /* SVG layout constants */
-const SVG_W   = 620;
-const SVG_H   = CARDS[CARDS.length - 1].y + 90;
-const AIX     = 290;
-const CY      = (CARDS[0].y + CARDS[CARDS.length - 1].y + 56) / 2;
+const SVG_W = 620;
+const SVG_H = CARDS[CARDS.length - 1].y + 90;
+const AIX = 290;
+const CY = (CARDS[0].y + CARDS[CARDS.length - 1].y + 56) / 2;
 const VOICE_X = 20;
-const CARD_X  = 430;
-const LOGO_R  = 52;
+const CARD_X = 430;
+const LOGO_R = 52;
 
 function FlowDot({ pathId, fill, dur, begin }) {
   return (
@@ -84,7 +126,6 @@ function IntegrationFlowScene({ reduced }) {
       <rect width={SVG_W} height={SVG_H} fill="url(#inthDots)" />
 
       <g className={reduced ? undefined : 'inth-anim'}>
-
         {/* ── Connector: Lead card → hub ── */}
         <path
           id="ip0"
@@ -114,16 +155,39 @@ function IntegrationFlowScene({ reduced }) {
         })}
 
         {/* ── Animated flow dots ── */}
-        {!reduced && CARDS.map((c, i) => (
-          <FlowDot key={c.pathId} pathId={c.pathId} fill={c.color} dur={2.2 + i * 0.15} begin={i * 0.4} />
-        ))}
+        {!reduced &&
+          CARDS.map((c, i) => (
+            <FlowDot
+              key={c.pathId}
+              pathId={c.pathId}
+              fill={c.color}
+              dur={2.2 + i * 0.15}
+              begin={i * 0.4}
+            />
+          ))}
 
         {/* ── Incoming Lead card ── */}
         <g filter="url(#inthShadow)">
-          <rect x={VOICE_X} y={CY - 42} width={108} height={84} rx={18} fill="#FFFFFF" stroke="#ECEEF0" strokeWidth={1} />
+          <rect
+            x={VOICE_X}
+            y={CY - 42}
+            width={108}
+            height={84}
+            rx={18}
+            fill="#FFFFFF"
+            stroke="#ECEEF0"
+            strokeWidth={1}
+          />
         </g>
         <circle className="inth-tdot" cx={VOICE_X + 18} cy={CY - 24} r={4} fill={GREEN} />
-        <text x={VOICE_X + 30} y={CY - 20} fontFamily="'Inter Tight', sans-serif" fontSize="10" fontWeight="600" fill="#2B333C">
+        <text
+          x={VOICE_X + 30}
+          y={CY - 20}
+          fontFamily="'Inter Tight', sans-serif"
+          fontSize="10"
+          fontWeight="600"
+          fill="#2B333C"
+        >
           Incoming Lead
         </text>
         {VOICE_BARS.map((h, i) => (
@@ -139,14 +203,37 @@ function IntegrationFlowScene({ reduced }) {
             style={{ animationDelay: `${i * 0.09}s` }}
           />
         ))}
-        <text x={VOICE_X + 54} y={CY + 34} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="8" fill="#9AA0A6">
+        <text
+          x={VOICE_X + 54}
+          y={CY + 34}
+          textAnchor="middle"
+          fontFamily="'Inter Tight', sans-serif"
+          fontSize="8"
+          fill="#9AA0A6"
+        >
           calling now
         </text>
 
         {/* ── CM logo hub ── */}
         {/* Pulsing rings */}
-        <circle className="inth-ring" cx={AIX} cy={CY} r={LOGO_R} stroke={GREEN} strokeWidth={2} style={{ animationDelay: '0s' }} />
-        <circle className="inth-ring" cx={AIX} cy={CY} r={LOGO_R} stroke={GREEN} strokeWidth={2} style={{ animationDelay: '1.3s' }} />
+        <circle
+          className="inth-ring"
+          cx={AIX}
+          cy={CY}
+          r={LOGO_R}
+          stroke={GREEN}
+          strokeWidth={2}
+          style={{ animationDelay: '0s' }}
+        />
+        <circle
+          className="inth-ring"
+          cx={AIX}
+          cy={CY}
+          r={LOGO_R}
+          stroke={GREEN}
+          strokeWidth={2}
+          style={{ animationDelay: '1.3s' }}
+        />
         {/* White backing circle */}
         <g className="inth-core" filter="url(#inthShadow)">
           <circle cx={AIX} cy={CY} r={LOGO_R} fill="#FFFFFF" stroke="#E5E7EB" strokeWidth={1.5} />
@@ -166,14 +253,36 @@ function IntegrationFlowScene({ reduced }) {
         {CARDS.map((c) => (
           <g key={c.label}>
             <g filter="url(#inthShadow)">
-              <rect x={CARD_X} y={c.y} width={172} height={56} rx={14} fill="#FFFFFF" stroke="#ECEEF0" strokeWidth={1} />
+              <rect
+                x={CARD_X}
+                y={c.y}
+                width={172}
+                height={56}
+                rx={14}
+                fill="#FFFFFF"
+                stroke="#ECEEF0"
+                strokeWidth={1}
+              />
             </g>
             <circle cx={CARD_X + 20} cy={c.y + 28} r={12} fill={c.color} opacity={0.15} />
             <circle cx={CARD_X + 20} cy={c.y + 28} r={7} fill={c.color} />
-            <text x={CARD_X + 38} y={c.y + 24} fontFamily="'Inter Tight', sans-serif" fontSize="11" fontWeight="600" fill="#2B333C">
+            <text
+              x={CARD_X + 38}
+              y={c.y + 24}
+              fontFamily="'Inter Tight', sans-serif"
+              fontSize="11"
+              fontWeight="600"
+              fill="#2B333C"
+            >
               {c.label}
             </text>
-            <text x={CARD_X + 38} y={c.y + 40} fontFamily="'Inter Tight', sans-serif" fontSize="8.5" fill="#9AA0A6">
+            <text
+              x={CARD_X + 38}
+              y={c.y + 40}
+              fontFamily="'Inter Tight', sans-serif"
+              fontSize="8.5"
+              fill="#9AA0A6"
+            >
               {c.sub}
             </text>
             {c.check !== null && (
@@ -194,12 +303,39 @@ function IntegrationFlowScene({ reduced }) {
         {/* ── "24/7 always on" stat pill only ── */}
         <g transform={`translate(${VOICE_X + 54} ${CARDS[0].y - 36})`}>
           <g className="inth-pill" style={{ animationDelay: '0s' }} filter="url(#inthShadow)">
-            <rect x={-46} y={-20} width={90} height={36} rx={12} fill="#FFFFFF" stroke="#EBEDEF" strokeWidth={1} />
-            <text x={0} y={-3} textAnchor="middle" fontFamily="'Cabinet Grotesk', sans-serif" fontSize="15" fontWeight="800" fill={GREEN}>24/7</text>
-            <text x={0} y={11} textAnchor="middle" fontFamily="'Inter Tight', sans-serif" fontSize="8.5" fill="#9AA0A6">always on</text>
+            <rect
+              x={-46}
+              y={-20}
+              width={90}
+              height={36}
+              rx={12}
+              fill="#FFFFFF"
+              stroke="#EBEDEF"
+              strokeWidth={1}
+            />
+            <text
+              x={0}
+              y={-3}
+              textAnchor="middle"
+              fontFamily="'Cabinet Grotesk', sans-serif"
+              fontSize="15"
+              fontWeight="800"
+              fill={GREEN}
+            >
+              24/7
+            </text>
+            <text
+              x={0}
+              y={11}
+              textAnchor="middle"
+              fontFamily="'Inter Tight', sans-serif"
+              fontSize="8.5"
+              fill="#9AA0A6"
+            >
+              always on
+            </text>
           </g>
         </g>
-
       </g>
     </svg>
   );
@@ -220,24 +356,17 @@ function WorksWithHero() {
       }}
     >
       <Container>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '60fr 40fr',
-            alignItems: 'center',
-            gap: 'clamp(2rem, 4vw, 4rem)',
-          }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[60fr_40fr] items-center gap-6 md:gap-[clamp(2rem,4vw,4rem)]">
           {/* ── Left — text ── */}
-          <div style={{ minWidth: 0 }}>
+          <div style={{ minWidth: 0 }} className="order-2 lg:order-1">
             <FadeIn>
               <p className="custom-eyebrow mb-3">Integrations</p>
-              <h1 className="custom-h1 mb-5" style={{ maxWidth: 500 }}>
+              <h1 className="custom-h1 mb-5 w-full lg:max-w-[500px]">
                 One orchestrator, handles every tool, your business needs.
               </h1>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <p className="custom-lead mb-8" style={{ maxWidth: 460 }}>
+              <p className="custom-lead mb-8 w-full lg:max-w-[460px]">
                 Caller Monkey connects to your CRM, WhatsApp Business, lead platforms, calendar,
                 email, and payment gateway — all talking to each other through one central system.
               </p>
@@ -268,7 +397,15 @@ function WorksWithHero() {
                   letterSpacing: 'var(--tracking-wide)',
                 }}
               >
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-green-500)', flexShrink: 0 }} />
+                <span
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: '50%',
+                    background: 'var(--color-green-500)',
+                    flexShrink: 0,
+                  }}
+                />
                 6+ platforms connected · Setup in 15 days
               </div>
             </FadeIn>
@@ -282,6 +419,7 @@ function WorksWithHero() {
               justifyContent: 'center',
               alignItems: 'center',
             }}
+            className="order-1 lg:order-2"
           >
             <FadeIn delay={0.08} y={16} style={{ width: '100%' }}>
               <IntegrationFlowScene reduced={reduced} />
