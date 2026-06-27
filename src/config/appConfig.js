@@ -15,13 +15,13 @@ export const appConfig = {
   brand: {
     name: 'Caller Monkey',
     tagline: 'Scale Communication. Protect Revenue. Grow Without Limits.',
-    domain: 'callermonkey.in',
-    url: 'https://callermonkey.in',
+    domain: 'callermonkey.com',
+    url: 'https://callermonkey.com',
   },
 
   contactInfo: {
     // Replace placeholders before launch.
-    email: 'email@callermonkey.in',
+    email: 'contact@callermonkey.com',
     phone: '+91 99999 XXXXX',
     whatsapp: '9199999XXXXX', // digits-only, used for wa.me/{digits}
     address: {
@@ -83,7 +83,7 @@ export const appConfig = {
   // Analytics IDs — wired in only when flags.enableAnalytics === true.
   analytics: {
     gaMeasurementId: '', // e.g. 'G-XXXXXXX'
-    plausibleDomain: '', // e.g. 'callermonkey.in'
+    plausibleDomain: '', // e.g. 'callermonkey.com'
   },
 
   developer: {
