@@ -49,7 +49,7 @@ const CARDS = [
   {
     y: 200 + TOP_PAD,
     color: '#F4A623',
-    label: 'Calendar',
+    label: 'AI Bot',
     sub: 'meeting scheduled',
     check: null,
     pathId: 'ip3',
@@ -57,7 +57,7 @@ const CARDS = [
   {
     y: 285 + TOP_PAD,
     color: '#D9342B',
-    label: 'Email',
+    label: 'Lead Management',
     sub: 'digest sent',
     check: 2.2,
     pathId: 'ip4',

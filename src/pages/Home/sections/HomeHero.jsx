@@ -67,41 +67,29 @@ const GREEN = '#2DA744';
 const INPUTS = [
   {
     id: 'fb',
-    label: 'Facebook',
+    label: 'Meta',
     sub: 'lead received',
-    color: '#1877F2',
+    color: '#0082FB',
     pathId: 'hi1',
     icon: (
       <path
-        d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-        stroke="#1877F2"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
+        d="M12 11.2C10.6 9 8.9 7.8 7 7.8C4.2 7.8 2 10.1 2 12.8C2 15.3 3.8 16.2 5.3 16.2C7.1 16.2 8.5 15 10.3 12.3L12 9.6L13.7 12.3C15.5 15 16.9 16.2 18.7 16.2C20.2 16.2 22 15.3 22 12.8C22 10.1 19.8 7.8 17 7.8C15.1 7.8 13.4 9 12 11.2Z"
+        fill="#0082FB"
       />
     ),
   },
   {
     id: 'insta',
-    label: 'Instagram',
+    label: 'Google',
     sub: 'DM captured',
-    color: '#E1306C',
+    color: '#4285F4',
     pathId: 'hi2',
     icon: (
       <>
-        <rect
-          x="2"
-          y="2"
-          width="20"
-          height="20"
-          rx="5"
-          stroke="#E1306C"
-          strokeWidth="1.8"
-          fill="none"
-        />
-        <circle cx="12" cy="12" r="4" stroke="#E1306C" strokeWidth="1.8" fill="none" />
-        <circle cx="17.5" cy="6.5" r="1.2" fill="#E1306C" />
+        <path d="M22 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.6c-.2 1.3-1 2.4-2.1 3.1v2.6h3.4C21 17.7 22 15.1 22 12.2z" fill="#4285F4" />
+        <path d="M12 22c2.7 0 5-.9 6.9-2.4l-3.4-2.6c-.9.6-2.1 1-3.5 1-2.7 0-5-1.8-5.8-4.3H2.7v2.7C4.6 19.9 8.1 22 12 22z" fill="#34A853" />
+        <path d="M6.2 13.7c-.2-.6-.3-1.2-.3-1.7 0-.6.1-1.2.3-1.7V7.6H2.7C2 9 1.5 10.4 1.5 12s.5 3 1.2 4.4l3.5-2.7z" fill="#FBBC05" />
+        <path d="M12 5.5c1.5 0 2.9.5 3.9 1.5l2.9-2.9C17 2.5 14.7 1.5 12 1.5 8.1 1.5 4.6 3.6 2.7 6.8l3.5 2.7C7 7.3 9.3 5.5 12 5.5z" fill="#EA4335" />
       </>
     ),
   },
@@ -129,7 +117,7 @@ const OUTPUTS = [
   { id: 'crm', label: 'CRM', sub: 'contact logged', color: '#2C7BE5', check: 0, pathId: 'ho1' },
   {
     id: 'email',
-    label: 'Email',
+    label: 'AI Calling Bot',
     sub: 'follow-up sent',
     color: '#D9342B',
     check: 1.1,
@@ -145,7 +133,7 @@ const OUTPUTS = [
   },
   {
     id: 'calendar',
-    label: 'Calendar',
+    label: 'Lead Management',
     sub: 'meeting booked',
     color: '#F4A623',
     check: 2.2,
@@ -452,7 +440,7 @@ function AIFlowScene({ reduced }) {
             </text>
           </g>
         </g>
-        <g transform={`translate(${OUT_X + OUT_W / 2} ${IN_START - 46})`}>
+        <g transform={`translate(${OUT_X + OUT_W / 2} ${IN_START - 72})`}>
           <g className="hm-pill" style={{ animationDelay: '1.4s' }} filter="url(#hmShadow)">
             <rect
               x={-54}
