@@ -57,6 +57,13 @@ const CAPABILITIES = [
     bg: '#FEF3C7',
     desc: 'Hindi, Tamil, Marathi & more',
   },
+  {
+    icon: 'Megaphone',
+    label: 'Meta / Google Leads',
+    color: '#1877F2',
+    bg: '#E7F0FD',
+    desc: 'Facebook, Instagram & Google Ads leads captured & qualified',
+  },
 ];
 
 /* ── Animated live indicator dot ── */
